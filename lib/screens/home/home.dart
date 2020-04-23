@@ -1,96 +1,42 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:mavka/screens/home/course.dart';
+import 'package:mavka/screens/pages/pages_controller.dart';
 import 'package:mavka/services/auth.dart';
 
-class Home extends StatelessWidget {
-  double width;
-  final AuthService _auth = AuthService();
-  List < Course > courses = [
-    Course(url: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcREM34Hb8LjIYGvGzP8LsloRt1kQfIGS0SD8Kwc2NzJbe_aolNf&usqp=CAU", text: "Math"),
-    Course(url: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSzQjq7w7-n-7vv9hLJ0_N3lJE3rFVtfjI3iRQimP0zmTerluRo&usqp=CAU", text: "Physics"),
-    Course(url: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRVaa0dOgmw5Ji9L5vtwvCp2YhdUejPx_IgmXrEsHvvotiI8tF0&usqp=CAU", text: "History"),
-  ];
+class Home extends StatefulWidget {
 
-  Widget courseTemplate(course){
-     return Container(
-      //color: Colors.brown[200],
-      margin: EdgeInsets.fromLTRB(12, 12, 12, 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        color: Colors.brown[200],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Image(
-                image: NetworkImage(course.url),
-                width: width,               
-              ),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                course.text,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int _pages = 0;
 
   @override
   Widget build(BuildContext context) {
-    width = MediaQuery.of(context).size.width * 0.8;
     print("I am at home");
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.blueAccent,
-        body: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: TextField(
-                //controller: editingController,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  hintText: "Search",
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(25.0))
-                  )
-                ),
-              ),
-            ),
-            Container(
-              height: width * 1.28,
-              child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: courses.map((course) => courseTemplate(course)).toList()
-              ),
-            ),
-          ],
-        ),
         bottomNavigationBar: CurvedNavigationBar(
+          animationDuration: Duration(
+            milliseconds: 200
+          ),
+          index: 0,
           backgroundColor: Colors.blueAccent,
           items: <Widget>[
-            Icon(Icons.video_library, size: 30),
             Icon(Icons.home, size: 30),
+            Icon(Icons.video_library, size: 30),
+            Icon(Icons.bookmark, size: 30),
             Icon(Icons.person, size: 30),
           ],
           onTap: (index) {
-          //Handle button tap
+            setState(() {
+              _pages = index;
+            });
           },
         ),
+        body: PagesController(_pages),
       ),
     );
   }
