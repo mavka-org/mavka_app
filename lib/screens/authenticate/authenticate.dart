@@ -1,27 +1,32 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:mavka/screens/authenticate/register.dart';
 import 'package:mavka/screens/authenticate/sign_in.dart';
-import 'package:flutter/material.dart';
+import 'package:mavka/screens/home/home.dart';
 
-class Authenticate extends StatefulWidget {
-  @override
-  _AuthenticateState createState() => _AuthenticateState();
-}
-
-class _AuthenticateState extends State<Authenticate> {
-
-  bool showSignIn = true;
-  void toggleView(){
-    setState(() {
-        showSignIn = !showSignIn;
-    });
-  }
-
+class Authenticate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    if(showSignIn){
-      return SignIn(toggleView: toggleView);
-    }else{
-      return Register(toggleView: toggleView);
-    }
+    return Scaffold(
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton(
+              child: Text('Sign in'),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn()));
+              }
+            ),
+            RaisedButton(
+              child: Text('Sign up'),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
+              },
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
