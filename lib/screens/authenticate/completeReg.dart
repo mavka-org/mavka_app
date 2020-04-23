@@ -14,39 +14,41 @@ class CompleteReg extends StatelessWidget {
     DatabaseService ds = DatabaseService(uid: user.uid);
 
     return Container(
-      child: Column(
-          children: <Widget>[
-            RaisedButton(
-              color: Colors.pink[400],
-              child: Text(
-                'Student',
-                style: TextStyle(color: Colors.white),
+      child: Center(
+        child: Column(
+            children: <Widget>[
+              RaisedButton(
+                color: Colors.pink[400],
+                child: Text(
+                  'Student',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => StudentReg()));
+                },
               ),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => StudentReg()));
-              },
-            ),
-            RaisedButton(
-              color: Colors.pink[400],
-              child: Text(
-                'Teacher',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
+              RaisedButton(
+                color: Colors.pink[400],
+                child: Text(
+                  'Teacher',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
 
-              },
-            ),
-            RaisedButton(
-              color: Colors.pink[400],
-              child: Text(
-                'Parent',
-                style: TextStyle(color: Colors.white),
+                },
               ),
-              onPressed: () {
+              RaisedButton(
+                color: Colors.pink[400],
+                child: Text(
+                  'Parent',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
 
-              },
-            ),
-            ]
+                },
+              ),
+              ]
+        ),
       )
     );
   }
