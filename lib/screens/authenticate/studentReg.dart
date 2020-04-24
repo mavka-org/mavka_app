@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mavka/models/currentUserID.dart';
 import 'package:mavka/models/userInfo.dart';
 import 'package:mavka/services/database.dart';
 
@@ -13,7 +14,7 @@ class StudentReg extends StatefulWidget {
 class _StudentRegState extends State<StudentReg> {
   @override
   Widget build(BuildContext context) {
-    DatabaseService ds = DatabaseService(uid: User.get());
+    DatabaseService ds = DatabaseService(uid: CurrentUserID.id);
     ds.updateUserData("student", "Chebotok", "Nikita");
     return Home();
   }

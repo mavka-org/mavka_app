@@ -1,9 +1,32 @@
 class User {
-  static String _uid;
-  static String get() {
-    return _uid;
+  String _firstName;
+  String _secondName;
+  String _type;
+
+  User(String firstName, String secondName, String type){
+    _firstName = firstName;
+    _secondName = secondName;
+    _type = type;
   }
-  static void set(String uid) {
-    _uid = uid;
+
+  String getFirstName() {
+    return _firstName;
+  }
+  void setFirstName(String firstName) {
+    _firstName = firstName;
+  }
+
+  String getSecondName() {
+    return _secondName;
+  }
+  void setSecondName(String secondName) {
+    _secondName = secondName;
+  }
+
+  String getType() {
+    return _type;
+  }
+  void setType(String type) {
+    _type = type;
   }
 }
