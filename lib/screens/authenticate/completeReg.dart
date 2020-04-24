@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mavka/screens/authenticate/studentReg.dart';
 import 'package:mavka/services/auth.dart';
@@ -14,6 +15,7 @@ class CompleteReg extends StatelessWidget {
     DatabaseService ds = DatabaseService(uid: user.uid);
 
     return Container(
+      padding: EdgeInsets.only(top: 50.0),
       child: Center(
         child: Column(
             children: <Widget>[
@@ -47,7 +49,7 @@ class CompleteReg extends StatelessWidget {
 
                 },
               ),
-              ]
+            ],
         ),
       )
     );
