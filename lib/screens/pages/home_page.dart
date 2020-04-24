@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mavka/models/course.dart';
 
@@ -8,14 +9,13 @@ class HomePage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width * 0.8;
 
     List <Course> courses = [
-      Course(url: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcREM34Hb8LjIYGvGzP8LsloRt1kQfIGS0SD8Kwc2NzJbe_aolNf&usqp=CAU", text: "Math"),
-      Course(url: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSzQjq7w7-n-7vv9hLJ0_N3lJE3rFVtfjI3iRQimP0zmTerluRo&usqp=CAU", text: "Physics"),
-      Course(url: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRVaa0dOgmw5Ji9L5vtwvCp2YhdUejPx_IgmXrEsHvvotiI8tF0&usqp=CAU", text: "History"),
+      Course(progress: 0.2, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcREM34Hb8LjIYGvGzP8LsloRt1kQfIGS0SD8Kwc2NzJbe_aolNf&usqp=CAU", text: "Math"),
+      Course(progress: 0.4, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSzQjq7w7-n-7vv9hLJ0_N3lJE3rFVtfjI3iRQimP0zmTerluRo&usqp=CAU", text: "Physics"),
+      Course(progress: 0.8, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRVaa0dOgmw5Ji9L5vtwvCp2YhdUejPx_IgmXrEsHvvotiI8tF0&usqp=CAU", text: "History"),
     ];
 
     Widget courseTemplate(course){
       return Container(
-        //color: Colors.brown[200],
         margin: EdgeInsets.fromLTRB(12, 12, 12, 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
@@ -29,6 +29,19 @@ class HomePage extends StatelessWidget {
                 child: Image(
                   image: NetworkImage(course.url),
                   width: width,
+                ),
+              ),
+              SizedBox(height: 10),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Container(
+                  width: width * 0.7,
+                  height: 10,
+                  child: LinearProgressIndicator(
+                    backgroundColor: Colors.grey,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.green,),
+                    value: course.progress,
+                  ),
                 ),
               ),
               SizedBox(height: 10),
@@ -56,7 +69,6 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: TextField(
-                //controller: editingController,
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
@@ -69,10 +81,9 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Container(
-              height: width * 1.28,
-              child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: courses.map((course) => courseTemplate(course)).toList()
+              child: CarouselSlider(
+                items: courses.map((course) => courseTemplate(course)).toList(),
+                options: CarouselOptions(height: width * 1.28),
               ),
             ),
           ],
