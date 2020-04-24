@@ -39,6 +39,7 @@ class _AuthenticateState extends State<Authenticate> {
 
   @override
   Widget build(BuildContext context) {
+    print("I am at auth");
     return Scaffold(
         backgroundColor: Colors.blueAccent,
         body: AnnotatedRegion<SystemUiOverlayStyle>(
