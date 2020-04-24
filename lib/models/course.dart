@@ -1,7 +1,7 @@
 class Course{
   String url;
   String text;
-
-  Course({this.url, this.text});
+  double progress;
+  Course({this.url, this.text, this.progress});
 
 }
