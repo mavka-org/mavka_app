@@ -4,6 +4,7 @@ import 'package:mavka/models/userInfo.dart';
 import 'package:mavka/screens/authenticate/authenticate.dart';
 import 'package:flutter/material.dart';
 import 'package:mavka/services/database.dart';
+import 'package:mavka/shared/loading.dart';
 import 'package:provider/provider.dart';
 import 'authenticate/completeReg.dart';
 
@@ -12,10 +13,10 @@ import 'home/home.dart';
 
 
 class Wrapper extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final FirebaseUser user = Provider.of<FirebaseUser>(context);
-
     print("upgrade");
     print(user);
 
@@ -29,12 +30,24 @@ class Wrapper extends StatelessWidget {
     return FutureBuilder<bool>(
         future: ds.isInBase(),
         builder: (context, AsyncSnapshot<bool> snapshot) {
-          if (snapshot.hasData && snapshot.data) {
-            return Home();
-          } else {
-            return CompleteReg();
+          if (snapshot.hasData) {
+            if(snapshot.data){
+              return Home();
+            }
+            else {
+              return CompleteReg();
+            }
+          }else{
+            return Loading();
           }
         }
     );
+    return Scaffold(
+      backgroundColor: Colors.blueAccent,
+      body: Container(
+
+      ),
+    );
+
   }
 }
