@@ -4,9 +4,11 @@ import 'package:mavka/models/userInfo.dart';
 class DatabaseService{
 
   final String uid;
-  DatabaseService({this.uid});
+  DatabaseService(this.uid);
 
   final CollectionReference users = Firestore.instance.collection('users');
+  final CollectionReference students = Firestore.instance.collection('students');
+  final CollectionReference courses = Firestore.instance.collection('courses');
 
   Future<bool> isInBase() async{
     DocumentSnapshot ds = await users.document(uid).get();
@@ -31,6 +33,21 @@ class DatabaseService{
     );
   }
 
+  Future addCourseToStudent(String studentID, String courseID) async{
+    DocumentSnapshot dsStudent = await students.document(studentID).get();
+    DocumentSnapshot dsCourse = await courses.document(courseID).get();
+    List<dynamic> dr = dsStudent.data['Courses'];
+    dr.add({'CourseReference': dsCourse.reference});
+    return await dsStudent.reference.setData({
+      'Courses': dr
+    }, merge: true);
+  }
+
+  Future<List<DocumentSnapshot>> getCoursesByForm(int myForm) async{
+    var docs = await courses.where('Form', isEqualTo: myForm).getDocuments();
+    List<DocumentSnapshot> result = docs.documents;
+    return result;
+  }
   
 
 }

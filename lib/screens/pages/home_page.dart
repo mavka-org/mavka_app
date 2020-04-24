@@ -1,12 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mavka/models/course.dart';
+import 'package:mavka/services/database.dart';
+import 'package:mavka/models/currentUserID.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
     double width = MediaQuery.of(context).size.width * 0.8;
+    DatabaseService ds = DatabaseService(CurrentUserID.id);
 
     List <Course> courses = [
       Course(progress: 0.2, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcREM34Hb8LjIYGvGzP8LsloRt1kQfIGS0SD8Kwc2NzJbe_aolNf&usqp=CAU", text: "Math"),
@@ -40,6 +43,26 @@ class HomePage extends StatelessWidget {
                 items: courses.map((course) => courseTemplate(course, width)).toList(),
                 options: CarouselOptions(height: width * 1.28),
               ),
+            ),
+            RaisedButton(
+              color: Colors.pink[400],
+              child: Text(
+                'Sosat',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () async {
+                ds.addCourseToStudent('VP8clnB9rM2a7S6D7F0o', 'tZP0XmQNmDIYPJIiBYgf');
+              },
+            ),
+            RaisedButton(
+              color: Colors.pink[400],
+              child: Text(
+                'Sosat2',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () async {
+                ds.getCoursesByForm(2);
+              },
             ),
           ],
         ),
