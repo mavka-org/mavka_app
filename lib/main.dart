@@ -5,12 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mavka/screens/home/home.dart';
 import 'package:mavka/screens/home/llist_of_courses.dart';
+import 'package:mavka/services/database.dart';
+
+import 'services/database.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+   // DatabaseService.getAllCourses();
+    DatabaseService.getAllThemesWithName("Test1", "Flutter");
     return StreamProvider<FirebaseUser>.value(
       value: AuthService().user,
       child: MaterialApp(

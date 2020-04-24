@@ -7,6 +7,7 @@ class AuthService{
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
+
   Stream<FirebaseUser> get user{
     return _auth.onAuthStateChanged;
   }
