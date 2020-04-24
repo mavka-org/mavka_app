@@ -30,3 +30,7 @@ class User {
     _type = type;
   }
 }
+
+class CurrentUserID{
+  static String id;
+}

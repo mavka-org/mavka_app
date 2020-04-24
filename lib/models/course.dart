@@ -1,10 +1,55 @@
 import 'package:flutter/material.dart';
 
 class Course{
-  String url;
-  String text;
-  double progress;
-  Course({this.url, this.text, this.progress});
+
+  String _uid;
+  String _name;
+  String _form;
+  String _info;
+  AssetImage _image;
+
+  Course(String uid, String name, String form, String info, AssetImage image){
+    _uid = uid;
+    _name = name;
+    _form = form;
+    _info = info;
+    _image = image;
+  }
+
+  String getId() {
+    return _uid;
+  }
+  void setId(String uid) {
+    _uid = uid;
+  }
+
+  String getName() {
+    return _name;
+  }
+  void setName(String name) {
+    _name = name;
+  }
+
+  String getForm() {
+    return _form;
+  }
+  void setForm(String form) {
+    _form = form;
+  }
+
+  String getInfo() {
+    return _info;
+  }
+  void setType(String info) {
+    _info = info;
+  }
+
+  AssetImage getImage() {
+    return _image;
+  }
+  void setImage(AssetImage image) {
+    _image = image;
+  }
 
 }
 

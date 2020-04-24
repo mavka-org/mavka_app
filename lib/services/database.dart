@@ -14,11 +14,11 @@ class DatabaseService{
     return ds.exists;
   }
 
-  Future updateUserData(String firstName, String secondName, String userType) async {
+  Future updateUserData(User user) async {
     return await users.document(uid).setData({
-      'firstName': firstName,
-      'secondName': secondName,
-      'type': userType
+      'firstName': user.getFirstName(),
+      'secondName': user.getSecondName(),
+      'type': user.getType()
     });
   }
 
@@ -31,6 +31,5 @@ class DatabaseService{
     );
   }
 
-  
 
 }
