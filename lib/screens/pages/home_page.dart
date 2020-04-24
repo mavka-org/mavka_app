@@ -14,52 +14,7 @@ class HomePage extends StatelessWidget {
       Course(progress: 0.8, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRVaa0dOgmw5Ji9L5vtwvCp2YhdUejPx_IgmXrEsHvvotiI8tF0&usqp=CAU", text: "History"),
     ];
 
-    Widget courseTemplate(course){
-      return Container(
-        margin: EdgeInsets.fromLTRB(12, 12, 12, 12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: Colors.brown[200],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Image(
-                  image: NetworkImage(course.url),
-                  width: width,
-                ),
-              ),
-              SizedBox(height: 10),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Container(
-                  width: width * 0.7,
-                  height: 10,
-                  child: LinearProgressIndicator(
-                    backgroundColor: Colors.grey,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.green,),
-                    value: course.progress,
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  course.text,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
+   
 
     return SafeArea(
       child: Scaffold(
@@ -82,7 +37,7 @@ class HomePage extends StatelessWidget {
             ),
             Container(
               child: CarouselSlider(
-                items: courses.map((course) => courseTemplate(course)).toList(),
+                items: courses.map((course) => courseTemplate(course, width)).toList(),
                 options: CarouselOptions(height: width * 1.28),
               ),
             ),

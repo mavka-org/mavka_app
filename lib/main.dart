@@ -4,6 +4,7 @@ import 'package:mavka/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mavka/screens/home/home.dart';
+import 'package:mavka/screens/home/llist_of_courses.dart';
 
 void main() => runApp(MyApp());
 
