@@ -73,8 +73,9 @@ class _RegisterState extends State<Register> {
                           loading = false;
                           error = 'please supply a valid email';
                         });
+                      }else{
+                        Navigator.pop(context);
                       }
-                      Navigator.pop(context);
                     }
                   },
                 ),
