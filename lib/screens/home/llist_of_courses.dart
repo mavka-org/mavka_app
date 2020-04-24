@@ -8,8 +8,9 @@ class ListOfCourses extends StatefulWidget {
   _ListOfCoursesState createState() => _ListOfCoursesState();
 }
 
-Widget listTemplate(List < Course > courses, double height, double width){
+Widget listTemplate(List <Course> courses, double height, double width){
       return Container(
+        color: Colors.blueAccent,
         child: Column(
           children: <Widget>[
             Row(
@@ -70,8 +71,8 @@ class _ListOfCoursesState extends State<ListOfCourses> {
   @override
   Widget build(BuildContext context) {
 
-    double width = MediaQuery.of(context).size.width * 0.75;
-    double height = MediaQuery.of(context).size.height * 0.84;
+    double width = MediaQuery.of(context).size.width * 0.8;
+    double height = MediaQuery.of(context).size.height * 0.75;
     return SafeArea(
       child: Scaffold(
         body:Column(
@@ -102,7 +103,10 @@ class _ListOfCoursesState extends State<ListOfCourses> {
             Container(
               child: CarouselSlider(
                 items: currentCourses.map((course) => listTemplate(course, height, width)).toList(),
-                options: CarouselOptions(height: height * 1.02),
+                options: CarouselOptions(
+                    height: height * 1.02,
+                    scrollDirection: Axis.vertical
+                ),
               ),
             ),
           ],
