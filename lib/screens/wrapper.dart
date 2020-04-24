@@ -15,6 +15,7 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FirebaseUser user = Provider.of<FirebaseUser>(context);
+
     print("upgrade");
     print(user);
 
@@ -22,6 +23,7 @@ class Wrapper extends StatelessWidget {
       print("auth");
       return Authenticate();
     }
+    print(user.uid);
     DatabaseService ds = DatabaseService(uid: user.uid);
     User.set(user.uid);
     return FutureBuilder<bool>(

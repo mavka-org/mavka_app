@@ -68,13 +68,13 @@ class _SignInState extends State<SignIn> {
                     if (_formKey.currentState.validate()) {
                       setState(() => loading = true);
                       dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-
-                      Navigator.pop(context);
                       if (result == null) {
                         setState(() {
                           error = 'could not sign in with those credentials';
                           loading = false;
                         });
+                      }else{
+                        Navigator.pop(context);
                       }
                     }
                   },
@@ -89,12 +89,13 @@ class _SignInState extends State<SignIn> {
                   onPressed: () async {
                     setState(() => loading = true);
                     dynamic result = await _auth.signInWithGoogle();
-                    Navigator.pop(context);
                     if (result == null) {
                       setState(() {
                         error = 'could not sign in with those credentials';
                         loading = false;
                       });
+                    }else{
+                      Navigator.pop(context);
                     }
                   },
                 ),

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mavka/screens/authenticate/authenticate.dart';
 
 class Profile extends StatelessWidget {
 
@@ -13,6 +14,7 @@ class Profile extends StatelessWidget {
           child: Text('Log out'),
           onPressed: () async {
             await _auth.signOut();
+            Navigator.popUntil(context, ModalRoute.withName('/'));
           },
         ),
       ),
