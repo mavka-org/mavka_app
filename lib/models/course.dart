@@ -6,14 +6,14 @@ class Course{
   String _name;
   String _form;
   String _info;
-  AssetImage _image;
+  //AssetImage _image;
 
-  Course(String uid, String name, String form, String info, AssetImage image){
+  Course(String uid, String name, String form, String info, /*AssetImage image*/){
     _uid = uid;
     _name = name;
     _form = form;
     _info = info;
-    _image = image;
+    //_image = image;
   }
 
   String getId() {
@@ -44,12 +44,12 @@ class Course{
     _info = info;
   }
 
-  AssetImage getImage() {
+  /*AssetImage getImage() {
     return _image;
   }
   void setImage(AssetImage image) {
     _image = image;
-  }
+  }*/
 
 }
 
