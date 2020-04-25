@@ -42,12 +42,5 @@ class Wrapper extends StatelessWidget {
           }
         }
     );
-    return Scaffold(
-      backgroundColor: Colors.blueAccent,
-      body: Container(
-
-      ),
-    );
-
   }
 }
