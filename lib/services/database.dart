@@ -61,10 +61,10 @@ class DatabaseService{
     return result;
   }
 
-  Future<List<List<Topic>>> getAllTopicsWithName (String course, String unitName) async {
+  Future<List<Topic>> getAllTopicsWithName (String course, String unitName) async {
     var collectionUnits = await courses.where("Name", isEqualTo: course).getDocuments();
     var units = collectionUnits.documents;
-    
+
     for (var unit in units) {
       var data = unit.data;
       if (data['Name'] == unitName) {

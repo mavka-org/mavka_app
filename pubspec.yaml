@@ -50,7 +50,14 @@ flutter:
     - assets/onboarding0.png
     - assets/onboarding1.png
     - assets/onboarding2.png
-
+    - assets/Icons_home.png
+    - assets/Icons_check.png
+    - assets/Icons_lessons.png
+    - assets/Icons_profile.png
+    - assets/test1.gif
+    - assets/test2.png
+    - assets/background1.jpg
+    - assets/background2.jpg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
