@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mavka/screens/pages/test.dart';
 import 'package:mavka/screens/wrapper.dart';
 import 'package:mavka/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider<FirebaseUser>.value(
       value: AuthService().user,
       child: MaterialApp(
-        home: Wrapper(),
+        home: DiagnosticTest(),
       ),
     );
   }

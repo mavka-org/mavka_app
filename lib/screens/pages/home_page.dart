@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mavka/models/course.dart';
 import 'package:mavka/services/database.dart';
 import 'package:mavka/models/currentUserID.dart';
+import 'test.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -17,7 +18,6 @@ class HomePage extends StatelessWidget {
       Course(progress: 0.8, url: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRVaa0dOgmw5Ji9L5vtwvCp2YhdUejPx_IgmXrEsHvvotiI8tF0&usqp=CAU", text: "History"),
     ];
 
-   
 
     return SafeArea(
       child: Scaffold(
