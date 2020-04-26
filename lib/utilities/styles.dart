@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mavka/shared/hex_color.dart';
 
 final kTitleStyle = TextStyle(
-  color: Colors.white,
+  color: HexColor('2684FE'),
   fontFamily: 'CM Sans Serif',
   fontSize: 26.0,
   height: 1.5,
