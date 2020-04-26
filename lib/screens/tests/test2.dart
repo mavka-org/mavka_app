@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mavka/screens/tests/test_result.dart';
 import 'package:mavka/shared/hex_color.dart';
 
 class Test2 extends StatefulWidget {
@@ -12,7 +13,7 @@ class _MyStatefulWidgetState2 extends State<Test2> {
   int current = -1;
   var func;
   void linkToContinue () {
-
+    Navigator.push(context, MaterialPageRoute(builder: (context) => TestResult()));
   }
 
   @override
@@ -40,7 +41,7 @@ class _MyStatefulWidgetState2 extends State<Test2> {
                   width: 20.0,
                   child: RaisedButton(
                     onPressed: () {},
-                    color: HexColor("#152535"),
+                    color: Colors.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(10.0),
                     ),
@@ -54,7 +55,7 @@ class _MyStatefulWidgetState2 extends State<Test2> {
                   width: 20.0,
                   child: RaisedButton(
                     onPressed: () {},
-                    color: HexColor("#2684FE"),
+                    color: Colors.blueAccent,
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(0.0),
                     ),
@@ -195,7 +196,7 @@ class _MyStatefulWidgetState2 extends State<Test2> {
                 child: Text(
                   "Відправити",
                   style: TextStyle(
-                      color: HexColor("#FFFFFF")
+                      color: Colors.white
                   ),
                 ),
                 shape: RoundedRectangleBorder(

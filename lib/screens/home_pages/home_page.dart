@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_controller.dart';
+import 'package:mavka/screens/courses/course1.dart';
 import 'package:mavka/screens/tests/test1.dart';
 import 'package:mavka/shared/hex_color.dart';
 
@@ -108,61 +109,66 @@ Widget courseTemplate(CourseDemo course, double width, double height){
                 width: width,
               ),
             ),*/
-        Container(
-          height: height * 0.79455,
-          width: width,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topLeft: const  Radius.circular(25.0),
-                  topRight: const  Radius.circular(25.0)),
-              image: DecorationImage(
-                image: course.assetImage,
-                fit: BoxFit.cover,
-              )
-            //color: Color(0xFF202EAB),
-          ),
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: height * 0.85 * 0.7),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    course.name,
-                    style: TextStyle(
-                        fontSize: 24.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: height * 0.02),
-              Container(
-                height: height * 0.1011,
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  border: Border(
-                      top: BorderSide(color: Colors.blue, width: 2, style: BorderStyle.solid),
-                      left: BorderSide(color: Colors.blue, width: 2, style: BorderStyle.solid),
-                      right: BorderSide(color: Colors.blue, width: 2, style: BorderStyle.solid),
-                  ),
-                ),
-                child: Row(
-
-                  children: <Widget>[
-                    SizedBox(width: 20.0,),
-                    Text(
-                      course.secondName,
+        GestureDetector(
+          onTap: (){
+            Navigator.push(HomePage.context, MaterialPageRoute(builder: (context) => Course1()));
+          },
+          child: Container(
+            height: height * 0.79455,
+            width: width,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(topLeft: const  Radius.circular(25.0),
+                    topRight: const  Radius.circular(25.0)),
+                image: DecorationImage(
+                  image: course.assetImage,
+                  fit: BoxFit.cover,
+                )
+              //color: Color(0xFF202EAB),
+            ),
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: height * 0.85 * 0.7),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      course.name,
                       style: TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.black,
+                          fontSize: 24.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              )
-            ],
+                SizedBox(height: height * 0.02),
+                Container(
+                  height: height * 0.1011,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    border: Border(
+                        top: BorderSide(color: Colors.blue, width: 2, style: BorderStyle.solid),
+                        left: BorderSide(color: Colors.blue, width: 2, style: BorderStyle.solid),
+                        right: BorderSide(color: Colors.blue, width: 2, style: BorderStyle.solid),
+                    ),
+                  ),
+                  child: Row(
+
+                    children: <Widget>[
+                      SizedBox(width: 20.0,),
+                      Text(
+                        course.secondName,
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         GestureDetector(
