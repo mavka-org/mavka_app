@@ -55,7 +55,7 @@ class _ListOfCoursesState extends State<ListOfCourses> {
   // ^_^
   String dropdownValue = 'One';
   List < List < Course > > currentCourses = [
-    [
+   /* [
       Course(progress: 0.4, url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSzQjq7w7-n-7vv9hLJ0_N3lJE3rFVtfjI3iRQimP0zmTerluRo&usqp=CAU', text: 'Algebra'),
       Course(progress: 0.6, url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSzQjq7w7-n-7vv9hLJ0_N3lJE3rFVtfjI3iRQimP0zmTerluRo&usqp=CAU', text: 'Physics'),
       Course(progress: 0.7, url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSzQjq7w7-n-7vv9hLJ0_N3lJE3rFVtfjI3iRQimP0zmTerluRo&usqp=CAU', text: 'Astronomy'),
@@ -66,7 +66,7 @@ class _ListOfCoursesState extends State<ListOfCourses> {
       Course(progress: 0.4, url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSzQjq7w7-n-7vv9hLJ0_N3lJE3rFVtfjI3iRQimP0zmTerluRo&usqp=CAU', text: 'Biology'),
       Course(progress: 0.3, url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSzQjq7w7-n-7vv9hLJ0_N3lJE3rFVtfjI3iRQimP0zmTerluRo&usqp=CAU', text: 'History'),
       Course(progress: 0.5, url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSzQjq7w7-n-7vv9hLJ0_N3lJE3rFVtfjI3iRQimP0zmTerluRo&usqp=CAU', text: 'Literature'),
-    ]
+    ]*/
   ];
   @override
   Widget build(BuildContext context) {

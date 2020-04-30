@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mavka/models/course.dart';
+import 'package:mavka/models/topic.dart';
+import 'package:mavka/models/unit.dart';
 import 'package:mavka/models/userInfo.dart';
 
 class DatabaseService{
@@ -16,11 +19,11 @@ class DatabaseService{
     return ds.exists;
   }
 
-  Future updateUserData(String firstName, String secondName, String userType) async {
+  Future updateUserData(User user) async {
     return await users.document(uid).setData({
-      'firstName': firstName,
-      'secondName': secondName,
-      'type': userType
+      'firstName': user.getFirstName(),
+      'secondName': user.getSecondName(),
+      'type': user.getType()
     });
   }
 
@@ -33,6 +36,44 @@ class DatabaseService{
     );
   }
 
+  Future<List<Unit>> getAllUnitsWithName (String course) async {
+    // print("start of query");
+    var units = await courses.where("Name", isEqualTo: course).getDocuments();
+    var list = units.documents;
+    // print("end of query");
+    List<Unit> result = new List();
+    list.forEach((element) {
+      result.add(Unit(element.documentID, element.data['Name'], element.data['Number'], element.data['Info']));
+    });
+    return result;
+  }
+
+  Future<List<Unit>> getAllUnitsWithId (String id) async {
+    //print("start of query");
+    var units = await courses.document(id).get();
+    // print("end of query");
+    var unit = await units.reference.collection("units").getDocuments();
+    var list = unit.documents;
+    List<Unit> result = new List();
+    list.forEach((element) {
+      result.add(Unit(element.documentID, element.data['Name'], element.data['Number'], element.data['Info']));
+    });
+    return result;
+  }
+
+  Future<List<Topic>> getAllTopicsWithName (String course, String unitName) async {
+    var collectionUnits = await courses.where("Name", isEqualTo: course).getDocuments();
+    var units = collectionUnits.documents;
+
+    for (var unit in units) {
+      var data = unit.data;
+      if (data['Name'] == unitName) {
+        var themes = await unit.reference.collection("topics").getDocuments();
+        var result = themes.documents;
+      }
+    }
+  }
+
   Future addCourseToStudent(String studentID, String courseID) async{
     DocumentSnapshot dsStudent = await students.document(studentID).get();
     DocumentSnapshot dsCourse = await courses.document(courseID).get();
@@ -43,11 +84,15 @@ class DatabaseService{
     }, merge: true);
   }
 
-  Future<List<DocumentSnapshot>> getCoursesByForm(int myForm) async{
+
+  Future<List<Course>> getCoursesByForm(int myForm) async{
     var docs = await courses.where('Form', isEqualTo: myForm).getDocuments();
-    List<DocumentSnapshot> result = docs.documents;
+    List<DocumentSnapshot> ds = docs.documents;
+    List<Course> result = new List();
+    ds.forEach((element) {
+      result.add(Course(element.documentID, element.data['Name'], element.data['Form'], element.data['Info']));
+    });
     return result;
   }
-  
 
 }

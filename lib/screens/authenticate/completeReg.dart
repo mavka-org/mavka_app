@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mavka/screens/authenticate/choose_course.dart';
 import 'package:mavka/screens/authenticate/studentReg.dart';
 import 'package:mavka/services/auth.dart';
 import 'package:mavka/services/database.dart';
@@ -26,7 +27,7 @@ class CompleteReg extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => StudentReg()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ChooseCourses()));
                 },
               ),
               RaisedButton(

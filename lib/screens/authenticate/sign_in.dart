@@ -100,6 +100,26 @@ class _SignInState extends State<SignIn> {
                   },
                 ),
                 SizedBox(height: 12.0),
+                RaisedButton(
+                  color: Colors.pink[400],
+                  child: Text(
+                    'Sign in with FB',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () async {
+                    setState(() => loading = true);
+                    dynamic result = await _auth.signInWithFacebook();
+                    if (result == null) {
+                      setState(() {
+                        error = 'could not sign in with those credentials';
+                        loading = false;
+                      });
+                    }else{
+                      Navigator.pop(context);
+                    }
+                  },
+                ),
+                SizedBox(height: 12.0),
                 Text(
                     error,
                     style: TextStyle(
