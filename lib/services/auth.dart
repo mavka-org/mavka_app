@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService{
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-
+  final FacebookLogin _fbLogin = FacebookLogin();
   Stream<FirebaseUser> get user{
     return _auth.onAuthStateChanged;
   }
@@ -63,6 +63,22 @@ class AuthService{
     }
   }
 
+  Future signInWithFacebook() async {
+    try {
+      //_fbLogin.loginBehavior = FacebookLoginBehavior.webViewOnly;
+      final FacebookLoginResult facebookLoginResult = await _fbLogin.logInWithReadPermissions(['email']);
+      if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
+        FacebookAccessToken facebookAccessToken = facebookLoginResult.accessToken;
+        final AuthCredential credential = FacebookAuthProvider.getCredential(accessToken: facebookAccessToken.token);
+        AuthResult authResult = await _auth.signInWithCredential(credential);
+        FirebaseUser user = authResult.user;
+        return user;
+      }
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 
   Future signOut() async {
     try{
@@ -71,6 +87,12 @@ class AuthService{
       }catch(e){
         print(e.toString());
       }
+      try {
+        await _fbLogin.logOut();
+      }catch(e){
+        print(e.toString());
+      }
+
       return await _auth.signOut();
     }catch(e){
       print(e.toString());

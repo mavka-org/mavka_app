@@ -13,7 +13,7 @@ class CompleteReg extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FirebaseUser user = Provider.of<FirebaseUser>(context);
-    DatabaseService ds = DatabaseService(uid: user.uid);
+    DatabaseService ds = DatabaseService(user.uid);
 
     return Container(
       padding: EdgeInsets.only(top: 50.0),

@@ -25,7 +25,7 @@ class Wrapper extends StatelessWidget {
       return Authenticate();
     }
     print(user.uid);
-    DatabaseService ds = DatabaseService(uid: user.uid);
+    DatabaseService ds = DatabaseService(user.uid);
     CurrentUserID.id = user.uid;
     return FutureBuilder<bool>(
         future: ds.isInBase(),
