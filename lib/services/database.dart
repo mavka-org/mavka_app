@@ -32,7 +32,7 @@ class DatabaseService{
       ds.data['type'],
     );
   }
-  static Future getAllCourses () async {
+  /*static Future getAllCourses () async {
     print("start of list");
     var m = await courses.getDocuments();
     var k = m.documents;
@@ -64,7 +64,7 @@ class DatabaseService{
       print(v);
     }*/
     print("end of list");
-  }
+  }*/
   static Future getAllUnitsWithName (String course) async {
    // print("start of query");
     var units = await courses.where("Name", isEqualTo: course).getDocuments();
@@ -77,7 +77,7 @@ class DatabaseService{
     }
     return null;
   }
-  static Future getAllUnitsWithId (String id) async {
+  static Future<List<DocumentSnapshot>> getAllUnitsWithId (String id) async {
     //print("start of query");
     var units = await courses.document(id).get();
    // print("end of query");
@@ -86,20 +86,26 @@ class DatabaseService{
     return result;
   }
 
-  static Future getAllThemesWithName (String course, String unitName) async {
-      var units = await getAllUnitsWithName(course);
-      for (var unit in units) {
-          var data = unit.data;
-          if (data['Name'] == unitName) {
-            var themes = await unit.reference.collection("topics").getDocuments();
-            var result = themes.documents;
-            /*for (var v in result) {
+  static Future<List<DocumentSnapshot>> getAllThemesWithName (String course, String unitName) async {
+    var units = await getAllUnitsWithName(course);
+    for (var unit in units) {
+      var data = unit.data;
+      if (data['Name'] == unitName) {
+        var themes = await unit.reference.collection("topics").getDocuments();
+        var result = themes.documents;
+        /*for (var v in result) {
               print(v.data);
-            }*/
-            return result;
-          }
+         }*/
+        return result;
       }
-      return null;
+    }
+    return null;
+  }
+
+  static Future<List<DocumentSnapshot>> getAllCourses () async {
+    var c = await courses.getDocuments();
+    var list = c.documents;
+    return list;
   }
 
 }

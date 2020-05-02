@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-class Course{
+class Course {
   String url;
   String text;
   double progress;
   Course({this.url, this.text, this.progress});
-
 }
 
  Widget courseTemplate(course, width){
