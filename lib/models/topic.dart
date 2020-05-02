@@ -27,10 +27,10 @@ class Topic{
     _name = name;
   }
 
-  int getForm() {
+  int getNumber() {
     return _number;
   }
-  void setForm(int number) {
+  void setNumber(int number) {
     _number = number;
   }
 
@@ -40,6 +40,8 @@ class Topic{
   void setType(String info) {
     _info = info;
   }
+
+
 
 
 }

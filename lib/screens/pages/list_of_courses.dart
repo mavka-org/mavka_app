@@ -30,7 +30,7 @@ class _ListOfCoursesState extends State<ListOfCourses> {
     var getHeight = (double percent) {
       return height * percent / 100.0;
     };
-    var courses = DatabaseService.getAllCourses();
+    var courses = (new DatabaseService("")).getAllCourses();
     return Scaffold(
       body: FutureBuilder<List<DocumentSnapshot>>(
         future: courses,

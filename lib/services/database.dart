@@ -63,22 +63,23 @@ class DatabaseService{
     return result;
   }
 
-  Future<List<Topic>> getAllTopicsWithName (String course, String unitName) async {
-    var collectionUnits = await courses.where("Name", isEqualTo: course).getDocuments();
-    var units = collectionUnits.documents;
-    for (var unit in units) {
-      var data = unit.data;
-      if (data['Name'] == unitName) {
-        var themes = await unit.reference.collection("topics").getDocuments();
-        var result = themes.documents;
-        List<Topic> fin = new List();
-        result.forEach((element) {
-          fin.add(Topic(element.documentID, element.data['Name'], element.data['Number'], element.data['Info']));
-        });
-        return fin;
-      }
+  Future<List<Topic>> getAllTopicsWithName (String course, String unitName) async { //правильная функция!!!!!!!
+   // print("Caaaaaaaall");
+    List<Topic> result = List();
+    var cc = await courses.where("Name", isEqualTo: course).getDocuments();
+    var c = cc.documents;
+    var units = await c[0].reference.collection("units").getDocuments();
+    var unit = units.documents;
+    for (var v in unit) {
+        if (v.data['Name'] == unitName) {
+            var k = await v.reference.collection("topics").getDocuments();
+            var topics = k.documents;
+            topics.forEach((element) {
+              result.add(Topic(element.documentID, element.data['Name'], element.data['Number'], element.data['Info']));
+            });
+        }
     }
-    return null;
+    return result;
   }
 
   Future<List<DocumentSnapshot>> getAllCourses () async {

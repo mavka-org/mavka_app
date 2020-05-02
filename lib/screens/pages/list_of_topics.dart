@@ -2,11 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mavka/services/database.dart';
 import 'package:mavka/models/HexColor.dart';
+import 'package:mavka/models/topic.dart';
 
 class ListOfTopics extends StatefulWidget {
   final String courseName;
-  final Map unitInfo;
-  ListOfTopics({Key key, this.courseName, this.unitInfo}) : super(key: key);
+  final String unitName;
+  ListOfTopics({Key key, this.courseName, this.unitName}) : super(key: key);
   @override
   _ListOfTopicsState createState() => _ListOfTopicsState();
 }
@@ -28,13 +29,14 @@ class _ListOfTopicsState extends State<ListOfTopics> {
     var getHeight = (double percent) {
       return height * percent / 100.0;
     };
-    var topics = DatabaseService.getAllThemesWithName(this.widget.courseName, this.widget.unitInfo['Name']);
+   // print(this.widget.courseName + "     " +  this.widget.unitName);
+    var topics = (new DatabaseService("")).getAllTopicsWithName(this.widget.courseName, this.widget.unitName);
     return Scaffold(
-      body: FutureBuilder<List<DocumentSnapshot>>(
+      body: FutureBuilder<List<Topic>>(
           future: topics,
           builder: (context, c) {
-            List<DocumentSnapshot> cc = c.data;
-            if (cc != null) cc.sort((a, b) => a.data['Number'] - b.data['Number']);
+            List<Topic> cc = c.data;
+            if (cc != null) cc.sort((a, b) => a.getNumber() - b.getNumber());
             List<Row> items = List();
             var widget = (i) {
               return Padding(
@@ -93,7 +95,7 @@ class _ListOfTopicsState extends State<ListOfTopics> {
                           child: Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              cc[i].data['Name'] + "\n",
+                              cc[i].getName() + "\n",
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   color:  light(colors[i % 6]) < 60.0 ? Colors.white : Colors.black,
@@ -132,7 +134,7 @@ class _ListOfTopicsState extends State<ListOfTopics> {
                 Padding(
                   padding: EdgeInsets.only(left: getWidth(8.7), top: getHeight(1.18)),
                   child: Text(
-                    this.widget.unitInfo['Name'],
+                    this.widget.unitName,
                     style: TextStyle(
                         fontFamily: "Gilroy",
                         fontSize: 14
