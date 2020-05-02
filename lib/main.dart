@@ -16,8 +16,9 @@ class MyApp extends StatelessWidget {
     return StreamProvider<FirebaseUser>.value(
       value: AuthService().user,
       child: MaterialApp(
-        home: Register(),
+        home: Wrapper(),
       ),
     );
   }
 }
+

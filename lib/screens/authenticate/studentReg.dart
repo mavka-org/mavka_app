@@ -13,7 +13,7 @@ class StudentReg extends StatefulWidget {
 class _StudentRegState extends State<StudentReg> {
   @override
   Widget build(BuildContext context) {
-    DatabaseService ds = DatabaseService(uid: CurrentUserID.id);
+    DatabaseService ds = DatabaseService(CurrentUserID.id);
     ds.updateUserData(User("Chebotok", "Nikita", Type.student()));
     return Home();
   }
