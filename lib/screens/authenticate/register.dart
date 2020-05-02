@@ -21,12 +21,8 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-      backgroundColor: Colors.brown[100],
-      appBar: AppBar(
-        backgroundColor: Colors.brown[400],
-        elevation: 0.0,
-        title: Text('Sign up to Firebase'),
-      ),
+      backgroundColor: Colors.white,
+      
       body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
           child: Form(
@@ -36,6 +32,7 @@ class _RegisterState extends State<Register> {
                 SizedBox(height: 20.0),
                 TextFormField(
                   decoration: textInputDecoration.copyWith(hintText: 'Email'),
+                  
                   validator: (value) => value.isEmpty ? 'Enter an email' : null,
                   onChanged: (value) {
                     setState(() {
@@ -45,7 +42,7 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 20.0),
                 TextFormField(
-                  decoration: textInputDecoration.copyWith(hintText: 'Password'),
+                  decoration: InputDecoration(hintText: 'Пароль',),
                   validator: (value) => value.length < 6
                       ? 'Enter a password 6+ chars long'
                       : null,
@@ -58,11 +55,19 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 20.0),
                 RaisedButton(
-                  color: Colors.pink[400],
+                  color: Colors.white,
                   child: Text(
                     'Sign up',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(fontSize: 25),
                   ),
+                    textColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(22.0),
+                      side: BorderSide(color: Color.fromRGBO(38, 132, 254, 100), width: 1),
+                    ),
+                    highlightColor: Colors.blue[50],
+                    highlightElevation: 5,
+                    elevation: 2,
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       setState(() => loading = true);

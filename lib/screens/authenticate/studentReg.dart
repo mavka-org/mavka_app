@@ -4,7 +4,6 @@ import 'package:mavka/models/userTypes.dart';
 import 'package:mavka/services/database.dart';
 
 import '../home/home.dart';
-import '../home/home.dart';
 
 class StudentReg extends StatefulWidget {
   @override
