@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mavka/models/unit.dart';
 import 'package:mavka/screens/pages/list_of_topics.dart';
 import 'package:mavka/services/database.dart';
 import 'package:mavka/models/HexColor.dart';
@@ -29,12 +30,12 @@ class _ListOfUnitsState extends State<ListOfUnits> {
     var getHeight = (double percent) {
       return height * percent / 100.0;
     };
-    var units = DatabaseService.getAllUnitsWithId(this.widget.courseID);
+    var units = (new DatabaseService("")).getAllUnitsWithId(this.widget.courseID);
     return Scaffold(
-      body: FutureBuilder<List<DocumentSnapshot>>(
+      body: FutureBuilder<List<Unit>>(
           future: units,
           builder: (context, c) {
-            List<DocumentSnapshot> cc = c.data;
+            List<Unit> cc = c.data;
             List<Row> items = List();
             var widget = (i) {
               return Padding(
@@ -90,12 +91,12 @@ class _ListOfUnitsState extends State<ListOfUnits> {
                         child: RaisedButton(
                           color: colors[i % 6],
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ListOfTopics(courseName: this.widget.courseInfo['Name'], unitInfo: cc[i].data)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ListOfTopics(courseName: this.widget.courseInfo['Name'], unitName: cc[i].getName())));
                           },
                           child: Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              cc[i].data['Name'] + "\n",
+                              cc[i].getName() + "\n",
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   color:  light(colors[i % 6]) < 60.0 ? Colors.white : Colors.black,
