@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:mavka/screens/authenticate/register.dart';
 import 'package:mavka/screens/authenticate/sign_in.dart';
 import 'package:mavka/screens/home/home.dart';
+import 'package:mavka/shared/hex_color.dart';
 import 'package:mavka/utilities/styles.dart';
 
 class Authenticate extends StatefulWidget {
@@ -31,7 +32,7 @@ class _AuthenticateState extends State<Authenticate> {
       height: 8.0,
       width: isActive ? 24.0 : 16.0,
       decoration: BoxDecoration(
-        color: isActive ? Colors.white : Color(0xFF7B51D3),
+        color: isActive ? HexColor('2684FE') : Colors.black,
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     );
@@ -41,7 +42,7 @@ class _AuthenticateState extends State<Authenticate> {
   Widget build(BuildContext context) {
     print("I am at auth");
     return Scaffold(
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.white,
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.light,
           child: Container(
@@ -68,23 +69,20 @@ class _AuthenticateState extends State<Authenticate> {
                             children: <Widget>[
                               Center(
                                 child: Image(
+                                  height: 300.0,
+                                  width: 300.0,
                                   image: AssetImage(
                                     'assets/onboarding0.png',
                                   ),
-                                  height: 300.0,
-                                  width: 300.0,
                                 ),
                               ),
                               SizedBox(height: 20.0),
                               Text(
-                                'Connect people\naround the world',
+                                'Створи космічну\nракету',
                                 style: kTitleStyle,
                               ),
                               SizedBox(height: 15.0),
-                              Text(
-                                'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.',
-                                style: kSubtitleStyle,
-                              ),
+
                             ],
                           ),
                         ),
@@ -95,23 +93,20 @@ class _AuthenticateState extends State<Authenticate> {
                             children: <Widget>[
                               Center(
                                 child: Image(
+                                  height: 300.0,
+                                  width: 300.0,
                                   image: AssetImage(
                                     'assets/onboarding1.png',
                                   ),
-                                  height: 300.0,
-                                  width: 300.0,
                                 ),
                               ),
                               SizedBox(height: 20.0),
                               Text(
-                                'Live your life smarter\nwith us!',
+                                'Вирости красиву\nкалину!',
                                 style: kTitleStyle,
                               ),
                               SizedBox(height: 15.0),
-                              Text(
-                                'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.',
-                                style: kSubtitleStyle,
-                              ),
+
                             ],
                           ),
                         ),
@@ -122,23 +117,19 @@ class _AuthenticateState extends State<Authenticate> {
                             children: <Widget>[
                               Center(
                                 child: Image(
+                                  height: 300.0,
+                                  width: 300.0,
                                   image: AssetImage(
                                     'assets/onboarding2.png',
                                   ),
-                                  height: 300.0,
-                                  width: 300.0,
                                 ),
                               ),
                               SizedBox(height: 20.0),
                               Text(
-                                'Get a new experience\nof imagination',
+                                'Розроби вакцину\nвід коронавірусу',
                                 style: kTitleStyle,
                               ),
                               SizedBox(height: 15.0),
-                              Text(
-                                'Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod tempor incididunt ut labore et.',
-                                style: kSubtitleStyle,
-                              ),
                             ],
                           ),
                         ),
@@ -169,7 +160,7 @@ class _AuthenticateState extends State<Authenticate> {
                       fontSize: 25.0
                   ),
                 ),
-                color: Colors.green,
+                color: HexColor('2684FE'),
                 height: 100.0,
                 minWidth: 179,
                 onPressed: () {
@@ -186,7 +177,7 @@ class _AuthenticateState extends State<Authenticate> {
                     )
                 ),
                 height: 100.0,
-                color: Colors.red,
+                color: HexColor('2684FE'),
                 minWidth: 179,
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));

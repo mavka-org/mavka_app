@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mavka/models/currentUserID.dart';
 import 'package:mavka/models/userInfo.dart';
 import 'package:mavka/screens/authenticate/authenticate.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +27,7 @@ class Wrapper extends StatelessWidget {
       return Authenticate();
     }
     print(user.uid);
-    DatabaseService ds = DatabaseService(uid: user.uid);
+    DatabaseService ds = DatabaseService(user.uid);
     CurrentUserID.id = user.uid;
     return FutureBuilder<bool>(
         future: ds.isInBase(),
@@ -45,12 +44,5 @@ class Wrapper extends StatelessWidget {
           }
         }
     );
-    return Scaffold(
-      backgroundColor: Colors.blueAccent,
-      body: Container(
-
-      ),
-    );
-
   }
 }
