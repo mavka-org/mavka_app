@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mavka/models/userInfo.dart';
 import 'package:mavka/screens/authenticate/helloscreen/helloscreen.dart';
 import 'package:mavka/screens/authenticate/onboarding_screen/type_page.dart';
@@ -26,7 +26,7 @@ class Wrapper extends StatelessWidget {
     print(user.uid);
     DatabaseService ds = DatabaseService(user.uid);
     CurrentUserID.id = user.uid;
-    return FutureBuilder<bool>(
+    return FutureBuilder<bool> (
         future: ds.isInBase(),
         builder: (context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.hasData) {

@@ -32,7 +32,7 @@ class TypePage extends StatelessWidget {
                     ),
                     color: Color.fromRGBO(38, 132, 254, 100),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => MotivationPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ClassAndCodePage()));
                     },
                     textColor: Colors.white,
                     height: 70,

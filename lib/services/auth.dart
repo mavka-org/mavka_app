@@ -83,7 +83,9 @@ class AuthService{
   Future signOut() async {
     try{
       if(await _fbLogin.isLoggedIn){
+        //print('fb_out');
         await _fbLogin.logOut();
+        //print('fb_out2');
       }
       if(await _googleSignIn.isSignedIn()){
         await _googleSignIn.signOut();

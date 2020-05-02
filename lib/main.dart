@@ -10,7 +10,11 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
+
+  static BuildContext tmpCon;
+
   Widget build(BuildContext context) {
+    tmpCon = context;
     return StreamProvider<FirebaseUser>.value(
       value: AuthService().user,
       child: MaterialApp(

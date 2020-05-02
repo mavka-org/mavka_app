@@ -216,6 +216,8 @@ class _ProfileState extends State<Profile> {
                   child: Text('Log out'),
                   onPressed: () async {
                     await Profile._authService.signOut();
+                    print("ss");
+                    //Navigator.popUntil(context, ModalRoute.withName('/'));
                   },
                 ),
               ],

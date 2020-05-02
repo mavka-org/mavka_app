@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mavka/main.dart';
 import 'package:mavka/models/userInfo.dart';
 import 'package:mavka/models/userTypes.dart';
+import 'package:mavka/screens/wrapper.dart';
 import 'package:mavka/services/database.dart';
 
 import '../home/home.dart';
@@ -19,8 +21,9 @@ class _StudentRegState extends State<StudentReg> {
       body: Center(
         child: RaisedButton(
           child: Text('Далі'),
-          onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+          onPressed: () {
+            Navigator.popUntil(context, ModalRoute.withName('/'));
+            Navigator.pushReplacement(MyApp.tmpCon, MaterialPageRoute(builder: (context) => Wrapper()));
           },
         ),
       ),
