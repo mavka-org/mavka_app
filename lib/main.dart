@@ -4,10 +4,7 @@ import 'package:mavka/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:mavka/screens/home/home.dart';
-import 'package:mavka/screens/home/llist_of_courses.dart';
-import 'package:mavka/screens/authenticate/onboarding screen/sign_up_first.dart';
-import 'package:mavka/screens/authenticate/helloscreen/helloscreen.dart';
-import 'package:mavka/screens/authenticate/register.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {

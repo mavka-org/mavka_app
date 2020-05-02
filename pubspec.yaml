@@ -36,7 +36,9 @@ dependencies:
   flutter_spinkit: ^4.1.2+1
   google_sign_in: ^4.0.4
   firebase_storage: ^3.1.5
+  flutter_rounded_progress_bar: 0.1.1
   flutter_facebook_login: ^1.1.1
+
 
 dev_dependencies:
   flutter_test:
@@ -91,6 +93,9 @@ flutter:
       fonts:
         - asset: assets/fonts/Gilroy-ExtraBold.otf
         - asset: assets/fonts/Gilroy-Light.otf
-  
+        - asset: fonts/Gilroy-Regular.ttf
+    - family: GilroyBold
+      fonts:
+        - asset: fonts/Gilroy-Bold.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

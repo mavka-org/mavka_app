@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mavka/models/userInfo.dart';
 import 'package:mavka/screens/authenticate/authenticate.dart';
 import 'package:flutter/material.dart';
+import 'package:mavka/screens/pages/user_type.dart';
 import 'package:mavka/services/database.dart';
 import 'package:mavka/shared/loading.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,7 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //return UserType();
     final FirebaseUser user = Provider.of<FirebaseUser>(context);
     print("upgrade");
     print(user);
