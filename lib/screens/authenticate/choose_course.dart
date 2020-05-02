@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mavka/screens/authenticate/completeReg.dart';
 import 'package:mavka/screens/authenticate/studentReg.dart';
 import 'package:mavka/shared/hex_color.dart';
 
@@ -100,12 +99,14 @@ class _ChooseCoursesState extends State<ChooseCourses> {
                                   image: AssetImage("assets/background1.jpg"),
                                 )
                             ),
-                            MaterialButton(
-                              child: Text('Продовжити'),
-                              color: HexColor('2684FE'),
-                              onPressed: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => StudentReg()));
-                              }
+                            Center(
+                              child: MaterialButton(
+                                child: Text('Продовжити'),
+                                color: HexColor('2684FE'),
+                                onPressed: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => StudentReg()));
+                                }
+                              ),
                             )
                           ],
                         )
@@ -116,6 +117,3 @@ class _ChooseCoursesState extends State<ChooseCourses> {
     );
   }
 }
-/*
-
- */

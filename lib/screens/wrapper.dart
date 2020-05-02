@@ -1,14 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mavka/models/userInfo.dart';
-import 'package:mavka/screens/authenticate/authenticate.dart';
 import 'package:flutter/material.dart';
-import 'package:mavka/screens/pages/user_type.dart';
+import 'package:mavka/models/userInfo.dart';
+import 'package:mavka/screens/authenticate/helloscreen/helloscreen.dart';
+import 'package:mavka/screens/authenticate/onboarding_screen/type_page.dart';
 import 'package:mavka/services/database.dart';
 import 'package:mavka/shared/loading.dart';
 import 'package:provider/provider.dart';
-import 'authenticate/completeReg.dart';
-
 import 'home/home.dart';
 
 
@@ -24,7 +21,7 @@ class Wrapper extends StatelessWidget {
 
     if(user == null) {
       print("auth");
-      return Authenticate();
+      return GettingStart();
     }
     print(user.uid);
     DatabaseService ds = DatabaseService(user.uid);
@@ -37,7 +34,7 @@ class Wrapper extends StatelessWidget {
               return Home();
             }
             else {
-              return CompleteReg();
+              return TypePage();
             }
           }else{
             return Loading();

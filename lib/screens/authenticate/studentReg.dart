@@ -15,6 +15,15 @@ class _StudentRegState extends State<StudentReg> {
   Widget build(BuildContext context) {
     DatabaseService ds = DatabaseService(CurrentUserID.id);
     ds.updateUserData(User("Chebotok", "Nikita", Type.student()));
-    return Home();
+    return Scaffold(
+      body: Center(
+        child: RaisedButton(
+          child: Text('Далі'),
+          onPressed: (){
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+          },
+        ),
+      ),
+    );
   }
 }

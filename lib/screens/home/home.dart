@@ -23,22 +23,22 @@ class _HomeState extends State<Home> {
           height: 80.0,
           child: BottomNavigationBar(
             selectedItemColor: HexColor('2684FE'),
-            type: BottomNavigationBarType.fixed,
+            unselectedItemColor: HexColor('89909A'),
             items: [
               BottomNavigationBarItem(
-                icon: Image.asset('assets/Icons_home.png'),
+                icon: Icon(Icons.home),
                 title: Text('')
               ),
               BottomNavigationBarItem(
-                icon: Image.asset('assets/Icons_lessons.png'),
+                icon: Icon(Icons.import_contacts),
                 title: Text(''),
               ),
               BottomNavigationBarItem(
-                icon: Image.asset('assets/Icons_check.png'),
+                icon: Icon(Icons.bookmark),
                 title: Text('')
               ),
               BottomNavigationBarItem(
-                icon: Image.asset('assets/Icons_profile.png'),
+                icon: Icon(Icons.person_outline),
                 title: Text('')
               ),
             ],

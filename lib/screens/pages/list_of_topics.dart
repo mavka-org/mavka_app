@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mavka/services/database.dart';
-import 'package:mavka/models/HexColor.dart';
 import 'package:mavka/models/topic.dart';
+import 'package:mavka/shared/hex_color.dart';
 
 class ListOfTopics extends StatefulWidget {
   final String courseName;

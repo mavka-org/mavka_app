@@ -5,6 +5,9 @@ import 'package:mavka/screens/authenticate/helloscreen/slideitem.dart';
 import 'package:mavka/screens/authenticate/helloscreen/slide_dots.dart';
 import 'dart:async';
 
+import '../register.dart';
+import '../sign_in.dart';
+
 class GettingStart extends StatefulWidget {
   @override
   _GettingStartState createState() => _GettingStartState();
@@ -93,7 +96,9 @@ class _GettingStartState extends State<GettingStart> {
                       "Sign in",
                       style: TextStyle(fontSize: 25),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn()));
+                    },
                     color: Colors.white,
                     textColor: Colors.black,
                     shape: RoundedRectangleBorder(
@@ -109,7 +114,9 @@ class _GettingStartState extends State<GettingStart> {
                       "Sign up",
                       style: TextStyle(fontSize: 25),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
+                    },
                     color: Colors.white,
                     textColor: Colors.black,
                     shape: RoundedRectangleBorder(

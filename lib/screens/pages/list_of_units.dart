@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mavka/models/unit.dart';
 import 'package:mavka/screens/pages/list_of_topics.dart';
 import 'package:mavka/services/database.dart';
-import 'package:mavka/models/HexColor.dart';
+import 'package:mavka/shared/hex_color.dart';
 
 class ListOfUnits extends StatefulWidget {
   final String courseID;

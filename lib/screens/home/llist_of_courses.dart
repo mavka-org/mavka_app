@@ -48,11 +48,7 @@ Widget listTemplate(List <Course> courses, double height, double width){
 
 class _ListOfCoursesState extends State<ListOfCourses> {
   
-  // LOOK HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // ATTENTTION !!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // MISHA LOOOOOOOOOOOOOOOH
-  // and seva
-  // ^_^
+
   String dropdownValue = 'One';
   List < List < Course > > currentCourses = [
    /* [
