@@ -53,6 +53,12 @@ flutter:
     - assets/onboarding0.png
     - assets/onboarding1.png
     - assets/onboarding2.png
+    - assets/sign_up_pic/sign_up_inform.png
+    - assets/sign_up_pic/sign_up_backpack.png
+    - assets/sign_up_pic/sign_up_last.png
+    - assets/sign_up_pic/sign_up_microbe.png
+    - assets/sign_up_pic/sign_up_rocket.png
+    - assets/sign_up_pic/sign_up_tree.png
     - assets/Icons_home.png
     - assets/Icons_check.png
     - assets/Icons_lessons.png
@@ -85,10 +91,11 @@ flutter:
   fonts:
     - family: Gilroy
       fonts:
+        - asset: assets/fonts/Gilroy-ExtraBold.otf
+        - asset: assets/fonts/Gilroy-Light.otf
         - asset: fonts/Gilroy-Regular.ttf
     - family: GilroyBold
       fonts:
         - asset: fonts/Gilroy-Bold.ttf
-  #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
