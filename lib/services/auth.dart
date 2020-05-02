@@ -82,17 +82,12 @@ class AuthService{
 
   Future signOut() async {
     try{
-      try {
-        await _googleSignIn.signOut();
-      }catch(e){
-        print(e.toString());
-      }
-      try {
+      if(await _fbLogin.isLoggedIn){
         await _fbLogin.logOut();
-      }catch(e){
-        print(e.toString());
       }
-
+      if(await _googleSignIn.isSignedIn()){
+        await _googleSignIn.signOut();
+      }
       return await _auth.signOut();
     }catch(e){
       print(e.toString());
