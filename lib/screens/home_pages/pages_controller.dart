@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mavka/screens/home/llist_of_courses.dart';
-import 'package:mavka/screens/home_pages/documents.dart';
 import 'package:mavka/screens/home_pages/profile_page.dart';
-
+import 'package:mavka/screens/material_pages/list_of_courses.dart';
 import 'bookmarks.dart';
 import 'home_page.dart';
 

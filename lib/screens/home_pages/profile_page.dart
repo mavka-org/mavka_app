@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mavka/screens/authenticate/authenticate.dart';
-import 'package:mavka/screens/authenticate/helloscreen/helloscreen.dart';
 import 'package:mavka/services/auth.dart';
+import 'package:mavka/models/userInfo.dart';
+import '../wrapper.dart';
+
 
 class Profile extends StatefulWidget {
   static String curr = "vnimane";
@@ -14,7 +15,7 @@ class Profile extends StatefulWidget {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     //Pass in the password to updatePassword.
     await _auth.signInWithEmailAndPassword(
-        email: "ermakov@dlit.dp.ua", password: "111111");
+        email: CurrentUser.user.email, password: "111111");
     user.updateEmail(email).then((_) {
       print("Succesfull changed email");
     }).catchError((error) {
@@ -28,7 +29,7 @@ class Profile extends StatefulWidget {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     //Pass in the password to updatePassword.
     await _auth.signInWithEmailAndPassword(
-        email: "ermakov@dlit.dp.ua", password: "228228");
+        email: CurrentUser.user.email, password: "111111");
     user.updatePassword(password).then((_) {
       print("Succesfull changed password");
     }).catchError((error) {
@@ -216,8 +217,7 @@ class _ProfileState extends State<Profile> {
                   child: Text('Log out'),
                   onPressed: () async {
                     await Profile._authService.signOut();
-                    print("ss");
-                    //Navigator.popUntil(context, ModalRoute.withName('/'));
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Wrapper()), (Route<dynamic> route) => false);
                   },
                 ),
               ],

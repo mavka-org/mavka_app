@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 class User {
   String _firstName;
   String _secondName;
@@ -31,6 +33,6 @@ class User {
   }
 }
 
-class CurrentUserID{
-  static String id;
+class CurrentUser{
+  static FirebaseUser user;
 }

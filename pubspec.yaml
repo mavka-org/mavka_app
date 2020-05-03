@@ -97,5 +97,8 @@ flutter:
     - family: GilroyBold
       fonts:
         - asset: fonts/Gilroy-Bold.ttf
+    - family: SocialIcons
+      fonts:
+        - asset: assets/icons/SocialIcons.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -1,18 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mavka/models/unit.dart';
+import 'package:mavka/screens/material_pages/list_of_topics.dart';
 import 'package:mavka/services/database.dart';
-import 'package:mavka/models/topic.dart';
 import 'package:mavka/shared/hex_color.dart';
 
-class ListOfTopics extends StatefulWidget {
-  final String courseName;
-  final String unitName;
-  ListOfTopics({Key key, this.courseName, this.unitName}) : super(key: key);
+class ListOfUnits extends StatefulWidget {
+  final String courseID;
+  final Map courseInfo;
+  ListOfUnits({Key key, this.courseID, this.courseInfo}) : super(key: key);
   @override
-  _ListOfTopicsState createState() => _ListOfTopicsState();
+  _ListOfUnitsState createState() => _ListOfUnitsState();
 }
 
-class _ListOfTopicsState extends State<ListOfTopics> {
+class _ListOfUnitsState extends State<ListOfUnits> {
   List<Color> colors = [HexColor("#DA5776"), HexColor("#202EAB"), HexColor("#E6E4E5"), HexColor("#A6AFFF"), HexColor("#A6AFFF"), HexColor("#A6EFFF")];
   List<Color> colors1 = [HexColor("#F9E6EA"), HexColor("#DEE0F2"), HexColor("#FBFBFB"), HexColor("#F2F3FF"), HexColor("#F2F3FF"), HexColor("#F2F3FF")];
   static double light (Color c) {
@@ -29,14 +29,12 @@ class _ListOfTopicsState extends State<ListOfTopics> {
     var getHeight = (double percent) {
       return height * percent / 100.0;
     };
-   // print(this.widget.courseName + "     " +  this.widget.unitName);
-    var topics = (new DatabaseService("")).getAllTopicsWithName(this.widget.courseName, this.widget.unitName);
+    var units = (new DatabaseService("")).getAllUnitsWithId(this.widget.courseID);
     return Scaffold(
-      body: FutureBuilder<List<Topic>>(
-          future: topics,
+      body: FutureBuilder<List<Unit>>(
+          future: units,
           builder: (context, c) {
-            List<Topic> cc = c.data;
-            if (cc != null) cc.sort((a, b) => a.getNumber() - b.getNumber());
+            List<Unit> cc = c.data;
             List<Row> items = List();
             var widget = (i) {
               return Padding(
@@ -91,7 +89,9 @@ class _ListOfTopicsState extends State<ListOfTopics> {
                       Positioned(
                         child: RaisedButton(
                           color: colors[i % 6],
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ListOfTopics(courseName: this.widget.courseInfo['Name'], unitName: cc[i].getName())));
+                          },
                           child: Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
@@ -119,7 +119,7 @@ class _ListOfTopicsState extends State<ListOfTopics> {
                 Padding(
                   padding: EdgeInsets.only(left: getWidth(8.7), top: getHeight(5.18)),
                   child: Text(
-                    this.widget.courseName,
+                    this.widget.courseInfo['Name'],
                     style: TextStyle(
                         fontFamily: "GilroyBold",
                         fontWeight: FontWeight.bold,
@@ -134,7 +134,7 @@ class _ListOfTopicsState extends State<ListOfTopics> {
                 Padding(
                   padding: EdgeInsets.only(left: getWidth(8.7), top: getHeight(1.18)),
                   child: Text(
-                    this.widget.unitName,
+                    this.widget.courseInfo['Info'] + "\nРозрахований для учнів " + this.widget.courseInfo['Form'].toString() + " класу",
                     style: TextStyle(
                         fontFamily: "Gilroy",
                         fontSize: 14
@@ -148,7 +148,7 @@ class _ListOfTopicsState extends State<ListOfTopics> {
                 Padding(
                   padding: EdgeInsets.only(left: getWidth(8.7), top: getHeight(5.18)),
                   child: Text(
-                    "Теми",
+                    "Розділи",
                     style: TextStyle(
                         fontFamily: "GilroyBold",
                         fontWeight: FontWeight.bold,

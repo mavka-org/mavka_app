@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 import 'package:mavka/screens/authenticate/helloscreen/slide.dart';
 import 'package:mavka/screens/authenticate/helloscreen/slide_dots.dart';
 import 'package:mavka/screens/authenticate/helloscreen/slideitem.dart';
-import 'package:mavka/screens/authenticate/helloscreen/slide_dots.dart';
 import 'dart:async';
 
 import '../register.dart';
@@ -16,20 +15,8 @@ class GettingStart extends StatefulWidget {
 class _GettingStartState extends State<GettingStart> {
   int _currentpage = 0;
   final PageController _pageController = PageController(initialPage: 0);
-  @override
-  void initState() {
-    super.initState();
-    Timer.periodic(Duration(seconds: 5), (Timer timer) {
-      if (_currentpage < 2) {
-        _currentpage++;
-      } else {
-        _currentpage = 0;
-      }
-      _pageController.animateToPage(_currentpage,
-          duration: Duration(milliseconds: 300), curve: Curves.easeIn);
-    });
-  }
 
+  @override
   void dispose() {
     super.dispose();
     _pageController.dispose();

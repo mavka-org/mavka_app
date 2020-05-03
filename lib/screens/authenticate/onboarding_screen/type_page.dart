@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mavka/screens/authenticate/onboarding_screen/class_and_code_page.dart';
-import 'package:mavka/screens/authenticate/onboarding_screen/motivation_page.dart';
 
 class TypePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("TYPE_PAGE");
       return Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -24,7 +24,7 @@ class _MyStatefulWidgetState3 extends State<TestResult> {
                 padding: const EdgeInsets.only(top: 50.0, left: 30.0),
                 child: IconButton(
                   onPressed: (){
-                    Navigator.popUntil(context, ModalRoute.withName('/'));
+                    Navigator.popUntil(context, (route) => route.isFirst);
                   },
                   icon: Icon(
                     Icons.clear,

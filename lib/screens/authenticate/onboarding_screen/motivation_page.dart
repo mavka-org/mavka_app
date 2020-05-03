@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../choose_course.dart';
+import 'choose_course.dart';
 class MotivationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

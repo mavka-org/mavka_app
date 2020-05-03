@@ -81,6 +81,7 @@ class AuthService{
   }
 
   Future signOut() async {
+    print('SIGN_OUT');
     try{
       if(await _fbLogin.isLoggedIn){
         //print('fb_out');

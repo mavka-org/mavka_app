@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mavka/screens/authenticate/studentReg.dart';
+import 'studentReg.dart';
 import 'package:mavka/shared/hex_color.dart';
 
 class ChooseCourses extends StatefulWidget {

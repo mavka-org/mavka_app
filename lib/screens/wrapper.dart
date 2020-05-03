@@ -11,21 +11,18 @@ import 'home/home.dart';
 
 
 class Wrapper extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    //return UserType();
-    final FirebaseUser user = Provider.of<FirebaseUser>(context);
-    print("upgrade");
+    FirebaseUser user = Provider.of<FirebaseUser>(context);
+    CurrentUser.user = user;
+    print("UPGRADE");
     print(user);
 
     if(user == null) {
-      print("auth");
+      print("SIGN_IN_UP");
       return GettingStart();
     }
-    print(user.uid);
     DatabaseService ds = DatabaseService(user.uid);
-    CurrentUserID.id = user.uid;
     return FutureBuilder<bool> (
         future: ds.isInBase(),
         builder: (context, AsyncSnapshot<bool> snapshot) {
