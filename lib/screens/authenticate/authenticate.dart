@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mavka/screens/authenticate/register.dart';
 import 'package:mavka/screens/authenticate/sign_in.dart';
-import 'package:mavka/screens/home/home.dart';
 import 'package:mavka/shared/hex_color.dart';
 import 'package:mavka/utilities/styles.dart';
 

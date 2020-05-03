@@ -1,35 +1,29 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mavka/models/userInfo.dart';
-import 'package:mavka/screens/authenticate/authenticate.dart';
-import 'package:flutter/material.dart';
-import 'package:mavka/screens/pages/user_type.dart';
+import 'package:mavka/screens/authenticate/helloscreen/helloscreen.dart';
+import 'package:mavka/screens/authenticate/onboarding_screen/type_page.dart';
 import 'package:mavka/services/database.dart';
 import 'package:mavka/shared/loading.dart';
 import 'package:provider/provider.dart';
-import 'authenticate/completeReg.dart';
-
 import 'home/home.dart';
 
 
 
 class Wrapper extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    //return UserType();
-    final FirebaseUser user = Provider.of<FirebaseUser>(context);
-    print("upgrade");
+    FirebaseUser user = Provider.of<FirebaseUser>(context);
+    CurrentUser.user = user;
+    print("UPGRADE");
     print(user);
 
     if(user == null) {
-      print("auth");
-      return Authenticate();
+      print("SIGN_IN_UP");
+      return GettingStart();
     }
-    print(user.uid);
     DatabaseService ds = DatabaseService(user.uid);
-    CurrentUserID.id = user.uid;
-    return FutureBuilder<bool>(
+    return FutureBuilder<bool> (
         future: ds.isInBase(),
         builder: (context, AsyncSnapshot<bool> snapshot) {
           if (snapshot.hasData) {
@@ -37,7 +31,7 @@ class Wrapper extends StatelessWidget {
               return Home();
             }
             else {
-              return CompleteReg();
+              return TypePage();
             }
           }else{
             return Loading();

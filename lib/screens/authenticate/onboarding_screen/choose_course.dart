@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'studentReg.dart';
 import 'package:mavka/shared/hex_color.dart';
 
 class ChooseCourses extends StatefulWidget {
@@ -76,37 +77,43 @@ class _ChooseCoursesState extends State<ChooseCourses> {
               Padding(
                 padding: const EdgeInsets.only(top: 30.0),
                 child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                      height: 500,
-                      child: Stack(
-                        children: <Widget>[
-                          Container(
-                              width: 180,
-                              height: 250,
-                              decoration: new BoxDecoration(
-                                color: HexColor('#EAADBD'),
-                                borderRadius: new BorderRadius.all(Radius.circular(40.0)),
-                              )
-                          ),
-                          Positioned(
-                            top: 0,
-                            left: -300,
-                            child:Image(
-                              width: 10000,
-                              height: 140,
-                              image: AssetImage("assets/background1.jpg"),
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                        height: 500,
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                                width: 180,
+                                height: 250,
+                                decoration: new BoxDecoration(
+                                  color: HexColor('#EAADBD'),
+                                  borderRadius: new BorderRadius.all(Radius.circular(40.0)),
+                                )
+                            ),
+                            Positioned(
+                                top: 0,
+                                left: 0,
+                                child:Image(
+                                  width: 240,
+                                  height: 140,
+                                  image: AssetImage("assets/background1.jpg"),
+                                )
+                            ),
+                            Center(
+                              child: MaterialButton(
+                                child: Text('Продовжити'),
+                                color: HexColor('2684FE'),
+                                onPressed: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => StudentReg()));
+                                }
+                              ),
                             )
-                          )
-                        ],
-                      )
-                  )
+                          ],
+                        )
+                    )
                 ),
               ),
-        ])
+            ])
     );
   }
 }
-/*
-
- */
