@@ -217,7 +217,7 @@ class _ProfileState extends State<Profile> {
                   child: Text('Log out'),
                   onPressed: () async {
                     await Profile._authService.signOut();
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Wrapper()), (Route<dynamic> route) => false);
+                    //Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Wrapper()), (Route<dynamic> route) => false);
                   },
                 ),
               ],
