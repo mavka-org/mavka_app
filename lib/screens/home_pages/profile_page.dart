@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mavka/screens/authenticate/sign_in.dart';
 import 'package:mavka/services/auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mavka/models/userInfo.dart';
 import '../wrapper.dart';
 
@@ -9,31 +11,46 @@ class Profile extends StatefulWidget {
   static String curr = "vnimane";
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   static AuthService _authService = new AuthService();
+  static void showInfoToast(String text) {
+    Fluttertoast.showToast(
+        msg: text,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 8);
+  }
 
 
-  static void changeEmail(String email) async {
+  static void changeEmail(String newEmail, Function updateState) async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     //Pass in the password to updatePassword.
     await _auth.signInWithEmailAndPassword(
-        email: CurrentUser.user.email, password: "111111");
-    user.updateEmail(email).then((_) {
+        email: SignIn.email, password: SignIn.password);
+    user.updateEmail(newEmail).then((_) {
       print("Succesfull changed email");
+      SignIn.email = newEmail;
+      updateState();
+      showInfoToast("Email змінено успішно");
     }).catchError((error) {
       print("Email can't be changed" + error.toString());
+      showInfoToast("Email не змінено\nНе корректний email");
       //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
     });
   }
 
-  static void changePassword(String password) async {
+  static void changePassword(String newPassword, Function updateState) async {
     //Create an instance of the current user.
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     //Pass in the password to updatePassword.
     await _auth.signInWithEmailAndPassword(
-        email: CurrentUser.user.email, password: "111111");
-    user.updatePassword(password).then((_) {
+        email: SignIn.email, password: SignIn.password);
+    user.updatePassword(newPassword).then((_) {
       print("Succesfull changed password");
+      SignIn.password = newPassword;
+      updateState();
+      showInfoToast("Пароль змінено успішно");
     }).catchError((error) {
       print("Password can't be changed" + error.toString());
+      showInfoToast("Пароль не змінено\nМає бути мінімум 6 символів"); 
       //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
     });
   }
@@ -43,6 +60,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+
+  
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -58,14 +77,14 @@ class _ProfileState extends State<Profile> {
                   padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
                   child: CircleAvatar(
                     backgroundImage: NetworkImage(
-                        "https://img.esportnews.gg/pictures/content/29/29052_750.jpg"),
+                        "https://lh3.googleusercontent.com/proxy/63nqem3bmcr41RFiewXuZ8S2LUp4cc3Q2YIacsgTLaLqTggFPM7LJkJAXIU9ys89dhbzHR_HCcAno1cO_yPhvSnZAf52E1IUSObJNcZg2A9rzZ0"),
                     radius: width / 5,
                   ),
                 ),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Text(
-                    'User name',
+                    "User name",
                     style: TextStyle(
                       fontSize: 20.0,
                     ),
@@ -143,7 +162,7 @@ class _ProfileState extends State<Profile> {
                       ),
                       Expanded(child: SizedBox()),
                       Text(
-                        'Email',
+                        SignIn.email,
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.grey[600],
@@ -151,8 +170,7 @@ class _ProfileState extends State<Profile> {
                       ),
                       SizedBox(width: width / 100),
                       GestureDetector(
-                        onTap: () {
-                          print("vnimanie");
+                        onTap:(){
                           showAlertDialog(
                               context, "Новий email", "Введіть email", () {
                             setState(() {});
@@ -187,7 +205,7 @@ class _ProfileState extends State<Profile> {
                       Container(
                         width: width * 0.4,
                         child: Text(
-                          "Password",
+                          SignIn.password,
                           textAlign: TextAlign.right,
                           style: TextStyle(
                             fontSize: 16,
@@ -234,11 +252,10 @@ class _ProfileState extends State<Profile> {
           child: Text("ОК"),
           onPressed: () {
             if (title == "Новий пароль") {
-              Profile.changePassword(tmp);
+              Profile.changePassword(tmp, f);
             } else {
-              Profile.changeEmail(tmp);
+              Profile.changeEmail(tmp, f);
             }
-            Profile.curr = tmp;
             f();
             Navigator.pop(context);
           },

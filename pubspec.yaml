@@ -38,7 +38,7 @@ dependencies:
   firebase_storage: ^3.1.5
   flutter_rounded_progress_bar: 0.1.1
   flutter_facebook_login: ^1.1.1
-
+  fluttertoast: ^4.0.0
 
 dev_dependencies:
   flutter_test:
