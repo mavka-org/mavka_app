@@ -20,11 +20,11 @@ class Profile extends StatefulWidget {
   }
 
 
-  static void changeEmail(String newEmail, Function updateState) async {
+  static void changeEmail(String newEmail, Function updateState, String currPassword) async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     //Pass in the password to updatePassword.
     await _auth.signInWithEmailAndPassword(
-        email: SignIn.email, password: SignIn.password);
+        email: SignIn.email, password: currPassword);
     user.updateEmail(newEmail).then((_) {
       print("Succesfull changed email");
       SignIn.email = newEmail;
@@ -32,17 +32,17 @@ class Profile extends StatefulWidget {
       showInfoToast("Email змінено успішно");
     }).catchError((error) {
       print("Email can't be changed" + error.toString());
-      showInfoToast("Email не змінено\nНе корректний email");
+      showInfoToast("Помилка\nEmail не змінено");
       //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
     });
   }
 
-  static void changePassword(String newPassword, Function updateState) async {
+  static void changePassword(String newPassword, Function updateState, String currPassword) async {
     //Create an instance of the current user.
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     //Pass in the password to updatePassword.
     await _auth.signInWithEmailAndPassword(
-        email: SignIn.email, password: SignIn.password);
+        email: SignIn.email, password: currPassword);
     user.updatePassword(newPassword).then((_) {
       print("Succesfull changed password");
       SignIn.password = newPassword;
@@ -50,7 +50,7 @@ class Profile extends StatefulWidget {
       showInfoToast("Пароль змінено успішно");
     }).catchError((error) {
       print("Password can't be changed" + error.toString());
-      showInfoToast("Пароль не змінено\nМає бути мінімум 6 символів"); 
+      showInfoToast("Помилка\nПароль не змінено"); 
       //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
     });
   }
@@ -172,7 +172,7 @@ class _ProfileState extends State<Profile> {
                       GestureDetector(
                         onTap:(){
                           showAlertDialog(
-                              context, "Новий email", "Введіть email", () {
+                              context, "Зміна email", "Введіть email", () {
                             setState(() {});
                           });
                         },
@@ -205,7 +205,7 @@ class _ProfileState extends State<Profile> {
                       Container(
                         width: width * 0.4,
                         child: Text(
-                          SignIn.password,
+                          "******",
                           textAlign: TextAlign.right,
                           style: TextStyle(
                             fontSize: 16,
@@ -218,7 +218,7 @@ class _ProfileState extends State<Profile> {
                         onTap: () {
                           print("vnimanie");
                           showAlertDialog(
-                              context, "Новий пароль", "Введіть пароль", () {
+                              context, "Зміна пароля", "Введіть пароль", () {
                             setState(() {});
                           });
                         },
@@ -247,14 +247,15 @@ class _ProfileState extends State<Profile> {
 
       showAlertDialog(BuildContext context, String title, String hint, Function f) {
         String tmp = "";
+        String psw = "";
         // set up the buttons
         Widget remindButton = FlatButton(
           child: Text("ОК"),
           onPressed: () {
             if (title == "Новий пароль") {
-              Profile.changePassword(tmp, f);
+              Profile.changePassword(tmp, f, psw);
             } else {
-              Profile.changeEmail(tmp, f);
+              Profile.changeEmail(tmp, f, psw);
             }
             f();
             Navigator.pop(context);
@@ -270,12 +271,23 @@ class _ProfileState extends State<Profile> {
         // set up the AlertDialog
         AlertDialog alert = AlertDialog(
           title: Text(title),
-          content: TextField(
-            onChanged: (text) {
-              tmp = text;
-            },
-            decoration: InputDecoration(hintText: hint),
-          ),
+          content: 
+            ListBody(
+              children: <Widget>[
+                TextField(
+                  onChanged: (text) {
+                    psw = text;
+                  },
+                  decoration: InputDecoration(hintText: "Введість поточний пароль"),
+                ),
+                TextField(
+                  onChanged: (text) {
+                    tmp = text;
+                  },
+                  decoration: InputDecoration(hintText: hint),
+                ),
+              ],
+            ),
           actions: [
             remindButton,
             cancelButton,
