@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:mavka/utilities/social_icons_icons.dart';
 
 class SignIn extends StatefulWidget {
+  static String password = '';
+  static String email = '';
   @override
   _SignInState createState() => _SignInState();
 }
@@ -12,8 +14,6 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
-  String email = '';
-  String password = '';
   String error = '';
 
   @override
@@ -57,7 +57,7 @@ class _SignInState extends State<SignIn> {
                         ),
                         onChanged: (value) {
                           setState(() {
-                            email = value;
+                            SignIn.email = value;
                           });
                         },
                       ),
@@ -86,7 +86,7 @@ class _SignInState extends State<SignIn> {
                         obscureText: true,
                         onChanged: (value) {
                           setState(() {
-                            password = value;
+                            SignIn.password = value;
                           });
                         },
                       ),
@@ -121,7 +121,7 @@ class _SignInState extends State<SignIn> {
                                   setState(() => loading = true);
                                   dynamic result = await _auth
                                       .signInWithEmailAndPassword(
-                                      email, password);
+                                      SignIn.email, SignIn.password);
                                   if (result == null) {
                                     setState(() {
                                       error =
