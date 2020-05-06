@@ -35,4 +35,5 @@ class User {
 
 class CurrentUser{
   static FirebaseUser user;
+  static String password;
 }
