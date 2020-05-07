@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mavka/models/unit.dart';
 import 'package:mavka/screens/material_pages/list_of_topics.dart';
@@ -7,7 +8,8 @@ import 'package:mavka/shared/hex_color.dart';
 class ListOfUnits extends StatefulWidget {
   final String courseID;
   final Map courseInfo;
-  ListOfUnits({Key key, this.courseID, this.courseInfo}) : super(key: key);
+  final int courseForm;
+  ListOfUnits({Key key, this.courseID, this.courseInfo, this.courseForm}) : super(key: key);
   @override
   _ListOfUnitsState createState() => _ListOfUnitsState();
 }
@@ -90,7 +92,7 @@ class _ListOfUnitsState extends State<ListOfUnits> {
                         child: RaisedButton(
                           color: colors[i % 6],
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ListOfTopics(courseName: this.widget.courseInfo['Name'], unitName: cc[i].getName())));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ListOfTopics(courseName: this.widget.courseInfo['Name'], unitName: cc[i].getName(), form: this.widget.courseForm,)));
                           },
                           child: Align(
                             alignment: Alignment.bottomLeft,
@@ -134,7 +136,7 @@ class _ListOfUnitsState extends State<ListOfUnits> {
                 Padding(
                   padding: EdgeInsets.only(left: getWidth(8.7), top: getHeight(1.18)),
                   child: Text(
-                    this.widget.courseInfo['Info'] + "\nРозрахований для учнів " + this.widget.courseInfo['Form'].toString() + " класу",
+                    this.widget.courseInfo['Info'] + "\nРозрахований для учнів " + this.widget.courseForm.toString() + " класу",
                     style: TextStyle(
                         fontFamily: "Gilroy",
                         fontSize: 14

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mavka/screens/home_pages/bookmarks.dart';
+import 'package:mavka/screens/home_pages/home_page.dart';
 import 'package:mavka/screens/home_pages/profile_page.dart';
+import 'package:mavka/screens/material_pages/choose_class.dart';
 import 'package:mavka/screens/material_pages/list_of_courses.dart';
-import 'bookmarks.dart';
-import 'home_page.dart';
 
 class PagesController extends StatelessWidget {
 
@@ -17,7 +18,7 @@ class PagesController extends StatelessWidget {
         return HomePage();
         break;
       case 1:
-        return ListOfCourses();
+        return ChooseClass();
         break;
       case 2:
         return Bookmarks();

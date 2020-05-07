@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mavka/screens/home_pages/pages_controller.dart';
+import 'package:mavka/screens/home/pages_controller.dart';
 import 'package:mavka/shared/hex_color.dart';
 
 class Home extends StatefulWidget {
