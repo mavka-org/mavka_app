@@ -1,3 +1,4 @@
+import 'package:mavka/models/userInfo.dart';
 import 'package:mavka/services/auth.dart';
 import 'package:mavka/shared/loading.dart';
 import 'package:flutter/material.dart';

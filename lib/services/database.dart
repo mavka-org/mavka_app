@@ -45,7 +45,7 @@ class DatabaseService{
     // print("end of query");
     List<Unit> result = new List();
     list.forEach((element) {
-      result.add(Unit(element.documentID, element.data['Name'], element.data['Number'], element.data['Info']));
+      result.add(Unit(element.documentID, element.data['Name'], element.data['Form'], element.data['Info']));
     });
     return result;
   }
@@ -58,32 +58,68 @@ class DatabaseService{
     var list = unit.documents;
     List<Unit> result = new List();
     list.forEach((element) {
-      result.add(Unit(element.documentID, element.data['Name'], element.data['Number'], element.data['Info']));
+      result.add(Unit(element.documentID, element.data['Name'], element.data['Form'], element.data['Info']));
+    });
+    return result;
+  }
+  Future<List<Unit>> getAllUnitsWithIdAndForm (String id, int form) async {
+    //print("start of query");
+    var units = await courses.document(id).get();
+    // print("end of query");
+    var unit = await units.reference.collection("units").where("Form", isEqualTo: form).getDocuments();
+    var list = unit.documents;
+    List<Unit> result = new List();
+    list.forEach((element) {
+      result.add(Unit(element.documentID, element.data['Name'], element.data['Form'], element.data['Info']));
     });
     return result;
   }
 
   Future<List<Topic>> getAllTopicsWithName (String course, String unitName) async { //правильная функция!!!!!!!
-   // print("Caaaaaaaall");
+    // print("Caaaaaaaall");
     List<Topic> result = List();
     var cc = await courses.where("Name", isEqualTo: course).getDocuments();
     var c = cc.documents;
     var units = await c[0].reference.collection("units").getDocuments();
     var unit = units.documents;
     for (var v in unit) {
-        if (v.data['Name'] == unitName) {
-            var k = await v.reference.collection("topics").getDocuments();
-            var topics = k.documents;
-            topics.forEach((element) {
-              result.add(Topic(element.documentID, element.data['Name'], element.data['Number'], element.data['Info']));
-            });
-        }
+      if (v.data['Name'] == unitName) {
+        var k = await v.reference.collection("topics").getDocuments();
+        var topics = k.documents;
+        topics.forEach((element) {
+          result.add(Topic(element.documentID, element.data['Name'], element.data['Number'], element.data['Info']));
+        });
+      }
+    }
+    return result;
+  }
+  Future<List<Topic>> getAllTopicsWithNameAndForm (String course, String unitName, int form) async { //правильная функция!!!!!!!
+    // print("Caaaaaaaall");
+    List<Topic> result = List();
+    var cc = await courses.where("Name", isEqualTo: course).where("Form", isEqualTo: form).getDocuments();
+    var c = cc.documents;
+    var units = await c[0].reference.collection("units").getDocuments();
+    var unit = units.documents;
+    for (var v in unit) {
+      if (v.data['Name'] == unitName) {
+        var k = await v.reference.collection("topics").getDocuments();
+        var topics = k.documents;
+        topics.forEach((element) {
+          result.add(Topic(element.documentID, element.data['Name'], element.data['Number'], element.data['Info']));
+        });
+      }
     }
     return result;
   }
 
   Future<List<DocumentSnapshot>> getAllCourses () async {
     var c = await courses.getDocuments();
+    var list = c.documents;
+    return list;
+  }
+
+  Future<List<DocumentSnapshot>> getAllCoursesByForm (int form) async {
+    var c = await courses.where("Form", isEqualTo: form).getDocuments();
     var list = c.documents;
     return list;
   }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mavka/services/database.dart';
 import 'package:mavka/models/topic.dart';
@@ -6,7 +7,8 @@ import 'package:mavka/shared/hex_color.dart';
 class ListOfTopics extends StatefulWidget {
   final String courseName;
   final String unitName;
-  ListOfTopics({Key key, this.courseName, this.unitName}) : super(key: key);
+  final int form;
+  ListOfTopics({Key key, this.courseName, this.unitName, this.form}) : super(key: key);
   @override
   _ListOfTopicsState createState() => _ListOfTopicsState();
 }
@@ -28,8 +30,8 @@ class _ListOfTopicsState extends State<ListOfTopics> {
     var getHeight = (double percent) {
       return height * percent / 100.0;
     };
-   // print(this.widget.courseName + "     " +  this.widget.unitName);
-    var topics = (new DatabaseService("")).getAllTopicsWithName(this.widget.courseName, this.widget.unitName);
+    // print(this.widget.courseName + "     " +  this.widget.unitName);
+    var topics = (new DatabaseService("")).getAllTopicsWithNameAndForm(this.widget.courseName, this.widget.unitName, this.widget.form);
     return Scaffold(
       body: FutureBuilder<List<Topic>>(
           future: topics,
