@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mavka/models/userInfo.dart';
 
 class AuthService{
 
@@ -91,6 +92,7 @@ class AuthService{
       if(await _googleSignIn.isSignedIn()){
         await _googleSignIn.signOut();
       }
+      CurrentUser.connectionId = null;
       return await _auth.signOut();
     }catch(e){
       print(e.toString());
