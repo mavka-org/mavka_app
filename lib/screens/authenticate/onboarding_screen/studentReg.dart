@@ -15,7 +15,7 @@ class _StudentRegState extends State<StudentReg> {
   @override
   Widget build(BuildContext context) {
     DatabaseService ds = DatabaseService(CurrentUser.user.uid);
-    ds.updateUserData(User("Chebotok", "Nikita", Type.student()));
+    ds.updateUserData(User.withConId("Chebotok", "Nikita", Type.student(), CurrentUser.connectionId));
     return Scaffold(
       body: Center(
         child: RaisedButton(

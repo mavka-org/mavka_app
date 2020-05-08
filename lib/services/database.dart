@@ -9,9 +9,9 @@ class DatabaseService{
   final String uid;
   DatabaseService(this.uid);
 
-  final CollectionReference users = Firestore.instance.collection('users');
-  final CollectionReference students = Firestore.instance.collection('students');
-  final CollectionReference courses = Firestore.instance.collection('courses');
+  static CollectionReference users = Firestore.instance.collection('users');
+  static CollectionReference students = Firestore.instance.collection('students');
+  static CollectionReference courses = Firestore.instance.collection('courses');
 
 
   Future<bool> isInBase() async{
@@ -24,7 +24,8 @@ class DatabaseService{
     return await users.document(uid).setData({
       'firstName': user.getFirstName(),
       'secondName': user.getSecondName(),
-      'type': user.getType()
+      'type': user.getType(),
+      'connectionId': user.getConId()
     });
   }
 
@@ -144,6 +145,39 @@ class DatabaseService{
       result.add(Course(element.documentID, element.data['Name'], element.data['Form'], element.data['Info']));
     });
     return result;
+  }
+
+  static Future<String> getNextConnectionId() async {
+    var doc = await students.document('LastID').get();
+    String ID = doc.data['ID'];
+    print('ID');
+    ID = nextID(ID);
+    await students.document('LastID').setData({'ID': ID});
+    return ID;
+  }
+
+  static String nextID(String ID) {
+    for(int i = 5; i >= 2; --i) {
+      if(ID[i] != '9') {
+        String tmp = String.fromCharCode(ID.codeUnitAt(i) + 1);
+        String res = ID.substring(0, i) + tmp;
+        if(i + 1 < 6) {
+          res += ID.substring(i + 1, 5 - i);
+        }
+        return res;
+      }
+    }
+    for(int i = 1; i >= 0; --i) {
+      if(ID[i] != 'Z') {
+        String tmp = String.fromCharCode(ID.codeUnitAt(i) + 1);
+        String res = tmp + ID.substring(i + 1, 5 - i);
+        if(i != 0) {
+          res = ID.substring(0, i) + res;
+        }
+        return res;
+      }
+    }
+    return 'PIZDA';
   }
 
 }
