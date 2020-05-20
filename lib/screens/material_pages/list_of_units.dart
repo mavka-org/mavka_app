@@ -1,46 +1,68 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mavka/models/unit.dart';
 import 'package:mavka/screens/material_pages/list_of_topics.dart';
 import 'package:mavka/services/database.dart';
 import 'package:mavka/shared/hex_color.dart';
+import 'package:mavka/utilities/cast.dart';
 
 class ListOfUnits extends StatefulWidget {
   final String courseID;
   final Map courseInfo;
   final int courseForm;
-  ListOfUnits({Key key, this.courseID, this.courseInfo, this.courseForm}) : super(key: key);
+
+  const ListOfUnits({Key key, this.courseID, this.courseInfo, this.courseForm})
+      : super(key: key);
+
   @override
   _ListOfUnitsState createState() => _ListOfUnitsState();
 }
 
 class _ListOfUnitsState extends State<ListOfUnits> {
-  List<Color> colors = [HexColor("#DA5776"), HexColor("#202EAB"), HexColor("#E6E4E5"), HexColor("#A6AFFF"), HexColor("#A6AFFF"), HexColor("#A6EFFF")];
-  List<Color> colors1 = [HexColor("#F9E6EA"), HexColor("#DEE0F2"), HexColor("#FBFBFB"), HexColor("#F2F3FF"), HexColor("#F2F3FF"), HexColor("#F2F3FF")];
-  static double light (Color c) {
+  List<Color> colors = <Color>[
+    HexColor('#DA5776'),
+    HexColor('#202EAB'),
+    HexColor('#E6E4E5'),
+    HexColor('#A6AFFF'),
+    HexColor('#A6AFFF'),
+    HexColor('#A6EFFF')
+  ];
+  List<Color> colors1 = <Color>[
+    HexColor('#F9E6EA'),
+    HexColor('#DEE0F2'),
+    HexColor('#FBFBFB'),
+    HexColor('#F2F3FF'),
+    HexColor('#F2F3FF'),
+    HexColor('#F2F3FF')
+  ];
+
+  static double light(Color c) {
     return (c.red * 0.8 + c.green + c.blue * 0.2) / 510 * 100;
   }
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    var getWidth = (double percent) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    // ignore: prefer_function_declarations_over_variables
+    final getWidth = (double percent) {
       return width * percent / 100.0;
     };
-    var getHeight = (double percent) {
+    // ignore: prefer_function_declarations_over_variables
+    final getHeight = (double percent) {
       return height * percent / 100.0;
     };
-    var units = (new DatabaseService("")).getAllUnitsWithId(this.widget.courseID);
+    final units = DatabaseService('').getAllUnitsWithId(widget.courseID);
     return Scaffold(
       body: FutureBuilder<List<Unit>>(
           future: units,
           builder: (context, c) {
-            List<Unit> cc = c.data;
-            List<Row> items = List();
-            var widget = (i) {
+            final cc = c.data;
+            final items = <Row>[];
+            // ignore: prefer_function_declarations_over_variables
+            final widget = (int i) {
               return Padding(
-                padding: EdgeInsets.only(left: getWidth(8.7), top: getHeight(5.18)),
+                padding:
+                    EdgeInsets.only(left: getWidth(8.7), top: getHeight(5.18)),
                 child: Container(
                   height: getHeight(24.6),
                   width: getWidth(37.5),
@@ -58,12 +80,11 @@ class _ListOfUnitsState extends State<ListOfUnits> {
                             child: RaisedButton(
                               color: colors1[i % 6],
                               onPressed: () {},
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Text(""),
-                              ),
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(19.0)
+                                  borderRadius: BorderRadius.circular(19.0)),
+                              child: const Align(
+                                alignment: Alignment.bottomLeft,
+                                child: Text(''),
                               ),
                             ),
                           ),
@@ -78,12 +99,11 @@ class _ListOfUnitsState extends State<ListOfUnits> {
                           child: RaisedButton(
                             color: colors1[i % 6],
                             onPressed: () {},
-                            child: Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(""),
-                            ),
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(19.0)
+                                borderRadius: BorderRadius.circular(19.0)),
+                            child: const Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text(''),
                             ),
                           ),
                         ),
@@ -92,25 +112,34 @@ class _ListOfUnitsState extends State<ListOfUnits> {
                         child: RaisedButton(
                           color: colors[i % 6],
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ListOfTopics(courseName: this.widget.courseInfo['Name'], unitName: cc[i].getName(), form: this.widget.courseForm,)));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ListOfTopics(
+                                          courseName: this
+                                              .widget
+                                              .courseInfo['Name']
+                                              .toString(),
+                                          unitName: cc[i].name,
+                                          form: this.widget.courseForm,
+                                        )));
                           },
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(19.0)),
                           child: Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              cc[i].getName() + "\n",
+                              '${cc[i].name}\n',
                               textAlign: TextAlign.left,
                               style: TextStyle(
-                                  color:  light(colors[i % 6]) < 60.0 ? Colors.white : Colors.black,
-                                  fontFamily: "Gilroy"
-                              ),
+                                  color: light(colors[i % 6]) < 60.0
+                                      ? Colors.white
+                                      : Colors.black,
+                                  fontFamily: 'Gilroy'),
                             ),
-                          ),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(19.0)
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),
@@ -119,14 +148,14 @@ class _ListOfUnitsState extends State<ListOfUnits> {
             items.add(Row(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: getWidth(8.7), top: getHeight(5.18)),
+                  padding: EdgeInsets.only(
+                      left: getWidth(8.7), top: getHeight(5.18)),
                   child: Text(
-                    this.widget.courseInfo['Name'],
-                    style: TextStyle(
-                        fontFamily: "GilroyBold",
+                    this.widget.courseInfo['Name'].toString(),
+                    style: const TextStyle(
+                        fontFamily: 'GilroyBold',
                         fontWeight: FontWeight.bold,
-                        fontSize: 25
-                    ),
+                        fontSize: 25),
                   ),
                 )
               ],
@@ -134,13 +163,11 @@ class _ListOfUnitsState extends State<ListOfUnits> {
             items.add(Row(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: getWidth(8.7), top: getHeight(1.18)),
+                  padding: EdgeInsets.only(
+                      left: getWidth(8.7), top: getHeight(1.18)),
                   child: Text(
-                    this.widget.courseInfo['Info'] + "\nРозрахований для учнів " + this.widget.courseForm.toString() + " класу",
-                    style: TextStyle(
-                        fontFamily: "Gilroy",
-                        fontSize: 14
-                    ),
+                    '${cast<String>(this.widget.courseInfo['Info'])}\nРозрахований для учнів ${this.widget.courseForm.toString()} класу',
+                    style: const TextStyle(fontFamily: 'Gilroy', fontSize: 14),
                   ),
                 )
               ],
@@ -148,40 +175,40 @@ class _ListOfUnitsState extends State<ListOfUnits> {
             items.add(Row(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: getWidth(8.7), top: getHeight(5.18)),
-                  child: Text(
-                    "Розділи",
+                  padding: EdgeInsets.only(
+                      left: getWidth(8.7), top: getHeight(5.18)),
+                  child: const Text(
+                    'Розділи',
                     style: TextStyle(
-                        fontFamily: "GilroyBold",
+                        fontFamily: 'GilroyBold',
                         fontWeight: FontWeight.bold,
-                        fontSize: 20
-                    ),
+                        fontSize: 20),
                   ),
                 )
               ],
             ));
-            if (cc != null)
-              for (int i = 0; i < cc.length; i += 2) {
+            if (cc != null) {
+              for (var i = 0; i < cc.length; i += 2) {
                 items.add(Row(
                   children: <Widget>[
                     widget(i),
-                    i + 1 < cc.length ? widget(i + 1) : Text("")
+                    if (i + 1 < cc.length) widget(i + 1) else const Text('')
                   ],
                 ));
               }
+            }
+
             return DraggableScrollableSheet(
               initialChildSize: 1.0,
               minChildSize: 1.0,
-              maxChildSize: 1.0,
-              builder: (context, scrollContoller) {
+              builder: (context, scrollController) {
                 return ListView(
-                  controller: scrollContoller,
+                  controller: scrollController,
                   children: items,
                 );
               },
             );
-          }
-      ),
+          }),
     );
   }
 }

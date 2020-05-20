@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:mavka/models/userInfo.dart';
+import 'package:mavka/models/user_info.dart';
 import 'package:mavka/services/auth.dart';
 
 class Profile extends StatefulWidget {
-  static String curr = "vnimane";
+  static String curr = 'vnimane';
   static final FirebaseAuth _auth = FirebaseAuth.instance;
-  static AuthService _authService = new AuthService();
+  static final AuthService _authService = AuthService();
 
   static void showInfoToast(String text) {
     Fluttertoast.showToast(
@@ -17,9 +17,9 @@ class Profile extends StatefulWidget {
         timeInSecForIosWeb: 8);
   }
 
-  static void changeEmail(
+  static Future<void> changeEmail(
       String newEmail, Function updateState, String currPassword) async {
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final user = await FirebaseAuth.instance.currentUser();
     //Pass in the password to updatePassword.
     try {
       await _auth.signInWithEmailAndPassword(
@@ -28,25 +28,25 @@ class Profile extends StatefulWidget {
       print(
           '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
       print(e.toString());
-      showInfoToast("Неправильний пароль!");
+      showInfoToast('Неправильний пароль!');
       return;
     }
     user.updateEmail(newEmail).then((_) async {
-      print("Succesfull changed email");
+      print('Successful changed email');
       CurrentUser.user = await _auth.currentUser();
       updateState();
-      showInfoToast("Email змінено успішно");
+      showInfoToast('Email змінено успішно');
     }).catchError((error) {
-      print("Email can't be changed" + error.toString());
-      showInfoToast("Помилка\nEmail не змінено");
+      print("Email can't be changed$error");
+      showInfoToast('Помилка\nEmail не змінено');
       //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
     });
   }
 
-  static void changePassword(
+  static Future<void> changePassword(
       String newPassword, Function updateState, String currPassword) async {
     //Create an instance of the current user.
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final user = await FirebaseAuth.instance.currentUser();
     //Pass in the password to updatePassword.
     try {
       await _auth.signInWithEmailAndPassword(
@@ -55,16 +55,16 @@ class Profile extends StatefulWidget {
       print(
           '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
       print(e.toString());
-      showInfoToast("Неправильний пароль!");
+      showInfoToast('Неправильний пароль!');
       return;
     }
     user.updatePassword(newPassword).then((_) {
-      print("Succesfull changed password");
+      print('Succesfull changed password');
       updateState();
-      showInfoToast("Пароль змінено успішно");
+      showInfoToast('Пароль змінено успішно');
     }).catchError((error) {
-      print("Password can't be changed" + error.toString());
-      showInfoToast("Помилка\nПароль не змінено");
+      print("Password can't be changed$error");
+      showInfoToast('Помилка\nПароль не змінено');
       //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
     });
   }
@@ -77,32 +77,31 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     print(CurrentUser.user.email);
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.width;
+    final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Padding(
           padding: EdgeInsets.only(left: width / 15, right: width / 20),
           child: Column(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
+                padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://starpri.ru/wp-content/uploads/2019/02/mX2YdEeLJUo.jpg"),
+                  backgroundImage: const NetworkImage(
+                      'https://starpri.ru/wp-content/uploads/2019/02/mX2YdEeLJUo.jpg'),
                   radius: width / 5,
                 ),
               ),
-              Align(
+              const Align(
                 alignment: Alignment.topCenter,
                 child: Text(
-                  "User name",
+                  'User name',
                   style: TextStyle(
                     fontSize: 20.0,
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: Row(
                   children: <Widget>[
                     Icon(
@@ -111,13 +110,13 @@ class _ProfileState extends State<Profile> {
                       size: width / 15,
                     ),
                     SizedBox(width: width / 40),
-                    Text(
+                    const Text(
                       'Дата реєстрації:',
                       style: TextStyle(
                         fontSize: 14.0,
                       ),
                     ),
-                    Expanded(child: SizedBox()),
+                    const Expanded(child: SizedBox()),
                     Text(
                       'Registration date',
                       style: TextStyle(
@@ -129,7 +128,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: Row(
                   children: <Widget>[
                     Icon(
@@ -138,15 +137,15 @@ class _ProfileState extends State<Profile> {
                       size: width / 15,
                     ),
                     SizedBox(width: width / 40),
-                    Text(
+                    const Text(
                       'Адреса:',
                       style: TextStyle(
                         fontSize: 14.0,
                       ),
                     ),
-                    Expanded(child: SizedBox()),
+                    const Expanded(child: SizedBox()),
                     Text(
-                      'Adress',
+                      'Address',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey[600],
@@ -156,7 +155,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: Row(
                   children: <Widget>[
                     Icon(
@@ -165,13 +164,13 @@ class _ProfileState extends State<Profile> {
                       size: width / 15,
                     ),
                     SizedBox(width: width / 40),
-                    Text(
+                    const Text(
                       'Email:',
                       style: TextStyle(
                         fontSize: 14.0,
                       ),
                     ),
-                    Expanded(child: SizedBox()),
+                    const Expanded(child: SizedBox()),
                     Text(
                       CurrentUser.user.email,
                       style: TextStyle(
@@ -182,7 +181,7 @@ class _ProfileState extends State<Profile> {
                     SizedBox(width: width / 100),
                     GestureDetector(
                       onTap: () {
-                        showAlertDialog(context, "Зміна email", "Введіть email",
+                        showAlertDialog(context, 'Зміна email', 'Введіть email',
                             () {
                           setState(() {});
                         });
@@ -197,7 +196,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: Row(
                   children: <Widget>[
                     Icon(
@@ -206,17 +205,17 @@ class _ProfileState extends State<Profile> {
                       size: width / 15,
                     ),
                     SizedBox(width: width / 40),
-                    Text(
+                    const Text(
                       'Пароль:',
                       style: TextStyle(
                         fontSize: 14.0,
                       ),
                     ),
-                    Expanded(child: SizedBox()),
+                    const Expanded(child: SizedBox()),
                     Container(
                       width: width * 0.4,
                       child: Text(
-                        "******",
+                        '******',
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           fontSize: 16,
@@ -227,9 +226,9 @@ class _ProfileState extends State<Profile> {
                     SizedBox(width: width / 40),
                     GestureDetector(
                       onTap: () {
-                        print("vnimanie");
+                        print('vnimanie');
                         showAlertDialog(
-                            context, "Зміна пароля", "Введіть пароль", () {
+                            context, 'Зміна пароля', 'Введіть пароль', () {
                           setState(() {});
                         });
                       },
@@ -243,11 +242,11 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               RaisedButton(
-                child: Text('Log out'),
                 onPressed: () async {
                   await Profile._authService.signOut();
                   //Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Wrapper()), (Route<dynamic> route) => false);
                 },
+                child: const Text('Log out'),
               ),
             ],
           )),
@@ -255,14 +254,14 @@ class _ProfileState extends State<Profile> {
   }
 }
 
-showAlertDialog(BuildContext context, String title, String hint, Function f) {
-  String tmp = "";
-  String psw = "";
+void showAlertDialog(
+    BuildContext context, String title, String hint, Function f) {
+  String tmp = '';
+  String psw = '';
   // set up the buttons
-  Widget remindButton = FlatButton(
-    child: Text("ОК"),
+  final Widget remindButton = FlatButton(
     onPressed: () {
-      if (title == "Зміна пароля") {
+      if (title == 'Зміна пароля') {
         Profile.changePassword(tmp, f, psw);
       } else {
         Profile.changeEmail(tmp, f, psw);
@@ -270,16 +269,17 @@ showAlertDialog(BuildContext context, String title, String hint, Function f) {
       f();
       Navigator.of(context, rootNavigator: true).pop('dialog');
     },
+    child: const Text('ОК'),
   );
-  Widget cancelButton = FlatButton(
-    child: Text("Отмена"),
+  final Widget cancelButton = FlatButton(
     onPressed: () {
       Navigator.of(context, rootNavigator: true).pop('dialog');
     },
+    child: const Text('Отмена'),
   );
 
   // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
+  final AlertDialog alert = AlertDialog(
     title: Text(title),
     content: Container(
       width: 100,
@@ -290,7 +290,8 @@ showAlertDialog(BuildContext context, String title, String hint, Function f) {
             onChanged: (text) {
               psw = text;
             },
-            decoration: InputDecoration(hintText: "Введіть поточний пароль"),
+            decoration:
+                const InputDecoration(hintText: 'Введіть поточний пароль'),
           ),
           TextField(
             onChanged: (text) {

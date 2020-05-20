@@ -11,7 +11,6 @@ class Loading extends StatelessWidget {
       child: Center(
         child: SpinKitDoubleBounce(
           color: HexColor('2684FE'),
-          size: 50.0,
         ),
       ),
     );

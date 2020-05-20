@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Slide{
+class Slide {
   final String image;
   final String title;
   final String description;
@@ -12,21 +12,17 @@ class Slide{
   });
 }
 
-final slidelist = [
+final List<Slide> slideList = <Slide>[
   Slide(
-    image: 'assets/sign_up_pic/sign_up_inform.png',
-    title: 'lolololololololololololol',
-    description: 'lalalalalalaalalalalalal'
-  ),
+      image: 'assets/sign_up_pic/sign_up_inform.png',
+      title: 'lolololololololololololol',
+      description: 'lalalalalalaalalalalalal'),
   Slide(
-    image: 'assets/sign_up_pic/sign_up_inform.png',
-    title: 'lolololololololololololol',
-    description: 'lalalalalalaalalalalalal'
-  ),
+      image: 'assets/sign_up_pic/sign_up_inform.png',
+      title: 'lolololololololololololol',
+      description: 'lalalalalalaalalalalalal'),
   Slide(
-    image: 'assets/sign_up_pic/sign_up_inform.png',
-    title: 'lolololololololololololol',
-    description: 'lalalalalalaalalalalalal'
-  ),
+      image: 'assets/sign_up_pic/sign_up_inform.png',
+      title: 'lolololololololololololol',
+      description: 'lalalalalalaalalalalalal'),
 ];
-

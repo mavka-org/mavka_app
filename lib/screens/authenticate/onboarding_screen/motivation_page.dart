@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'choose_course.dart';
+
 class MotivationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        fontFamily: "Gilroy",
+        fontFamily: 'Gilroy',
       ),
       home: Scaffold(
         body: Column(
@@ -14,13 +15,13 @@ class MotivationPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Row(
-              children: <Widget>[
+              children: const <Widget>[
                 Padding(
                   padding: EdgeInsets.only(left: 30, top: 30),
                   child: Text(
-                    "Яка твоя мрія?",
+                    'Яка твоя мрія?',
                     style: TextStyle(
-                      fontFamily: "Gilroy",
+                      fontFamily: 'Gilroy',
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
@@ -33,13 +34,13 @@ class MotivationPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: 35, top: 30),
+                  padding: const EdgeInsets.only(left: 35, top: 30),
                   child: Container(
                     width: 300,
                     height: 50,
-                    child: Text(
-                      "Що ти хочеш зробити зі своїми набутими знаннями?",
-                      style: TextStyle(fontFamily: "Gilroy", fontSize: 20),
+                    child: const Text(
+                      'Що ти хочеш зробити зі своїми набутими знаннями?',
+                      style: TextStyle(fontFamily: 'Gilroy', fontSize: 20),
                     ),
                   ),
                 ),
@@ -51,9 +52,9 @@ class MotivationPage extends StatelessWidget {
                 Stack(
                   overflow: Overflow.visible,
                   children: <Widget>[
-                    Image(
+                    const Image(
                       image:
-                      AssetImage("assets/sign_up_pic/sign_up_rocket.png"),
+                          AssetImage('assets/sign_up_pic/sign_up_rocket.png'),
                       width: 200,
                       height: 200,
                       alignment: Alignment(1, 0),
@@ -65,19 +66,22 @@ class MotivationPage extends StatelessWidget {
                         width: 300,
                         height: 70,
                         child: MaterialButton(
-                          child: Text(
-                            "Космічну ракету",
-                            style:
-                            TextStyle(fontFamily: "Gilroy", fontSize: 25),
-                          ),
-                          color: Color.fromRGBO(38, 132, 254, 100),
+                          color: const Color.fromRGBO(38, 132, 254, 100),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ChooseCourses()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChooseCourses()));
                           },
                           textColor: Colors.white,
                           height: 70,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15)),
+                          child: const Text(
+                            'Космічну ракету',
+                            style:
+                                TextStyle(fontFamily: 'Gilroy', fontSize: 25),
+                          ),
                         ),
                       ),
                     ),
@@ -91,8 +95,8 @@ class MotivationPage extends StatelessWidget {
                 Stack(
                   overflow: Overflow.visible,
                   children: <Widget>[
-                    Image(
-                      image: AssetImage("assets/sign_up_pic/sign_up_tree.png"),
+                    const Image(
+                      image: AssetImage('assets/sign_up_pic/sign_up_tree.png'),
                       width: 200,
                       height: 200,
                       alignment: Alignment(-1, 0),
@@ -101,19 +105,19 @@ class MotivationPage extends StatelessWidget {
                       left: 100,
                       top: 100,
                       child: MaterialButton(
-                        child: Text(
-                          "Виростити красиву калину",
-                          style: TextStyle(
-                            fontFamily: "Gilroy",
-                            fontSize: 25,
-                          ),
-                        ),
-                        color: Color.fromRGBO(38, 132, 254, 100),
+                        color: const Color.fromRGBO(38, 132, 254, 100),
                         onPressed: () {},
                         height: 70,
                         textColor: Colors.white,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15)),
+                        child: const Text(
+                          'Виростити красиву калину',
+                          style: TextStyle(
+                            fontFamily: 'Gilroy',
+                            fontSize: 25,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -126,9 +130,9 @@ class MotivationPage extends StatelessWidget {
                 Stack(
                   overflow: Overflow.visible,
                   children: <Widget>[
-                    Image(
+                    const Image(
                       image:
-                      AssetImage("assets/sign_up_pic/sign_up_microbe.png"),
+                          AssetImage('assets/sign_up_pic/sign_up_microbe.png'),
                       width: 200,
                       height: 180,
                       alignment: Alignment(1, 0),
@@ -140,18 +144,18 @@ class MotivationPage extends StatelessWidget {
                         width: 300,
                         height: 80,
                         child: MaterialButton(
-                          child: Center(
-                            child: Text(
-                              "Розробити вакцину проти Коронавірусу",
-                              style:
-                              TextStyle(fontFamily: "Gilroy", fontSize: 25),
-                            ),
-                          ),
-                          color: Color.fromRGBO(38, 132, 254, 100),
+                          color: const Color.fromRGBO(38, 132, 254, 100),
                           onPressed: () {},
                           textColor: Colors.white,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15)),
+                          child: const Center(
+                            child: Text(
+                              'Розробити вакцину проти Коронавірусу',
+                              style:
+                                  TextStyle(fontFamily: 'Gilroy', fontSize: 25),
+                            ),
+                          ),
                         ),
                       ),
                     ),

@@ -11,7 +11,7 @@
 ///      fonts:
 ///       - asset: fonts/SocialIcons.ttf
 ///
-/// 
+///
 /// * Font Awesome, Copyright (C) 2016 by Dave Gandy
 ///         Author:    Dave Gandy
 ///         License:   SIL ()
@@ -23,8 +23,7 @@ class SocialIcons {
   SocialIcons._();
 
   static const _kFontFam = 'SocialIcons';
-  static const _kFontPkg = null;
 
-  static const IconData facebook = IconData(0xf09a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData google = IconData(0xf1a0, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData facebook = IconData(0xf09a, fontFamily: _kFontFam);
+  static const IconData google = IconData(0xf1a0, fontFamily: _kFontFam);
 }

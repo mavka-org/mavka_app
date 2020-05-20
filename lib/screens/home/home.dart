@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 import '../../screens/home/pages.dart';
 
@@ -21,7 +22,7 @@ class _HomeState extends State<Home> {
           height: 80,
           child: ClipRRect(
             //todo: shadow in menu's box
-            borderRadius: BorderRadius.vertical(top: Radius.circular(38)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(38)),
             child: BottomNavigationBar(
                 elevation: 18,
                 backgroundColor: Colors.white,
@@ -29,18 +30,19 @@ class _HomeState extends State<Home> {
                 showUnselectedLabels: false,
                 type: BottomNavigationBarType.fixed,
                 currentIndex: _currentPage,
-                //todo hex -> Colors.*[*] (everywhere)
                 selectedItemColor: Colors.blue,
                 unselectedItemColor: Colors.grey[500],
-                items: [
+                items: const [
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.home), title: Text('HOME')),
+                      icon: Icon(FlutterIcons.home_fea), title: Text('HOME')),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.import_contacts), title: Text('?')),
+                      icon: Icon(FlutterIcons.book_open_fea), title: Text('?')),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.bookmark), title: Text('BOOKMARKS')),
+                      icon: Icon(FlutterIcons.check_sli),
+                      title: Text('BOOKMARKS')),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.person_outline), title: Text('ACCOUNT')),
+                      icon: Icon(FlutterIcons.user_fea),
+                      title: Text('ACCOUNT')),
                 ],
                 onTap: (index) => setState(() => _currentPage = index)),
           ),

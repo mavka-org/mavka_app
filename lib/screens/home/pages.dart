@@ -7,7 +7,7 @@ import 'package:mavka/screens/material_pages/choose_class.dart';
 class PagesController extends StatelessWidget {
   final int page;
 
-  PagesController(this.page);
+  const PagesController(this.page);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class PagesController extends StatelessWidget {
         return Profile();
         break;
       default:
-        return Center(child: Text('critical paging error'));
+        return const Center(child: Text('critical paging error'));
         break;
     }
   }

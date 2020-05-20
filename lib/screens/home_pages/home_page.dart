@@ -7,6 +7,7 @@ import 'package:mavka/shared/hex_color.dart';
 
 class HomePage extends StatefulWidget {
   static BuildContext context;
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -16,27 +17,27 @@ class _HomePageState extends State<HomePage> {
     CourseDemo(
         name: 'ЗНО математика',
         secondName: 'До списку тем →',
-        assetImage: AssetImage('assets/background1.jpg')),
+        assetImage: const AssetImage('assets/background1.jpg')),
     CourseDemo(
         name: 'Астрономія',
         secondName: 'До списку тем →',
-        assetImage: AssetImage('assets/background2.jpg')),
+        assetImage: const AssetImage('assets/background2.jpg')),
   ];
 
   @override
   Widget build(BuildContext context) {
     HomePage.context = context;
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.width;
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 30.0,
           ),
           Row(
-            children: <Widget>[
+            children: const <Widget>[
               SizedBox(
                 width: 20.0,
               ),
@@ -47,22 +48,22 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(15, 30, 10, 20),
+            padding: const EdgeInsets.fromLTRB(15, 30, 10, 20),
             child: Container(
               width: width,
               child: TextField(
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: HexColor('F5F5F7'),
-                    hintText: "Шукай за темами для навчання",
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
+                    hintText: 'Шукай за темами для навчання',
+                    prefixIcon: const Icon(Icons.search),
+                    border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(25.0)))),
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 0, 6),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 20, 0, 6),
             child: Align(
               alignment: Alignment.topLeft,
               child: Text(
@@ -71,15 +72,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Container(
-            child: CarouselSlider(
-              items: courses
-                  .map((course) => courseTemplate(course, width, width * 1.1))
-                  .toList(),
-              options: CarouselOptions(
-                height: height * 1.15,
-                enableInfiniteScroll: false,
-              ),
+          CarouselSlider(
+            items: courses
+                .map((course) => courseTemplate(course, width, width * 1.1))
+                .toList(),
+            options: CarouselOptions(
+              height: height * 1.15,
+              enableInfiniteScroll: false,
             ),
           ),
         ],
@@ -90,7 +89,7 @@ class _HomePageState extends State<HomePage> {
 
 Widget courseTemplate(CourseDemo course, double width, double height) {
   return Container(
-    margin: EdgeInsets.fromLTRB(4, 14, 4, 14),
+    margin: const EdgeInsets.fromLTRB(4, 14, 4, 14),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(25),
       image: DecorationImage(
@@ -116,9 +115,9 @@ Widget courseTemplate(CourseDemo course, double width, double height) {
             height: height * 0.79455,
             width: width,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: const Radius.circular(25.0),
-                    topRight: const Radius.circular(25.0)),
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(25.0),
+                    topRight: Radius.circular(25.0)),
                 image: DecorationImage(
                   image: course.assetImage,
                   fit: BoxFit.cover,
@@ -134,7 +133,7 @@ Widget courseTemplate(CourseDemo course, double width, double height) {
                     alignment: Alignment.topLeft,
                     child: Text(
                       course.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 24.0,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
@@ -146,29 +145,20 @@ Widget courseTemplate(CourseDemo course, double width, double height) {
                   height: height * 0.1011,
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
-                    border: Border(
-                      top: BorderSide(
-                          color: Colors.blue,
-                          width: 2,
-                          style: BorderStyle.solid),
-                      left: BorderSide(
-                          color: Colors.blue,
-                          width: 2,
-                          style: BorderStyle.solid),
-                      right: BorderSide(
-                          color: Colors.blue,
-                          width: 2,
-                          style: BorderStyle.solid),
+                    border: const Border(
+                      top: BorderSide(color: Colors.blue, width: 2),
+                      left: BorderSide(color: Colors.blue, width: 2),
+                      right: BorderSide(color: Colors.blue, width: 2),
                     ),
                   ),
                   child: Row(
                     children: <Widget>[
-                      SizedBox(
+                      const SizedBox(
                         width: 20.0,
                       ),
                       Text(
                         course.secondName,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16.0,
                           color: Colors.black,
                         ),
@@ -183,27 +173,23 @@ Widget courseTemplate(CourseDemo course, double width, double height) {
         GestureDetector(
           onTap: () {
             Navigator.push(HomePage.context,
-                MaterialPageRoute(builder: (context) => Test1()));
+                MaterialPageRoute(builder: (context) => const Test1()));
           },
           child: Container(
             height: height * 0.18,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: const Radius.circular(25.0),
-                  bottomRight: const Radius.circular(25.0)),
+              borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(25.0),
+                  bottomRight: Radius.circular(25.0)),
               color: Colors.grey[200],
-              border: Border(
-                  top: BorderSide(
-                      color: Colors.blue, width: 2, style: BorderStyle.solid),
-                  left: BorderSide(
-                      color: Colors.blue, width: 2, style: BorderStyle.solid),
-                  right: BorderSide(
-                      color: Colors.blue, width: 2, style: BorderStyle.solid),
-                  bottom: BorderSide(
-                      color: Colors.blue, width: 2, style: BorderStyle.solid)),
+              border: const Border(
+                  top: BorderSide(color: Colors.blue, width: 2),
+                  left: BorderSide(color: Colors.blue, width: 2),
+                  right: BorderSide(color: Colors.blue, width: 2),
+                  bottom: BorderSide(color: Colors.blue, width: 2)),
             ),
             child: Row(
-              children: <Widget>[
+              children: const <Widget>[
                 SizedBox(width: 20.0),
                 Text(
                   'Пройти тест 🔥',
@@ -236,5 +222,6 @@ class CourseDemo {
   String name;
   String secondName;
   AssetImage assetImage;
+
   CourseDemo({this.name, this.secondName, this.assetImage});
 }

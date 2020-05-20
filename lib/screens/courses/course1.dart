@@ -6,8 +6,7 @@ class Course1 extends StatefulWidget {
 }
 
 class _Course1State extends State<Course1> {
-
-  List < Theme > listOfThemes = [
+  List<Theme> listOfThemes = [
     Theme(name: 'Теорія ймовірності', totalPoints: 500, currentPoints: 150),
     Theme(name: 'Комбінаторика', totalPoints: 300, currentPoints: 250),
     Theme(name: 'Первісна', totalPoints: 400, currentPoints: 125),
@@ -18,8 +17,8 @@ class _Course1State extends State<Course1> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -27,33 +26,36 @@ class _Course1State extends State<Course1> {
           children: <Widget>[
             Container(
                 height: height * 0.3,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(bottomLeft: const  Radius.circular(25.0),
-                        bottomRight: const  Radius.circular(25.0)),
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(25.0),
+                        bottomRight: Radius.circular(25.0)),
                     image: DecorationImage(
-                      image: NetworkImage('https://cdn.dribbble.com/users/573008/screenshots/10723965/media/30ea9416d96dafb2c2897e96b4891d69.png'),
+                      image: NetworkImage(
+                          'https://cdn.dribbble.com/users/573008/screenshots/10723965/media/30ea9416d96dafb2c2897e96b4891d69.png'),
                       fit: BoxFit.cover,
-                    )
-                ),
-                child:Column(
+                    )),
+                child: Column(
                   children: <Widget>[
                     Row(
                       children: <Widget>[
                         Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.05, height * 0.3 * 0.2, 0, 0),
+                          padding: EdgeInsets.fromLTRB(
+                              width * 0.05, height * 0.3 * 0.2, 0, 0),
                           child: IconButton(
-                            onPressed: (){
+                            onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.close,
                               color: Colors.white,
                             ),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(width * 0.75, height * 0.3 * 0.2, 0, 0),
-                          child: Icon(
+                          padding: EdgeInsets.fromLTRB(
+                              width * 0.75, height * 0.3 * 0.2, 0, 0),
+                          child: const Icon(
                             Icons.menu,
                             color: Colors.white,
                           ),
@@ -63,30 +65,26 @@ class _Course1State extends State<Course1> {
                     Align(
                       alignment: Alignment.topLeft,
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(width * 0.05, height * 0.3 * 0.3, 0, 0),
-                        child: Text(
-                            'ЗНО математика',
+                        padding: EdgeInsets.fromLTRB(
+                            width * 0.05, height * 0.3 * 0.3, 0, 0),
+                        child: const Text('ЗНО математика',
                             style: TextStyle(
                               fontSize: 22.0,
                               //fontWeight: FontWeight.bold,
                               color: Colors.white,
-                            )
-                        ),
+                            )),
                       ),
                     ),
                   ],
-                )
-            ),
-            SizedBox(height: 10),
+                )),
+            const SizedBox(height: 10),
             Container(
                 height: height * 0.63,
                 child: ListView.builder(
                   itemCount: listOfThemes.length,
-                  itemBuilder: (context, index) => themeTemplate(listOfThemes[index], height * 0.65, width),
-                  
-                )
-
-            ),
+                  itemBuilder: (context, index) =>
+                      themeTemplate(listOfThemes[index], height * 0.65, width),
+                )),
           ],
         ),
       ),
@@ -94,7 +92,7 @@ class _Course1State extends State<Course1> {
   }
 }
 
-Widget themeTemplate(Theme theme, double height, double width){
+Widget themeTemplate(Theme theme, double height, double width) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(
@@ -117,14 +115,11 @@ Widget themeTemplate(Theme theme, double height, double width){
                   alignment: Alignment.topLeft,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 15, 0, 15),
-                    child: Text(
-                        theme.name,
-                        style: TextStyle(
+                    child: Text(theme.name,
+                        style: const TextStyle(
                             fontSize: 16.0,
                             color: Colors.black,
-                            fontWeight: FontWeight.bold
-                        )
-                    ),
+                            fontWeight: FontWeight.bold)),
                   ),
                 ),
                 Align(
@@ -136,12 +131,13 @@ Widget themeTemplate(Theme theme, double height, double width){
                       child: Container(
                           height: height * 0.25 * 0.15,
                           width: width * 0.55,
-                          child:LinearProgressIndicator(
+                          child: LinearProgressIndicator(
                             backgroundColor: Colors.grey[200],
-                            value: (theme.currentPoints / theme.totalPoints).toDouble(),
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.green[300]),
-                          )
-                      ),
+                            value: (theme.currentPoints / theme.totalPoints)
+                                .toDouble(),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.green[300]),
+                          )),
                     ),
                   ),
                 ),
@@ -149,23 +145,19 @@ Widget themeTemplate(Theme theme, double height, double width){
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                      child: Text(
-                          'Теорія',
+                      child: Text('Теорія',
                           style: TextStyle(
                             fontSize: 12.0,
                             color: Colors.grey[600],
-                          )
-                      ),
+                          )),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 0 ,0),
-                      child: Text(
-                          'Практика',
+                      padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                      child: Text('Практика',
                           style: TextStyle(
                             fontSize: 12.0,
                             color: Colors.grey[600],
-                          )
-                      ),
+                          )),
                     ),
                   ],
                 )
@@ -177,30 +169,26 @@ Widget themeTemplate(Theme theme, double height, double width){
             child: Container(
               width: width * 0.18,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: const  Radius.circular(25.0),
-                    bottomLeft: const  Radius.circular(25.0)),
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(25.0),
+                    bottomLeft: Radius.circular(25.0)),
                 color: Colors.green[200],
               ),
               child: Column(
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.fromLTRB(8, 6, 6, 4),
-                    child: Text(
-                        theme.currentPoints.toString(),
-                        style: TextStyle(
+                    child: Text(theme.currentPoints.toString(),
+                        style: const TextStyle(
                             fontSize: 20.0,
                             color: Colors.white,
-                            fontWeight: FontWeight.bold
-                        )
-                    ),
+                            fontWeight: FontWeight.bold)),
                   ),
-                  Text(
-                      'балів',
+                  const Text('балів',
                       style: TextStyle(
                         fontSize: 10.0,
                         color: Colors.white,
-                      )
-                  ),
+                      )),
                 ],
               ),
             ),
@@ -211,10 +199,10 @@ Widget themeTemplate(Theme theme, double height, double width){
   );
 }
 
-class Theme{
+class Theme {
   String name;
   int currentPoints;
   int totalPoints;
+
   Theme({this.name, this.currentPoints, this.totalPoints});
 }
-
