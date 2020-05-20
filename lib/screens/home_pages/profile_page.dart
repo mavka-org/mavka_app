@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mavka/screens/authenticate/sign_in.dart';
-import 'package:mavka/services/auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mavka/models/userInfo.dart';
-import '../wrapper.dart';
+import 'package:mavka/services/auth.dart';
 
 class Profile extends StatefulWidget {
   static String curr = "vnimane";
@@ -82,179 +80,176 @@ class _ProfileState extends State<Profile> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.width;
     return SafeArea(
-      child: Scaffold(
-          backgroundColor: Colors.grey[200],
-          body: Padding(
-            padding: EdgeInsets.only(left: width / 15, right: width / 20),
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        "https://starpri.ru/wp-content/uploads/2019/02/mX2YdEeLJUo.jpg"),
-                    radius: width / 5,
+      child: Padding(
+          padding: EdgeInsets.only(left: width / 15, right: width / 20),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      "https://starpri.ru/wp-content/uploads/2019/02/mX2YdEeLJUo.jpg"),
+                  radius: width / 5,
+                ),
+              ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Text(
+                  "User name",
+                  style: TextStyle(
+                    fontSize: 20.0,
                   ),
                 ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Text(
-                    "User name",
-                    style: TextStyle(
-                      fontSize: 20.0,
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.date_range,
+                      color: Colors.grey[650],
+                      size: width / 15,
                     ),
-                  ),
+                    SizedBox(width: width / 40),
+                    Text(
+                      'Дата реєстрації:',
+                      style: TextStyle(
+                        fontSize: 14.0,
+                      ),
+                    ),
+                    Expanded(child: SizedBox()),
+                    Text(
+                      'Registration date',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.date_range,
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.home,
+                      color: Colors.grey[650],
+                      size: width / 15,
+                    ),
+                    SizedBox(width: width / 40),
+                    Text(
+                      'Адреса:',
+                      style: TextStyle(
+                        fontSize: 14.0,
+                      ),
+                    ),
+                    Expanded(child: SizedBox()),
+                    Text(
+                      'Adress',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.email,
+                      color: Colors.grey[650],
+                      size: width / 15,
+                    ),
+                    SizedBox(width: width / 40),
+                    Text(
+                      'Email:',
+                      style: TextStyle(
+                        fontSize: 14.0,
+                      ),
+                    ),
+                    Expanded(child: SizedBox()),
+                    Text(
+                      CurrentUser.user.email,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    SizedBox(width: width / 100),
+                    GestureDetector(
+                      onTap: () {
+                        showAlertDialog(context, "Зміна email", "Введіть email",
+                            () {
+                          setState(() {});
+                        });
+                      },
+                      child: Icon(
+                        Icons.edit,
                         color: Colors.grey[650],
                         size: width / 15,
                       ),
-                      SizedBox(width: width / 40),
-                      Text(
-                        'Дата реєстрації:',
-                        style: TextStyle(
-                          fontSize: 14.0,
-                        ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.security,
+                      color: Colors.grey[650],
+                      size: width / 15,
+                    ),
+                    SizedBox(width: width / 40),
+                    Text(
+                      'Пароль:',
+                      style: TextStyle(
+                        fontSize: 14.0,
                       ),
-                      Expanded(child: SizedBox()),
-                      Text(
-                        'Registration date',
+                    ),
+                    Expanded(child: SizedBox()),
+                    Container(
+                      width: width * 0.4,
+                      child: Text(
+                        "******",
+                        textAlign: TextAlign.right,
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.grey[600],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.home,
+                    ),
+                    SizedBox(width: width / 40),
+                    GestureDetector(
+                      onTap: () {
+                        print("vnimanie");
+                        showAlertDialog(
+                            context, "Зміна пароля", "Введіть пароль", () {
+                          setState(() {});
+                        });
+                      },
+                      child: Icon(
+                        Icons.edit,
                         color: Colors.grey[650],
                         size: width / 15,
                       ),
-                      SizedBox(width: width / 40),
-                      Text(
-                        'Адреса:',
-                        style: TextStyle(
-                          fontSize: 14.0,
-                        ),
-                      ),
-                      Expanded(child: SizedBox()),
-                      Text(
-                        'Adress',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.email,
-                        color: Colors.grey[650],
-                        size: width / 15,
-                      ),
-                      SizedBox(width: width / 40),
-                      Text(
-                        'Email:',
-                        style: TextStyle(
-                          fontSize: 14.0,
-                        ),
-                      ),
-                      Expanded(child: SizedBox()),
-                      Text(
-                        CurrentUser.user.email,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                      SizedBox(width: width / 100),
-                      GestureDetector(
-                        onTap: () {
-                          showAlertDialog(
-                              context, "Зміна email", "Введіть email", () {
-                            setState(() {});
-                          });
-                        },
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.grey[650],
-                          size: width / 15,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  child: Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.security,
-                        color: Colors.grey[650],
-                        size: width / 15,
-                      ),
-                      SizedBox(width: width / 40),
-                      Text(
-                        'Пароль:',
-                        style: TextStyle(
-                          fontSize: 14.0,
-                        ),
-                      ),
-                      Expanded(child: SizedBox()),
-                      Container(
-                        width: width * 0.4,
-                        child: Text(
-                          "******",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: width / 40),
-                      GestureDetector(
-                        onTap: () {
-                          print("vnimanie");
-                          showAlertDialog(
-                              context, "Зміна пароля", "Введіть пароль", () {
-                            setState(() {});
-                          });
-                        },
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.grey[650],
-                          size: width / 15,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                RaisedButton(
-                  child: Text('Log out'),
-                  onPressed: () async {
-                    await Profile._authService.signOut();
-                    //Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Wrapper()), (Route<dynamic> route) => false);
-                  },
-                ),
-              ],
-            ),
+              ),
+              RaisedButton(
+                child: Text('Log out'),
+                onPressed: () async {
+                  await Profile._authService.signOut();
+                  //Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Wrapper()), (Route<dynamic> route) => false);
+                },
+              ),
+            ],
           )),
     );
   }
