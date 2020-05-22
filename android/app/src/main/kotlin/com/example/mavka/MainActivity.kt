@@ -1,4 +1,4 @@
-package org.mavlka.mavka
+package com.example.mavka
 
 import io.flutter.embedding.android.FlutterActivity
 
