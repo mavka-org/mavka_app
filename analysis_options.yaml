@@ -1,8 +1,0 @@
-include: package:lint/analysis_options.yaml
-
-linter:
-  rules:
-    avoid_classes_with_only_static_members: false
-    prefer_single_quotes: true
-    # only for debug
-    avoid_print: false
