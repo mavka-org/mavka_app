@@ -21,6 +21,8 @@ class UserSignInEvent extends UserEvent {
 
 class UserCheckEvent extends UserEvent {}
 
+class UserLogOutEvent extends UserEvent {}
+
 class SocialAuth {
   //todo
 }

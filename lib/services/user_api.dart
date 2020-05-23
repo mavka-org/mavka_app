@@ -10,25 +10,24 @@ class UserApi {
 
   Future<User> signInWithEvent(UserSignInEvent event) async {
     try {
-//
-//      final AuthResult result = await _auth.signInWithEmailAndPassword(
-//          email: email, password: password);
-//      final FirebaseUser user = result.user;
-//
-//      print(result.additionalUserInfo.username);
-//      print(result.additionalUserInfo.profile);
-//      print(result.user.email);
-//      print(result.user.uid);
-//
-//      print('----');
-//
-//      final ds = await _users.document(result.user.uid).get();
-//
-//      print(ds.data);
+      if (event.social == null) {
+        try {
+          final AuthResult result = await _auth.signInWithEmailAndPassword(
+              email: event.email, password: event.password);
+          final FirebaseUser user = result.user;
 
-//      print(result.user.);
-      return null;
+          final storage = await _getUserStorage(user.uid);
+
+          return User(user: user, storage: storage);
+        } catch (e) {
+          // if user doesn't exist
+          return null;
+        }
+      } else {
+        throw UnimplementedError();
+      }
     } catch (e) {
+      print('!!!!!!!!!!!!!UNHANDLED EXCEPTION!!!!!!!!!!');
       print(e.toString());
       rethrow;
     }
@@ -39,12 +38,16 @@ class UserApi {
       final currentUser = await _auth.currentUser();
       assert(currentUser != null);
 
-      final storage = await _users.document(currentUser.uid).get();
+      final storage = await _getUserStorage(currentUser.uid);
 
-      return User(
-          storage: UserStorage.fromMap(storage.data), user: currentUser);
+      return User(storage: storage, user: currentUser);
     } catch (e) {
       return null;
     }
   }
+
+  Future<UserStorage> _getUserStorage(final String uid) async =>
+      UserStorage.fromMap((await _users.document(uid).get()).data);
+
+  Future<void> logOut() => _auth.signOut();
 }

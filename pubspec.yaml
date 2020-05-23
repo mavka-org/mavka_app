@@ -14,13 +14,17 @@ dependencies:
   # architecture
   bloc: ^4.0.0
   flutter_bloc: ^4.0.0
-  equatable: ^1.1.1
-  fluro: ^1.6.3
 
 
   # firebase
   firebase_auth: ^0.16.0
   cloud_firestore: ^0.13.5
+
+
+  # ui
+  google_fonts: ^1.1.0
+  flutter_icons: ^1.1.0
+
 
 
 dev_dependencies:
@@ -31,3 +35,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - google_fonts/

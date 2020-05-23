@@ -14,6 +14,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {
+    print('incoming event: $event');
+
     if (event is UserCheckEvent) {
       final currentUser = await _api.getCurrentUser();
       if (currentUser != null) {
@@ -23,9 +25,24 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         yield UserUnauthorizedState();
       }
     } else if (event is UserSignInEvent) {
-//      yield UserLoadingState();
-//      print('singing in...');
-//      _api.signInWithEvent(event);
+      yield UserLoadingState();
+
+      print('singing in...');
+      final u = await _api.signInWithEvent(event);
+      if (u == null) {
+        yield UserUnauthorizedState();
+      } else {
+        user = u;
+        yield UserAuthorizedState();
+      }
+    } else if (event is UserLogOutEvent) {
+      // todo consider removing this line (for dry code)
+      yield UserLoadingState();
+
+      user = null;
+      await _api.logOut();
+
+      yield UserUnauthorizedState();
     } else {
       throw UnimplementedError();
     }

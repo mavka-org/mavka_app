@@ -2,18 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mavka/blocs/user/states.dart';
 import 'package:mavka/blocs/user/user.dart';
+import 'package:mavka/screens/intro.dart';
 import 'package:mavka/screens/loading.dart';
 
 import 'blocs/user/events.dart';
+import 'screens/home.dart';
+import 'screens/sign_in.dart';
+import 'screens/sign_up.dart';
 
 void main() {
   runApp(BlocProvider<UserBloc>(
     create: (BuildContext context) => UserBloc()..add(UserCheckEvent()),
     child: MaterialApp(
-//      routes: {
-//        '/': (context) => const Scaffold(),
-//      },
-      home: _Wrapper(),
+      theme: ThemeData(
+          primaryColor: Colors.lightBlue[600],
+          accentColor: Colors.lightBlue[600],
+
+//        textTheme: TextTheme(
+//          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+//          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+//          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+//        ),
+
+          buttonTheme: const ButtonThemeData()),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => _Wrapper(),
+        '/sign_in': (context) => SignInScreen(),
+        '/sign_up': (context) => SignUpScreen()
+      },
     ),
   ));
 }
@@ -25,14 +42,16 @@ class _Wrapper extends StatelessWidget {
         builder: (context, state) {
           //todo intercept auth errors (i e connectivity issues)
           //todo ui
-          if (state is UserUninitializedState) {
+          if (state is UserUninitializedState || state is UserLoadingState) {
             return LoadingScreen();
+          } else if (state is UserUnauthorizedState) {
+            return IntroScreen();
           }
-          return Scaffold(
-            body: Center(
-              child: Text(state.toString()),
-            ),
-          );
+          if (state is UserAuthorizedState) {
+            return HomeScreen();
+          } else {
+            return const Scaffold();
+          }
         },
       );
 }
