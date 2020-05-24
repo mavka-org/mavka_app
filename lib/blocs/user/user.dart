@@ -35,6 +35,17 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         user = u;
         yield UserAuthorizedState();
       }
+    } else if (event is UserSignUpEvent) {
+      yield UserLoadingState();
+
+      print('singing up...');
+      final u = await _api.signUpWithEvent(event);
+      if (u == null) {
+        yield UserUnauthorizedState();
+      } else {
+        user = u;
+        yield UserAuthorizedState();
+      }
     } else if (event is UserLogOutEvent) {
       // todo consider removing this line (for dry code)
       yield UserLoadingState();

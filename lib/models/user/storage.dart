@@ -19,4 +19,11 @@ class UserStorage {
         secondName = cast<String>(map['secondName']),
         connectionId = cast<String>(map['connectionId']),
         type = string2userType(cast<String>(map['type']));
+
+  Map<String, dynamic> get toMap => {
+        'firstName': firstName,
+        'secondName': secondName,
+        'connectionId': connectionId,
+        'type': userType2string(type)
+      };
 }

@@ -24,6 +24,8 @@ dependencies:
   # ui
   google_fonts: ^1.1.0
   flutter_icons: ^1.1.0
+  smooth_page_indicator: ^0.1.5
+  flutter_svg: ^0.17.4
 
 
 
@@ -31,6 +33,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # code analysis
   lint: ^1.2.0
 
 flutter:
@@ -38,3 +41,4 @@ flutter:
 
   assets:
     - google_fonts/
+    - assets/intro/

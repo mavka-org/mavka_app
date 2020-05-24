@@ -16,7 +16,7 @@ class LogoComponent extends StatelessWidget {
             style: GoogleFonts.montserrat(
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.w600,
-                fontSize: 24,
+                fontSize: 26,
                 color: color),
           ),
         ),
