@@ -6,9 +6,9 @@ import 'package:mavka/screens/intro.dart';
 import 'package:mavka/screens/loading.dart';
 
 import 'blocs/user/events.dart';
+import 'screens/getting_started/getting_started.dart';
 import 'screens/home.dart';
 import 'screens/sign_in.dart';
-import 'screens/sign_up.dart';
 
 void main() {
   runApp(BlocProvider<UserBloc>(
@@ -28,8 +28,8 @@ void main() {
       initialRoute: '/',
       routes: {
         '/': (context) => _Wrapper(),
-        '/sign_in': (context) => SignInScreen(),
-        '/sign_up': (context) => SignUpScreen()
+        '/sign_in': (context) => SignInScreen(isSignInScreen: true),
+        '/sign_up': (context) => SignInScreen(isSignInScreen: false)
       },
     ),
   ));
@@ -42,15 +42,17 @@ class _Wrapper extends StatelessWidget {
         builder: (context, state) {
           //todo intercept auth errors (i e connectivity issues)
           //todo ui
-          if (state is UserUninitializedState || state is UserLoadingState) {
-            return LoadingScreen();
-          } else if (state is UserUnauthorizedState) {
+          if (state is UserUnauthorizedState) {
             return IntroScreen();
-          }
-          if (state is UserAuthorizedState) {
-            return HomeScreen();
+          } else if (state is UserAuthorizedState) {
+            final bloc = context.bloc<UserBloc>();
+            if (bloc.user.isStorageEmpty) {
+              return GettingStartedScreen();
+            } else {
+              return HomeScreen();
+            }
           } else {
-            return const Scaffold();
+            return LoadingScreen();
           }
         },
       );

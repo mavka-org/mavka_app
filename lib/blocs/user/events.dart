@@ -35,6 +35,4 @@ class UserCheckEvent extends UserEvent {}
 
 class UserLogOutEvent extends UserEvent {}
 
-class SocialAuth {
-  //todo
-}
+enum SocialAuth { google, facebook }

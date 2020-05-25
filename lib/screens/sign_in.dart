@@ -12,6 +12,9 @@ import 'package:mavka/layouts/intro.dart';
 class SignInScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final bool isSignInScreen;
+
+  SignInScreen({@required this.isSignInScreen});
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +56,11 @@ class SignInScreen extends StatelessWidget {
                           height: 20,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text('Помилка. Обліковий запис не існує'),
-                              Icon(Icons.error)
+                            children: [
+                              Text(isSignInScreen
+                                  ? 'Помилка. Обліковий запис не існує'
+                                  : 'Помилка'),
+                              const Icon(Icons.error)
                             ],
                           ),
                         ),
@@ -127,13 +132,20 @@ class SignInScreen extends StatelessWidget {
                           color: Colors.blue,
                           disabledColor: Colors.blueGrey,
                           onPressed: () {
-                            context.bloc<UserBloc>().add(UserSignInEvent(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                ));
+                            if (isSignInScreen) {
+                              context.bloc<UserBloc>().add(UserSignInEvent(
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  ));
+                            } else {
+                              context.bloc<UserBloc>().add(UserSignUpEvent(
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  ));
+                            }
                           },
                           child: Text(
-                            'Увійти',
+                            isSignInScreen ? 'Увійти' : 'Зареєструватися',
                             style: GoogleFonts.montserratAlternates(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16,

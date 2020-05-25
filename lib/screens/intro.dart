@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mavka/blocs/user/events.dart';
+import 'package:mavka/blocs/user/user.dart';
 import 'package:mavka/layouts/intro.dart';
 
 class IntroScreen extends StatelessWidget {
@@ -18,7 +21,10 @@ class IntroScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8)),
                 color: Colors.blue,
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/sign_in');
+                  //todo use single bloc entry point
+                  context
+                      .bloc<UserBloc>()
+                      .add(UserSignInEvent(social: SocialAuth.google));
                 },
                 icon: const Icon(
                   FlutterIcons.google_faw5d,
@@ -42,7 +48,9 @@ class IntroScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8)),
                 color: Colors.blue,
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/sign_in');
+                  context
+                      .bloc<UserBloc>()
+                      .add(UserSignInEvent(social: SocialAuth.facebook));
                 },
                 icon: const Icon(
                   FlutterIcons.facebook_f_faw5d,

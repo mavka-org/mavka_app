@@ -94,6 +94,7 @@ class _IntroSlider extends StatelessWidget {
             child: PageView(
               scrollDirection: Axis.horizontal,
               controller: _controller,
+              physics: const ScrollPhysics(),
               children: [
                 Column(
                   children: [
