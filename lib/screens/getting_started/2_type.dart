@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mavka/components/buttons.dart';
 import 'package:mavka/models/user/types.dart';
 
 import 'getting_started.dart';
@@ -24,27 +26,32 @@ class StepTypeGS extends StatelessWidget {
           const SizedBox(
             height: 32,
           ),
-          button('Учень (-ця)', context,
-              checked: model.userType == UserType.student,
-              working: true, onPressed: () {
-            print('change!!!');
-            if (model.userType == null) {
-              model.userType = UserType.student;
-            } else {
-              model.userType = null;
-            }
-            model.checkData();
-          }),
-          const SizedBox(
-            height: 16,
+          CheckButtonComponent(
+            text: 'Учень (-ця)',
+            checked: model.userType == UserType.student,
+            padding: const EdgeInsets.only(bottom: 16),
+            height: 70,
+            onPressed: () {
+              if (model.userType == null) {
+                model.userType = UserType.student;
+              } else {
+                model.userType = null;
+              }
+              model.checkData();
+            },
           ),
-          button('Батьки', context,
-              working: false, checked: false, onPressed: () {}),
-          const SizedBox(
-            height: 16,
+          const CheckButtonComponent(
+            text: 'Батьки',
+            checked: false,
+            padding: EdgeInsets.only(bottom: 16),
+            height: 70,
           ),
-          button('Вчитель', context,
-              working: false, checked: false, onPressed: () {}),
+          const CheckButtonComponent(
+            text: 'Вчитель',
+            checked: false,
+            padding: EdgeInsets.only(bottom: 16),
+            height: 70,
+          ),
         ],
       ),
     );

@@ -2,11 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:mavka/components/buttons.dart';
 import 'package:mavka/screens/getting_started/1_data.dart';
 import 'package:mavka/screens/getting_started/2_type.dart';
 import 'package:mavka/utilities/cast.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '3_form.dart';
+import '4_dream.dart';
+import '5_courses.dart';
 
 class GettingStartedScreen extends StatefulWidget {
   @override
@@ -17,13 +21,20 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
   final _pageController = PageController();
   int page = 0;
 
-  final List<GSModel> models = [StepDataGSModel(), StepTypeGSModel()];
+  final List<GSModel> models = [
+    StepDataGSModel(),
+    StepTypeGSModel(),
+    StepFormGSModel(),
+    StepDreamGSModel(),
+    StepCoursesGSModel(),
+  ];
 
   @override
   void initState() {
-//    _tabController = TabController(vsync: this, length: 2);
     super.initState();
   }
+
+  void resetKeyboard() => FocusScope.of(context).unfocus();
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +44,6 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
     return Scaffold(
       body: SafeArea(
         child: Builder(
-//          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 26),
-
           builder: (context) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -72,6 +81,18 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: StepTypeGS(cast<StepTypeGSModel>(models[1])),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: StepFormGS(cast<StepFormGSModel>(models[2])),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: StepDreamGS(cast<StepDreamGSModel>(models[3])),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: StepCoursesGS(cast<StepCoursesGSModel>(models[4])),
+                    ),
                   ],
                 ),
               ),
@@ -81,30 +102,23 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
                   children: [
                     if (page != 0)
                       Expanded(
-                        child: ButtonTheme(
-                          height: 40,
-                          child: OutlineButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            onPressed: () {
-                              _pageController.animateToPage(page - 1,
-                                  curve: Curves.easeInOutCubic,
-                                  duration: const Duration(milliseconds: 300));
+                        child: OutlineButtonComponent(
+                          text: 'Назад',
+                          onPressed: () {
+                            resetKeyboard();
+                            _pageController.animateToPage(page - 1,
+                                curve: Curves.easeInOutCubic,
+                                duration: const Duration(milliseconds: 300));
 
-                              setState(() {
-                                page--;
-                                //todo come up with a solution that doesn't relies on time
-                                Future.delayed(
-                                    const Duration(milliseconds: 100),
-                                    () => models[page].checkData());
-                              });
-                            },
-                            child: Text(
-                              'Назад',
-                              style: GoogleFonts.montserratAlternates(
-                                  fontWeight: FontWeight.w600, fontSize: 16),
-                            ),
-                          ),
+                            setState(() {
+                              page--;
+                              //todo come up with a solution that doesn't relies on time
+                              Future.delayed(const Duration(milliseconds: 100),
+                                  () => models[page].checkData());
+                            });
+
+//                            CoursesApi()..getAllCourses();
+                          },
                         ),
                       ),
                     if (page != 0)
@@ -112,46 +126,70 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
                         width: 8,
                       ),
                     Expanded(
-                        child: ButtonTheme(
-                      height: 40,
-                      minWidth: double.infinity,
                       child: StreamBuilder<bool>(
                           stream: models[page].isNextActive.stream,
                           initialData: false,
                           builder: (context, snapshot) {
-//                            models[page].checkData();
-
-                            return FlatButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              color: Colors.blue,
-                              disabledColor: Colors.blueGrey,
-                              onPressed: snapshot.data
+                            return FlatButtonComponent(
+                              text: (page == 4 && !snapshot.data)
+                                  ? 'Пропустити'
+                                  : 'Продовжити',
+                              onPressed: (snapshot.data || page == 4)
                                   ? () {
-                                      //todo as a component
-                                      _pageController.animateToPage(page + 1,
-                                          curve: Curves.easeInOutCubic,
-                                          duration: const Duration(
-                                              milliseconds: 300));
+                                      //todo declare case earlier
 
-                                      setState(() {
-                                        page++;
-                                        Future.delayed(
-                                            const Duration(milliseconds: 100),
-                                            () => models[page].checkData());
-                                      });
+                                      if (page == 2) {
+                                        cast<StepCoursesGSModel>(models[4])
+                                                .form =
+                                            cast<StepFormGSModel>(models[2])
+                                                .form;
+                                      }
+
+                                      if (page == 4) {
+                                        // todo
+                                        print('DONE!');
+                                        print('first name last name: ' +
+                                            cast<StepDataGSModel>(models[0])
+                                                .firstName +
+                                            ' ' +
+                                            cast<StepDataGSModel>(models[0])
+                                                .lastName);
+                                        print('user type: ' +
+                                            cast<StepTypeGSModel>(models[1])
+                                                .userType
+                                                .toString());
+                                        print('form: ' +
+                                            cast<StepFormGSModel>(models[2])
+                                                .form
+                                                .toString());
+                                        print('dream id: ' +
+                                            cast<StepDreamGSModel>(models[3])
+                                                .dream
+                                                .toString());
+                                        print('courses: ' +
+                                            cast<StepCoursesGSModel>(models[4])
+                                                .courses
+                                                .toString());
+                                      } else {
+                                        resetKeyboard();
+                                        //todo as a component
+                                        _pageController.animateToPage(page + 1,
+                                            curve: Curves.easeInOutCubic,
+                                            duration: const Duration(
+                                                milliseconds: 300));
+
+                                        setState(() {
+                                          page++;
+                                          Future.delayed(
+                                              const Duration(milliseconds: 100),
+                                              () => models[page].checkData());
+                                        });
+                                      }
                                     }
                                   : null,
-                              child: Text(
-                                'Продовжити',
-                                style: GoogleFonts.montserratAlternates(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                    color: Colors.white),
-                              ),
                             );
                           }),
-                    )),
+                    ),
                   ],
                 ),
               ),

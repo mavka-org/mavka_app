@@ -31,6 +31,7 @@ dependencies:
 
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -44,3 +45,5 @@ flutter:
   assets:
     - google_fonts/
     - assets/intro/
+    - assets/dreams/
+    - assets/courses/

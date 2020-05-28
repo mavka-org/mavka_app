@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mavka/blocs/user/events.dart';
 import 'package:mavka/blocs/user/states.dart';
 import 'package:mavka/blocs/user/user.dart';
+import 'package:mavka/components/buttons.dart';
+import 'package:mavka/components/snackbar.dart';
 import 'package:mavka/layouts/intro.dart';
 
 //todo design
@@ -24,48 +25,15 @@ class SignInScreen extends StatelessWidget {
           return BlocListener<UserBloc, UserState>(
               listener: (context, state) {
                 if (state is UserLoadingState) {
-                  Scaffold.of(context)
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(
-                      //todo snackbar as a component
-                      SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        content: SizedBox(
-                          height: 20,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text('Завантаження...'),
-                              FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: CircularProgressIndicator(),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
+                  showSnackBarComponent(
+                      SnackBarType.loading, 'Завантаження...', context);
                 } else if (state is UserUnauthorizedState) {
-                  Scaffold.of(context)
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(
-                      SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: Colors.red,
-                        content: SizedBox(
-                          height: 20,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(isSignInScreen
-                                  ? 'Помилка. Обліковий запис не існує'
-                                  : 'Помилка'),
-                              const Icon(Icons.error)
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
+                  showSnackBarComponent(
+                      SnackBarType.error,
+                      isSignInScreen
+                          ? 'Помилка. Обліковий запис не існує'
+                          : 'Помилка',
+                      context);
                 } else if (state is UserAuthorizedState) {
                   Navigator.of(context).pop();
 //                  print('good!');
@@ -121,52 +89,29 @@ class SignInScreen extends StatelessWidget {
                       const SizedBox(
                         height: 26,
                       ),
-                      //todo button as a component
                       //todo validation for form
-                      ButtonTheme(
-                        height: 40,
-                        minWidth: double.infinity,
-                        child: FlatButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          color: Colors.blue,
-                          disabledColor: Colors.blueGrey,
-                          onPressed: () {
-                            if (isSignInScreen) {
-                              context.bloc<UserBloc>().add(UserSignInEvent(
-                                    email: _emailController.text,
-                                    password: _passwordController.text,
-                                  ));
-                            } else {
-                              context.bloc<UserBloc>().add(UserSignUpEvent(
-                                    email: _emailController.text,
-                                    password: _passwordController.text,
-                                  ));
-                            }
-                          },
-                          child: Text(
-                            isSignInScreen ? 'Увійти' : 'Зареєструватися',
-                            style: GoogleFonts.montserratAlternates(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                                color: Colors.white),
-                          ),
-                        ),
+                      FlatButtonComponent(
+                        onPressed: () {
+                          if (isSignInScreen) {
+                            context.bloc<UserBloc>().add(UserSignInEvent(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                ));
+                          } else {
+                            context.bloc<UserBloc>().add(UserSignUpEvent(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                ));
+                          }
+                        },
+                        text: isSignInScreen ? 'Увійти' : 'Зареєструватися',
                       ),
-                      ButtonTheme(
-                        height: 40,
-                        child: OutlineButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(
-                            'Відмінити',
-                            style: GoogleFonts.montserratAlternates(
-                                fontWeight: FontWeight.w600, fontSize: 16),
-                          ),
-                        ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      OutlineButtonComponent(
+                        onPressed: () => Navigator.of(context).pop(),
+                        text: 'Відмінити',
                       ),
                     ])),
               ));

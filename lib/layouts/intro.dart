@@ -37,7 +37,7 @@ class IntroLayout extends StatelessWidget {
       child: ClipRRect(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
         child: Material(
-          color: Colors.white,
+          color: Colors.grey[200],
           child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
               child: child),
@@ -106,7 +106,7 @@ class _IntroSlider extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      'title to slide #1',
+                      'title #1',
                       style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.w500,
                           fontSize: 18,
@@ -124,7 +124,7 @@ class _IntroSlider extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      'title to slide #2',
+                      'title #2',
                       style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.w500,
                           fontSize: 18,
@@ -142,7 +142,7 @@ class _IntroSlider extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      'title to slide #3',
+                      'title #3',
                       style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.w500,
                           fontSize: 18,
