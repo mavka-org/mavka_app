@@ -1,4 +1,6 @@
 import 'package:flutter/widgets.dart';
+import 'package:mavka/blocs/user/social_auth.dart';
+import 'package:mavka/models/user/storage.dart';
 //toto replace to meta package
 
 abstract class UserEvent {}
@@ -31,8 +33,12 @@ class UserSignInEvent extends UserEvent {
   }
 }
 
+class UserGettingStartedEvent extends UserEvent {
+  final UserStorage storage;
+
+  UserGettingStartedEvent({@required this.storage});
+}
+
 class UserCheckEvent extends UserEvent {}
 
 class UserLogOutEvent extends UserEvent {}
-
-enum SocialAuth { google, facebook }

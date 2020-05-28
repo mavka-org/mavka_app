@@ -11,6 +11,9 @@ import 'screens/home.dart';
 import 'screens/sign_in.dart';
 
 void main() {
+//  debugDefaultTargetPlatformOverride = TargetPlatform.linux;
+//  defaultTargetPlatform = TargetPlatform.fuchsia;
+
   runApp(BlocProvider<UserBloc>(
     create: (BuildContext context) => UserBloc()..add(UserCheckEvent()),
     child: MaterialApp(

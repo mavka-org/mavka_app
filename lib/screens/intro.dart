@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mavka/blocs/user/events.dart';
+import 'package:mavka/blocs/user/social_auth.dart';
 import 'package:mavka/blocs/user/user.dart';
 import 'package:mavka/components/buttons.dart';
 import 'package:mavka/layouts/intro.dart';

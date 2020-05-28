@@ -2,7 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mavka/blocs/user/events.dart';
+import 'package:mavka/blocs/user/user.dart';
 import 'package:mavka/components/buttons.dart';
+import 'package:mavka/models/user/storage.dart';
 import 'package:mavka/screens/getting_started/1_data.dart';
 import 'package:mavka/screens/getting_started/2_type.dart';
 import 'package:mavka/utilities/cast.dart';
@@ -12,6 +16,7 @@ import '3_form.dart';
 import '4_dream.dart';
 import '5_courses.dart';
 
+//todo check for existing data and autofill
 class GettingStartedScreen extends StatefulWidget {
   @override
   _GettingStartedScreenState createState() => _GettingStartedScreenState();
@@ -148,28 +153,24 @@ class _GettingStartedScreenState extends State<GettingStartedScreen> {
                                       if (page == 4) {
                                         // todo
                                         print('DONE!');
-                                        print('first name last name: ' +
-                                            cast<StepDataGSModel>(models[0])
-                                                .firstName +
-                                            ' ' +
-                                            cast<StepDataGSModel>(models[0])
-                                                .lastName);
-                                        print('user type: ' +
-                                            cast<StepTypeGSModel>(models[1])
-                                                .userType
-                                                .toString());
-                                        print('form: ' +
-                                            cast<StepFormGSModel>(models[2])
-                                                .form
-                                                .toString());
-                                        print('dream id: ' +
-                                            cast<StepDreamGSModel>(models[3])
-                                                .dream
-                                                .toString());
-                                        print('courses: ' +
-                                            cast<StepCoursesGSModel>(models[4])
-                                                .courses
-                                                .toString());
+
+                                        final s1Data =
+                                            cast<StepDataGSModel>(models[0]);
+                                        final s2Type =
+                                            cast<StepTypeGSModel>(models[1]);
+//                                        final s3Form =
+//                                            cast<StepFormGSModel>(models[2]);
+//                                        final s4Dream =
+//                                            cast<StepDreamGSModel>(models[3]);
+//                                        final s5Courses =
+//                                            cast<StepCoursesGSModel>(models[4]);
+
+                                        context.bloc<UserBloc>().add(
+                                            UserGettingStartedEvent(
+                                                storage: UserStorage(
+                                                    firstName: s1Data.firstName,
+                                                    secondName: s1Data.lastName,
+                                                    type: s2Type.userType)));
                                       } else {
                                         resetKeyboard();
                                         //todo as a component

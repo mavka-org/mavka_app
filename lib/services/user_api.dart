@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mavka/blocs/user/events.dart';
+import 'package:mavka/blocs/user/social_auth.dart';
 import 'package:mavka/models/user/storage.dart';
 import 'package:mavka/models/user/user.dart';
 
@@ -46,8 +47,8 @@ class UserApi {
             return User(user: user, storage: storage);
           } catch (e) {
             rethrow;
-            print(e.toString());
-            return null;
+//            print(e.toString());
+//            return null;
           }
         } else if (event.social == SocialAuth.facebook) {
           try {
@@ -70,7 +71,6 @@ class UserApi {
               final storage = await _getUserStorage(user.uid);
 
               return User(user: user, storage: storage);
-              return null;
             } else {
               return null;
             }
@@ -96,14 +96,6 @@ class UserApi {
           email: event.email, password: event.password);
       final FirebaseUser user = result.user;
 
-//      final storage = UserStorage(
-//          firstName: 'John',
-//          secondName: 'Doe',
-//          type: UserType.student,
-//          connectionId: '123');
-
-//      await _users.document(user.uid).setData(storage.toMap);
-
       return User(user: user, storage: null);
     } catch (e) {
       return null;
@@ -121,6 +113,14 @@ class UserApi {
     } catch (e) {
       return null;
     }
+  }
+
+  Future<void> setUserStorage(final UserStorage storage) async {
+    // todo currentUser as single instance
+
+    final currentUser = await _auth.currentUser();
+
+    await _users.document(currentUser.uid).setData(storage.toMap);
   }
 
   Future<UserStorage> _getUserStorage(final String uid) async {

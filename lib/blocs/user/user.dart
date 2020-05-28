@@ -54,6 +54,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       await _api.logOut();
 
       yield UserUnauthorizedState();
+    } else if (event is UserGettingStartedEvent) {
+      yield UserLoadingState();
+
+      await _api.setUserStorage(event.storage);
+
+      user = await _api.getCurrentUser();
+
+      yield UserAuthorizedState();
     } else {
       throw UnimplementedError();
     }
