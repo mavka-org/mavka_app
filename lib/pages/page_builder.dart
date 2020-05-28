@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mavka/blocs/user/events.dart';
 import 'package:mavka/blocs/user/user.dart';
 
+import 'home.dart';
+
 class PageBuilder extends StatelessWidget {
   final int index;
 
@@ -11,6 +13,8 @@ class PageBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (index) {
+      case 0:
+        return HomePage();
       default:
         return Center(
           child: RaisedButton(

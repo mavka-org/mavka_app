@@ -44,6 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: (i) => setState(() => index = i)),
           ),
         ),
-        body: PageBuilder(index));
+        body: SafeArea(child: PageBuilder(index)));
   }
 }

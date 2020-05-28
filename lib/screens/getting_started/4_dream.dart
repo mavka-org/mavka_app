@@ -25,18 +25,25 @@ class StepDreamGS extends StatelessWidget {
               const SizedBox(
                 height: 32,
               ),
-              Expanded(child: exp(context, true, 'Космічну ракету', 1)),
+              Expanded(child: exp(context, 'Космічну ракету', 1, isLeft: true)),
               Expanded(
-                  child: exp(context, false, 'Виростити красиву калину', 2)),
+                  child: exp(context, 'Виростити красиву калину', 2,
+                      isLeft: false)),
               Expanded(
-                  child: exp(context, true,
-                      'Розробити вакцину проти Коронавірусу', 3)),
+                  child: exp(
+                context,
+                'Розробити вакцину проти Коронавірусу',
+                3,
+                isLeft: true,
+              )),
             ],
           );
         });
   }
 
-  Widget exp(BuildContext context, bool isLeft, String text, int id) => Stack(
+  Widget exp(BuildContext context, String text, int id,
+          {@required bool isLeft}) =>
+      Stack(
         children: [
           Align(
             alignment: !isLeft ? Alignment.centerLeft : Alignment.centerRight,
