@@ -30,14 +30,29 @@ dependencies:
   flutter_svg: ^0.17.4
 
 
+  # storage
+  hive: ^1.4.1+1
+  hive_flutter: ^0.3.0+2
+
+
 
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  # todo tests
+#  flutter_test:
+#    sdk: flutter
+
 
   # code analysis
   lint: ^1.2.0
+
+
+  # storage
+  build_runner: ^1.10.0
+  hive_generator: ^0.7.0+2
+
+
+
 
 flutter:
   uses-material-design: true

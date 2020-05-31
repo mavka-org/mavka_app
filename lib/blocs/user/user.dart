@@ -16,54 +16,65 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   Stream<UserState> mapEventToState(UserEvent event) async* {
     print('incoming event: $event');
 
-    if (event is UserCheckEvent) {
-      final currentUser = await _api.getCurrentUser();
-      if (currentUser != null) {
-        user = currentUser;
-        yield UserAuthorizedState();
-      } else {
+    switch (event.runtimeType) {
+      case UserCheckEvent:
+        final currentUser = await _api.getCurrentUser();
+        if (currentUser != null) {
+          user = currentUser;
+          yield UserAuthorizedState();
+        } else {
+          yield UserUnauthorizedState();
+        }
+        break;
+
+      case UserSignInEvent:
+        yield UserLoadingState();
+
+        print('singing in...');
+        final u = await _api.signInWithEvent(event as UserSignInEvent);
+        if (u == null) {
+          yield UserUnauthorizedState();
+        } else {
+          user = u;
+          yield UserAuthorizedState();
+        }
+        break;
+
+      case UserSignUpEvent:
+        yield UserLoadingState();
+
+        print('singing up...');
+        final u = await _api.signUpWithEvent(event as UserSignUpEvent);
+        if (u == null) {
+          yield UserUnauthorizedState();
+        } else {
+          user = u;
+          yield UserAuthorizedState();
+        }
+        break;
+
+      case UserLogOutEvent:
+        // todo consider removing this line (for dry code)
+        yield UserLoadingState();
+
+        user = null;
+        await _api.logOut();
+
         yield UserUnauthorizedState();
-      }
-    } else if (event is UserSignInEvent) {
-      yield UserLoadingState();
+        break;
 
-      print('singing in...');
-      final u = await _api.signInWithEvent(event);
-      if (u == null) {
-        yield UserUnauthorizedState();
-      } else {
-        user = u;
+      case UserGettingStartedEvent:
+        yield UserLoadingState();
+
+        await _api.setUserStorage((event as UserGettingStartedEvent).storage);
+
+        user = await _api.getCurrentUser();
+
         yield UserAuthorizedState();
-      }
-    } else if (event is UserSignUpEvent) {
-      yield UserLoadingState();
+        break;
 
-      print('singing up...');
-      final u = await _api.signUpWithEvent(event);
-      if (u == null) {
-        yield UserUnauthorizedState();
-      } else {
-        user = u;
-        yield UserAuthorizedState();
-      }
-    } else if (event is UserLogOutEvent) {
-      // todo consider removing this line (for dry code)
-      yield UserLoadingState();
-
-      user = null;
-      await _api.logOut();
-
-      yield UserUnauthorizedState();
-    } else if (event is UserGettingStartedEvent) {
-      yield UserLoadingState();
-
-      await _api.setUserStorage(event.storage);
-
-      user = await _api.getCurrentUser();
-
-      yield UserAuthorizedState();
-    } else {
-      throw UnimplementedError();
+      default:
+        throw UnimplementedError();
     }
   }
 }

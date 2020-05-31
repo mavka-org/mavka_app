@@ -61,7 +61,71 @@ class HomePage extends StatelessWidget {
           style:
               GoogleFonts.montserrat(fontSize: 22, fontWeight: FontWeight.w600),
         ),
+        course(),
+        course(),
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed('/course');
+          },
+          child: const Text('press me'),
+        )
       ],
     );
   }
+
+  // dunno why but this sucks. ui i mean
+  Widget course() => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              color: Colors.blue[400]),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Container(
+                  height: 68,
+                  width: 68,
+                  decoration: BoxDecoration(
+                      color: Colors.blue[300],
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: Center(
+                    child: Text(
+                      '10/90',
+                      style: GoogleFonts.montserrat(
+                          fontSize: 22, color: Colors.white),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Похідні',
+                      style: GoogleFonts.montserrat(
+                          fontSize: 16,
+                          color: Colors.grey[100],
+                          fontWeight: FontWeight.w300),
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      'Математика',
+                      style: GoogleFonts.montserrat(
+                          fontSize: 24,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      );
 }

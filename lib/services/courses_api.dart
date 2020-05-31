@@ -7,9 +7,12 @@ class CoursesApi {
   Future<List<Course>> getAllCoursesForForm(int form) async {
     final data = await store.where('Form', isEqualTo: form).getDocuments();
 
-    return data.documents
-        .map((e) => Course.fromMap(e.data))
-        .toList()
-        .cast<Course>();
+    return data.documents.map((e) => Course.fromMap(e.data)).toList();
+  }
+
+  Future<List<Course>> getAllCourses() async {
+    final data = await store.getDocuments();
+
+    return data.documents.map((e) => Course.fromMap(e.data)).toList();
   }
 }

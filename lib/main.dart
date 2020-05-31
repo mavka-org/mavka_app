@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mavka/blocs/course/course.dart';
 import 'package:mavka/blocs/user/states.dart';
 import 'package:mavka/blocs/user/user.dart';
+import 'package:mavka/pages/course.dart';
 import 'package:mavka/screens/intro.dart';
 import 'package:mavka/screens/loading.dart';
 
@@ -14,13 +16,20 @@ void main() {
 //  debugDefaultTargetPlatformOverride = TargetPlatform.linux;
 //  defaultTargetPlatform = TargetPlatform.fuchsia;
 
-  runApp(BlocProvider<UserBloc>(
-    create: (BuildContext context) => UserBloc()..add(UserCheckEvent()),
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider<UserBloc>(
+          create: (BuildContext context) => UserBloc()
+            ..add(
+              UserCheckEvent(),
+            )),
+      BlocProvider<CourseBloc>(create: (BuildContext context) => CourseBloc()),
+    ],
     child: MaterialApp(
       theme: ThemeData(
           primaryColor: Colors.lightBlue[600],
           accentColor: Colors.lightBlue[600],
-
+// todo themes
 //        textTheme: TextTheme(
 //          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
 //          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
@@ -32,7 +41,8 @@ void main() {
       routes: {
         '/': (context) => _Wrapper(),
         '/sign_in': (context) => SignInScreen(isSignInScreen: true),
-        '/sign_up': (context) => SignInScreen(isSignInScreen: false)
+        '/sign_up': (context) => SignInScreen(isSignInScreen: false),
+        '/course': (context) => CoursePage()
       },
     ),
   ));
@@ -45,6 +55,7 @@ class _Wrapper extends StatelessWidget {
         builder: (context, state) {
           //todo intercept auth errors (i e connectivity issues)
           //todo ui
+          // todo loading screen
           if (state is UserUnauthorizedState) {
             return IntroScreen();
           } else if (state is UserAuthorizedState) {
