@@ -1,0 +1,1 @@
+enum SocialAuth { google, facebook }
