@@ -6,7 +6,7 @@ import 'package:mavka/blocs/user/states.dart';
 import 'package:mavka/blocs/user/user.dart';
 import 'package:mavka/components/buttons.dart';
 import 'package:mavka/components/snackbar.dart';
-import 'package:mavka/layouts/intro.dart';
+import 'package:mavka/layouts/auth/intro.dart';
 
 //todo design
 //todo stless -> stful (for advanced validation & button activation/deactivation)

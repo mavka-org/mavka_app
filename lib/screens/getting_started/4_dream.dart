@@ -81,8 +81,6 @@ class StepDreamGS extends StatelessWidget {
       @required bool working,
       @required Function() onPressed}) {
     final body = Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Theme(
           data: Theme.of(context).copyWith(

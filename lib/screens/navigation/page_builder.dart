@@ -14,7 +14,7 @@ class PageBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (index) {
       case 0:
-        return HomePage();
+        return NavigationHomePage();
       default:
         return Center(
           child: RaisedButton(

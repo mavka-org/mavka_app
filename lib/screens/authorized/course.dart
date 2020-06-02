@@ -41,10 +41,10 @@ class CoursePage extends StatelessWidget {
                 child: Material(
                   color: Colors.grey[200],
                   child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 22, vertical: 18),
                       child: Column(
-                        children: [
+                        children: const [
                           Text(
                               '123213213213asddddddddddddddddasddddddddddddddddddddddddddd')
                         ],

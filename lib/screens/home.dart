@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:mavka/pages/page_builder.dart';
+
+import 'navigation/page_builder.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

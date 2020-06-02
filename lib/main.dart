@@ -4,14 +4,14 @@ import 'package:mavka/blocs/course/course.dart';
 import 'package:mavka/blocs/course/events.dart';
 import 'package:mavka/blocs/user/states.dart';
 import 'package:mavka/blocs/user/user.dart';
-import 'package:mavka/pages/course.dart';
-import 'package:mavka/screens/intro.dart';
+import 'package:mavka/screens/auth/intro.dart';
 import 'package:mavka/screens/loading.dart';
 
 import 'blocs/user/events.dart';
+import 'screens/auth/sign_in.dart';
+import 'screens/authorized/course.dart';
 import 'screens/getting_started/getting_started.dart';
 import 'screens/home.dart';
-import 'screens/sign_in.dart';
 
 void main() {
 //  debugDefaultTargetPlatformOverride = TargetPlatform.linux;

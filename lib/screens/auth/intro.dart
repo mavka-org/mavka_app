@@ -6,7 +6,7 @@ import 'package:mavka/blocs/user/events.dart';
 import 'package:mavka/blocs/user/social_auth.dart';
 import 'package:mavka/blocs/user/user.dart';
 import 'package:mavka/components/buttons.dart';
-import 'package:mavka/layouts/intro.dart';
+import 'package:mavka/layouts/auth/intro.dart';
 
 class IntroScreen extends StatelessWidget {
   @override
