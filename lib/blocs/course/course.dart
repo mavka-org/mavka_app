@@ -6,8 +6,9 @@ import 'package:mavka/services/courses_api.dart';
 
 class CourseBloc extends Bloc<CourseEvent, CourseState> {
   @override
-  CourseState get initialState => null;
+  CourseState get initialState => CourseNullState();
 
+  // todo store data in hive
   final _api = CoursesApi();
   List<Course> courses;
 
@@ -19,6 +20,7 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
     switch (event.runtimeType) {
       case LoadCourseDatabaseEvent:
         courses = await _api.getAllCourses();
+        yield CourseLoadedState();
         break;
 
       default:

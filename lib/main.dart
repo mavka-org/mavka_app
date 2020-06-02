@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mavka/blocs/course/course.dart';
+import 'package:mavka/blocs/course/events.dart';
 import 'package:mavka/blocs/user/states.dart';
 import 'package:mavka/blocs/user/user.dart';
 import 'package:mavka/pages/course.dart';
@@ -23,7 +24,12 @@ void main() {
             ..add(
               UserCheckEvent(),
             )),
-      BlocProvider<CourseBloc>(create: (BuildContext context) => CourseBloc()),
+      // todo handle connectivity issues
+      BlocProvider<CourseBloc>(
+          create: (BuildContext context) => CourseBloc()
+            ..add(
+              LoadCourseDatabaseEvent(),
+            )),
     ],
     child: MaterialApp(
       theme: ThemeData(

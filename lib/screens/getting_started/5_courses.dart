@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mavka/blocs/course/course.dart';
+import 'package:mavka/blocs/course/events.dart';
+import 'package:mavka/blocs/course/states.dart';
 import 'package:mavka/components/buttons.dart';
 import 'package:mavka/models/course.dart';
 import 'package:mavka/screens/getting_started/getting_started.dart';
-import 'package:mavka/services/courses_api.dart';
 
 class StepCoursesGS extends StatelessWidget {
   final StepCoursesGSModel model;
@@ -29,19 +32,26 @@ class StepCoursesGS extends StatelessWidget {
         StreamBuilder<bool>(
             stream: model.isNextActive.stream,
             builder: (context, snapshot) {
-              return FutureBuilder(
+              return BlocBuilder<CourseBloc, CourseState>(
+                  bloc: context.bloc<CourseBloc>(),
 //                  key: UniqueKey(),
-                  future: CoursesApi().getAllCoursesForForm(model.form),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<List<Course>> snapshot) {
-                    if (!snapshot.hasData || snapshot.data == null) {
+//                  future: CoursesApi().getAllCoursesForForm(model.form),
+                  builder: (BuildContext context, CourseState state) {
+                    if (state is CourseNullState) {
+                      context.bloc<CourseBloc>().add(LoadCourseDatabaseEvent());
                       return const Text('Загрузка...');
                     } else {
                       model.courses
                           .removeWhere((element) => element.form != model.form);
 
+                      // todo there is probably a better way to do this (e g store data in state)
+                      final courses = context
+                          .bloc<CourseBloc>()
+                          .getCoursesByForm(model.form);
+
+                      // todo element as a component
                       return Column(
-                        children: snapshot.data
+                        children: courses
                             .map((e) => CheckButtonComponent(
                                   text: e.name ?? '123',
                                   fontSize: 20,
