@@ -39,8 +39,8 @@ dependencies:
 
 dev_dependencies:
   # todo tests
-#  flutter_test:
-#    sdk: flutter
+  #  flutter_test:
+  #    sdk: flutter
 
 
   # code analysis
@@ -56,6 +56,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
 
   assets:
     - google_fonts/

@@ -31,3 +31,19 @@ UserType string2userType(String type) {
       throw UnimplementedError('type does not exist');
   }
 }
+
+String userType2localizedString(UserType type) {
+  switch (type) {
+    case UserType.student:
+      return 'Учень';
+      break;
+    case UserType.teacher:
+      return 'Вчитель';
+      break;
+    case UserType.parent:
+      return 'Батьки';
+      break;
+    default:
+      throw UnimplementedError('type does not exist');
+  }
+}

@@ -9,7 +9,63 @@ class CourseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('${course.name} ${course.form}, ${course.info}');
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.indigo[300], borderRadius: BorderRadius.circular(12)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Container(
+                height: 100,
+                width: 100,
+                decoration: BoxDecoration(
+                    color: Colors.indigo[200],
+                    borderRadius: const BorderRadius.all(Radius.circular(18))),
+                child: const Center(
+                  child: Text(
+                    '🔭',
+                    style: TextStyle(fontSize: 40, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+            const Spacer(),
+            Container(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'ЗНО',
+                      style: GoogleFonts.montserratAlternates(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                    Text(
+                      'Астрономія',
+                      style: GoogleFonts.montserrat(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                    const SizedBox(
+                      height: 18,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

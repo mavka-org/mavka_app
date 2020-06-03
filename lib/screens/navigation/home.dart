@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mavka/blocs/user/user.dart';
+import 'package:mavka/components/fields.dart';
 import 'package:mavka/model_views/course.dart';
 import 'package:mavka/utilities/random_color.dart';
 
-class NavigationHomePage extends StatelessWidget {
+class HomeNavigationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.bloc<UserBloc>();
@@ -40,25 +41,7 @@ class NavigationHomePage extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 26),
-          child: Container(
-            height: 54,
-            child: const TextField(
-              decoration: InputDecoration(
-                  filled: true,
-                  hintText: 'Пошук за курсами та темами',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(12),
-                    ),
-                  ),
-                  fillColor: Colors.white,
-                  prefixIcon: Icon(Icons.search)),
-            ),
-          ),
+          child: CoursesSearch(),
         ),
         const SizedBox(
           height: 32,

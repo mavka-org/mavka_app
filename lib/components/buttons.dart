@@ -175,3 +175,29 @@ class CheckButtonComponent extends StatelessWidget {
     );
   }
 }
+
+class CoolWhiteButton extends StatelessWidget {
+  final String text;
+  final Function() onPressed;
+
+  const CoolWhiteButton(this.text, this.onPressed);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(8),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(8),
+        onTap: onPressed,
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Text(
+            text,
+            style: GoogleFonts.montserratAlternates(fontSize: 14),
+          ),
+        ),
+      ),
+    );
+  }
+}

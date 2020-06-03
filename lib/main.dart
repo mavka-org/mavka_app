@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mavka/blocs/course/course.dart';
 import 'package:mavka/blocs/course/events.dart';
 import 'package:mavka/blocs/user/states.dart';
 import 'package:mavka/blocs/user/user.dart';
+import 'package:mavka/models/course.dart';
 import 'package:mavka/screens/auth/intro.dart';
 import 'package:mavka/screens/loading.dart';
 
@@ -13,9 +16,15 @@ import 'screens/authorized/course.dart';
 import 'screens/getting_started/getting_started.dart';
 import 'screens/home.dart';
 
-void main() {
+Future<void> main() async {
 //  debugDefaultTargetPlatformOverride = TargetPlatform.linux;
 //  defaultTargetPlatform = TargetPlatform.fuchsia;
+
+  // todo init hive on loading page
+  await Hive.initFlutter();
+
+  Hive.registerAdapter(CourseAdapter());
+  await Hive.openBox<Course>('courses');
 
   runApp(MultiBlocProvider(
     providers: [
