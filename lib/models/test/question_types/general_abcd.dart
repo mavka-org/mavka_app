@@ -10,7 +10,7 @@ class GeneralABCDQuestionVariant {
   bool right = false;
 }
 
-class GeneralABCDQuestionLetters<String> extends Enum<String> {
+class GeneralABCDQuestionLetters extends Enum<String> {
   const GeneralABCDQuestionLetters(String val) : super(val);
 
   static const GeneralABCDQuestionLetters a = GeneralABCDQuestionLetters('а');

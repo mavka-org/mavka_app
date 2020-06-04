@@ -21,6 +21,7 @@ Future<void> main() async {
 //  debugDefaultTargetPlatformOverride = TargetPlatform.linux;
 //  defaultTargetPlatform = TargetPlatform.fuchsia;
   // todo init hive on loading page
+
   await Hive.initFlutter();
 
   Hive.registerAdapter(CourseAdapter());

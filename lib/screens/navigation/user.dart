@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mavka/blocs/user/events.dart';
 import 'package:mavka/blocs/user/user.dart';
 import 'package:mavka/components/buttons.dart';
-import 'package:mavka/models/user/types.dart';
 
 class UserNavigationPage extends StatelessWidget {
   @override
@@ -61,7 +60,7 @@ class UserNavigationPage extends StatelessWidget {
         ),
         Center(
           child: Text(
-            userType2localizedString(userBloc.user.storage.type),
+            userBloc.user.storage.type.getLocalizedString,
             // todo use the same grey color for all secondary text
             style: GoogleFonts.montserratAlternates(
                 fontSize: 16, color: Colors.grey[800]),

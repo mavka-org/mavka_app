@@ -1,57 +1,26 @@
-//class UserType<String> extends Enum<String> {
-//  const UserType(String val) : super(val);
-//
-//  static const UserType student = UserType('student');
-//  static const UserType teacher = UserType('teacher');
-//  static const UserType parent = UserType('parent');
-//}
+import 'dart:core';
 
-enum UserType { student, teacher, parent }
+import 'package:mavka/utilities/enum.dart';
 
-String userType2string(UserType type) {
-  switch (type) {
-    case UserType.student:
-      return 'student';
-      break;
-    case UserType.teacher:
-      return 'teacher';
-      break;
-    case UserType.parent:
-      return 'parent';
-      break;
-    default:
-      throw UnimplementedError('type does not exist');
-  }
-}
+class UserType extends Enum<String> {
+  const UserType(String val) : super(val);
 
-UserType string2userType(String type) {
-  switch (type) {
-    case 'student':
-      return UserType.student;
-      break;
-    case 'teacher':
-      return UserType.teacher;
-      break;
-    case 'parent':
-      return UserType.parent;
-      break;
-    default:
-      throw UnimplementedError('type does not exist');
-  }
-}
+  static const UserType student = UserType('student');
+  static const UserType teacher = UserType('teacher');
+  static const UserType parent = UserType('parent');
 
-String userType2localizedString(UserType type) {
-  switch (type) {
-    case UserType.student:
-      return 'Учень';
-      break;
-    case UserType.teacher:
-      return 'Вчитель';
-      break;
-    case UserType.parent:
-      return 'Батьки';
-      break;
-    default:
-      throw UnimplementedError('type does not exist');
+  String get getLocalizedString {
+    final type = super.toString();
+
+    switch (type) {
+      case 'student':
+        return 'Учень';
+      case 'teacher':
+        return 'Вчитель';
+      case 'parent':
+        return 'Батьки';
+    }
+
+    throw UnimplementedError(type);
   }
 }
