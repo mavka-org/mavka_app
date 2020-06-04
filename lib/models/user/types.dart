@@ -1,3 +1,11 @@
+//class UserType<String> extends Enum<String> {
+//  const UserType(String val) : super(val);
+//
+//  static const UserType student = UserType('student');
+//  static const UserType teacher = UserType('teacher');
+//  static const UserType parent = UserType('parent');
+//}
+
 enum UserType { student, teacher, parent }
 
 String userType2string(UserType type) {

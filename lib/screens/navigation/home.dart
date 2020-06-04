@@ -64,11 +64,11 @@ class HomeNavigationPage extends StatelessWidget {
             padding: const EdgeInsets.only(left: 26),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            children: [
-              CourseVerticalRecentCard(),
-              CourseVerticalRecentCard(),
-              CourseVerticalRecentCard(),
-              CourseVerticalRecentCard(),
+            children: const [
+              CourseVerticalRecentCard(0),
+              CourseVerticalRecentCard(1),
+              CourseVerticalRecentCard(2),
+              CourseVerticalRecentCard(3),
             ],
           ),
         ),

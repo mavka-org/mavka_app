@@ -8,6 +8,7 @@ import 'package:mavka/blocs/user/states.dart';
 import 'package:mavka/blocs/user/user.dart';
 import 'package:mavka/models/course.dart';
 import 'package:mavka/screens/auth/intro.dart';
+import 'package:mavka/screens/authorized/test.dart';
 import 'package:mavka/screens/loading.dart';
 
 import 'blocs/user/events.dart';
@@ -19,7 +20,6 @@ import 'screens/home.dart';
 Future<void> main() async {
 //  debugDefaultTargetPlatformOverride = TargetPlatform.linux;
 //  defaultTargetPlatform = TargetPlatform.fuchsia;
-
   // todo init hive on loading page
   await Hive.initFlutter();
 
@@ -57,7 +57,8 @@ Future<void> main() async {
         '/': (context) => _Wrapper(),
         '/sign_in': (context) => SignInScreen(isSignInScreen: true),
         '/sign_up': (context) => SignInScreen(isSignInScreen: false),
-        '/course': (context) => CoursePage()
+        '/course': (context) => CoursePage(),
+        '/test': (context) => TestPage(),
       },
     ),
   ));

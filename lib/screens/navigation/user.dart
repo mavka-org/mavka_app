@@ -11,7 +11,7 @@ import 'package:mavka/models/user/types.dart';
 class UserNavigationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var userBloc = context.bloc<UserBloc>();
+    final userBloc = context.bloc<UserBloc>();
     //UserLogOutEvent()
     return ListView(
       children: [
