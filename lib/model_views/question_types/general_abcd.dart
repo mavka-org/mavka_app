@@ -15,7 +15,7 @@ class GeneralABCDQuestionView extends StatefulWidget {
 class _GeneralABCDQuestionViewState extends State<GeneralABCDQuestionView> {
   GeneralABCDQuestionVariant active;
 
-  // todo use similar style for all questions
+  // todo use the same style for all questions
   @override
   Widget build(BuildContext context) => Column(
       children: widget.model.variants

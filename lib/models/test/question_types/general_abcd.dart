@@ -2,19 +2,12 @@ part of 'question_type.dart';
 
 class GeneralABCDQuestionType extends QuestionType {
   List<GeneralABCDQuestionVariant> variants;
+
+  bool validate(GeneralABCDQuestionVariant variant) => variant.right == true;
 }
 
 class GeneralABCDQuestionVariant {
-  GeneralABCDQuestionLetters letter;
+  GeneralQuestionLetters letter;
   String text;
   bool right = false;
-}
-
-class GeneralABCDQuestionLetters extends Enum<String> {
-  const GeneralABCDQuestionLetters(String val) : super(val);
-
-  static const GeneralABCDQuestionLetters a = GeneralABCDQuestionLetters('а');
-  static const GeneralABCDQuestionLetters b = GeneralABCDQuestionLetters('б');
-  static const GeneralABCDQuestionLetters c = GeneralABCDQuestionLetters('в');
-  static const GeneralABCDQuestionLetters d = GeneralABCDQuestionLetters('г');
 }
