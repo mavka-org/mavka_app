@@ -5,6 +5,7 @@ class CoursePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageLayout(
+      hero: 'card0',
       color: Colors.indigo[300],
       title: 'Астрономія',
       child: Column(

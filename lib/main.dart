@@ -8,6 +8,7 @@ import 'package:mavka/blocs/user/states.dart';
 import 'package:mavka/blocs/user/user.dart';
 import 'package:mavka/models/course.dart';
 import 'package:mavka/screens/auth/intro.dart';
+import 'package:mavka/screens/authorized/settings.dart';
 import 'package:mavka/screens/authorized/test.dart';
 import 'package:mavka/screens/loading.dart';
 
@@ -26,6 +27,7 @@ Future<void> main() async {
 
   Hive.registerAdapter(CourseAdapter());
   await Hive.openBox<Course>('courses');
+  await Hive.openBox<String>('prefs');
 
   runApp(MultiBlocProvider(
     providers: [
@@ -60,6 +62,7 @@ Future<void> main() async {
         '/sign_up': (context) => SignInScreen(isSignInScreen: false),
         '/course': (context) => CoursePage(),
         '/test': (context) => TestPage(),
+        '/settings': (context) => SettingsScreen(),
       },
     ),
   ));

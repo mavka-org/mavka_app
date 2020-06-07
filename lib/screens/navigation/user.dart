@@ -107,7 +107,17 @@ class UserNavigationPage extends StatelessWidget {
                 )
               ],
             ),
-          )
+          ),
+        const SizedBox(
+          height: 46,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 26),
+          child: CoolWhiteButton(
+            'Налаштування',
+            () => Navigator.of(context).pushNamed('/settings'),
+          ),
+        ),
       ],
     );
   }

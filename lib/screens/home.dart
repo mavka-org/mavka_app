@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 80,
           color: Colors.transparent,
           child: Hero(
-            tag: 'card',
+            tag: 'bottom_navbar',
             child: ClipRRect(
               borderRadius:
                   const BorderRadius.vertical(top: Radius.circular(38)),

@@ -190,8 +190,9 @@ class CoolWhiteButton extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(8),
         onTap: onPressed,
-        child: Padding(
+        child: Container(
           padding: const EdgeInsets.all(8),
+          alignment: Alignment.center,
           child: Text(
             text,
             style: GoogleFonts.montserratAlternates(fontSize: 14),

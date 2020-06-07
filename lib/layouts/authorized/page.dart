@@ -7,13 +7,16 @@ class PageLayout extends StatelessWidget {
   final Color color;
   final bool isTitleBlack;
   final Widget customHeader;
+  final String hero;
 
   const PageLayout(
       {@required this.child,
       @required this.color,
+      @required this.hero,
       this.title,
       this.customHeader,
-      this.isTitleBlack = false});
+      this.isTitleBlack = false})
+      : assert(title != null || customHeader != null);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,7 @@ class PageLayout extends StatelessWidget {
             ),
             Expanded(
                 child: Hero(
-              tag: 'card0',
+              tag: hero,
               child: Container(
                 color: color,
                 child: ClipRRect(

@@ -9,7 +9,7 @@ class TestBloc extends Bloc<TestEvent, TestState> {
   @override
   TestState get initialState => TestNullState();
 
-  // todo dunno, probable shouldn't store data like that, needs review
+  // todo dunno, probably shouldn't store data like that, needs review
   Test currentTest;
 
   @override

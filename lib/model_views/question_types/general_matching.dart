@@ -37,16 +37,20 @@ class _GeneralMatchingQuestionViewState
         Column(children: [
           Row(children: [
             const SizedBox(
-              width: 10,
+              width: 20,
             ),
             for (var v in widget.model.variants)
               Padding(
                 padding: const EdgeInsets.all(2),
                 child: Container(
-                  width: 26,
-                  height: 26,
+                  width: 30,
+                  height: 30,
                   child: Center(
-                    child: Text(v.letter.toString()),
+                    child: Text(
+                      v.letter.toString(),
+                      style: GoogleFonts.montserratAlternates(
+                          fontWeight: FontWeight.w500, fontSize: 16),
+                    ),
                   ),
                 ),
               )
@@ -54,27 +58,33 @@ class _GeneralMatchingQuestionViewState
           for (var e in widget.model.questions)
             Row(
               children: [
-                Text(e.number.toString()),
+                Container(
+                  height: 18,
+                  width: 18,
+                  child: Text(
+                    e.number.toString(),
+                    style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.w500, fontSize: 16),
+                  ),
+                ),
                 const SizedBox(
-                  width: 2,
+                  width: 4,
                 ),
                 for (var l in widget.model.variants)
                   Padding(
                     padding: const EdgeInsets.all(2),
                     child: Material(
-                      color: Colors.black,
+                      color: Colors.white,
                       child: InkWell(
                         onTap: () {
                           setState(() => widget.model.questions
                               .firstWhere(
                                   (element) => element.number == e.number)
                               .answer = l.letter);
-                          print(e.number.toString());
-                          print(l.letter.toString());
                         },
                         child: Container(
-                          width: 26,
-                          height: 26,
+                          width: 30,
+                          height: 30,
                           child: widget.model.questions
                                       .firstWhere((element) =>
                                           element.number == e.number)
@@ -83,7 +93,7 @@ class _GeneralMatchingQuestionViewState
                               ? const Center(
                                   child: Icon(
                                     Icons.close,
-                                    color: Colors.white,
+                                    color: Colors.blue,
                                   ),
                                 )
                               : Container(),
@@ -105,8 +115,11 @@ class _GeneralMatchingQuestionViewState
             Container(
               height: 26,
               width: 26,
-              decoration: BoxDecoration(border: Border.all(width: 0.5)),
-              child: Center(
+              color: Colors.white,
+              child: Container(
+                width: 26,
+                height: 26,
+                alignment: Alignment.center,
                 child: Text(
                   box,
                   style: GoogleFonts.montserratAlternates(

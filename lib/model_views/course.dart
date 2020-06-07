@@ -84,7 +84,7 @@ class CourseVerticalRecentCard extends StatelessWidget {
             color: Colors.transparent,
             child: Container(
               decoration: BoxDecoration(
-                  color: Colors.lightBlue[300],
+                  color: Colors.indigo[300],
                   borderRadius: BorderRadius.circular(18)),
               width: 300,
               child: Column(
@@ -96,7 +96,7 @@ class CourseVerticalRecentCard extends StatelessWidget {
                       height: 120,
                       width: 120,
                       decoration: BoxDecoration(
-                          color: Colors.lightBlue[200],
+                          color: Colors.indigo[200],
                           borderRadius:
                               const BorderRadius.all(Radius.circular(18))),
                       child: const Center(
@@ -118,22 +118,25 @@ class CourseVerticalRecentCard extends StatelessWidget {
                           Text(
                             'Астрономія',
                             style: GoogleFonts.montserrat(
-                                fontSize: 32, fontWeight: FontWeight.w500),
+                                fontSize: 32,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
                           ),
                           const SizedBox(
                             height: 12,
                           ),
                           Text(
                             'Наступна тема:',
-                            style:
-                                GoogleFonts.montserratAlternates(fontSize: 18),
+                            style: GoogleFonts.montserratAlternates(
+                                fontSize: 18, color: Colors.white),
                           ),
                           const SizedBox(
                             height: 4,
                           ),
                           Text(
                             'Місяць',
-                            style: GoogleFonts.montserrat(fontSize: 18),
+                            style: GoogleFonts.montserrat(
+                                fontSize: 18, color: Colors.white),
                           ),
                           const SizedBox(
                             height: 8,

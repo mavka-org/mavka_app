@@ -7,7 +7,7 @@ import 'package:mavka/blocs/test/test.dart';
 import 'package:mavka/components/buttons.dart';
 import 'package:mavka/components/page_indicators.dart';
 import 'package:mavka/layouts/authorized/page.dart';
-import 'package:mavka/model_views/question_types/question.dart';
+import 'package:mavka/model_views/question.dart';
 import 'package:mavka/models/test/test.dart';
 
 class TestPage extends StatelessWidget {
@@ -23,6 +23,7 @@ class TestPage extends StatelessWidget {
             final bloc = context.bloc<TestBloc>();
             return PageLayout(
                 color: Colors.indigo[300],
+                hero: 'card0',
                 customHeader:
                     TestPageIndicatorComponent(bloc.currentTest.questions),
                 child: Column(
@@ -38,15 +39,6 @@ class TestPage extends StatelessWidget {
                     const SizedBox(
                       height: 28,
                     ),
-
-//                    RaisedButton(
-//                      onPressed: () => bloc.add(TestNextPageEvent()),
-//                      child: const Text('next'),
-//                    ),
-//                    RaisedButton(
-//                      onPressed: () => bloc.add(TestPrevPageEvent()),
-//                      child: const Text('prev'),
-//                    )
                   ],
                 ));
           },
