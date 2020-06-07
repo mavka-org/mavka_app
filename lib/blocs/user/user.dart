@@ -14,8 +14,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {
-    print('incoming event: $event');
-
     switch (event.runtimeType) {
       case UserCheckEvent:
         final currentUser = await _api.getCurrentUser();

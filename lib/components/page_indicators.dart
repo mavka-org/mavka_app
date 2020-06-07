@@ -1,44 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mavka/models/test/question.dart';
 
 class TestPageIndicatorComponent extends StatelessWidget {
-  final int currentPage;
-  final int length;
-  final Map<int, _ChipState> states;
+  final List<Question> questions;
 
-  const TestPageIndicatorComponent(
-      {@required this.length, @required this.currentPage, this.states});
+  const TestPageIndicatorComponent(this.questions);
 
   @override
   Widget build(BuildContext context) {
+    print('rebuilding');
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
-      child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-        final cardsAmount = constraints.maxWidth ~/ 26;
-        var cards = <Widget>[];
+        padding: const EdgeInsets.symmetric(horizontal: 40),
+        child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+          final cardsAmount = constraints.maxWidth ~/ 26;
+          final cards = <Widget>[];
 
-        if (cardsAmount >= length) {
-          cards = List.generate(
-              length,
-              (index) => chip(
-                  index + 1,
-                  currentPage == index + 1
-                      ? _ChipState.active
-                      : _ChipState.none)).toList();
-        } else {
-          // todo support more questions
-          throw UnimplementedError('list is too big for this screen');
-        }
-        return Row(
-          mainAxisSize: MainAxisSize.min,
-          children: cards,
-        );
-      }),
-    );
+          if (cardsAmount >= questions.length) {
+            var i = 1;
+            for (final e in questions) {
+              cards.add(chip(i, e.state));
+              i++;
+            }
+          } else {
+            // todo support more questions
+            throw UnimplementedError('list is too big for this screen');
+          }
+          return Row(
+            mainAxisSize: MainAxisSize.min,
+            children: cards,
+          );
+        }));
   }
 
-  Widget chip([int page, _ChipState state = _ChipState.none]) => Padding(
+  Widget chip(int page, QuestionState state) => Padding(
         padding: const EdgeInsets.all(3),
         child: Container(
           width: 20,
@@ -56,24 +52,19 @@ class TestPageIndicatorComponent extends StatelessWidget {
       );
 }
 
-enum _ChipState { active, notActive, done, error, none }
-
-Color _chipState2color(_ChipState state) {
+Color _chipState2color(QuestionState state) {
   switch (state) {
-    case _ChipState.active:
+    case QuestionState.active:
       return Colors.blue[100];
       break;
-    case _ChipState.notActive:
+    case QuestionState.none:
       return Colors.grey[300];
       break;
-    case _ChipState.done:
+    case QuestionState.right:
       return Colors.green[100];
       break;
-    case _ChipState.error:
+    case QuestionState.wrong:
       return Colors.red[100];
-      break;
-    case _ChipState.none:
-      return Colors.white;
       break;
   }
   throw UnimplementedError();

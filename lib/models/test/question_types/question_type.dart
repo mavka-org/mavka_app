@@ -1,9 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:mavka/model_views/question_types/general_abcd.dart';
+import 'package:mavka/model_views/question_types/general_matching.dart';
 import 'package:mavka/utilities/enum.dart';
 
 part 'general_abcd.dart';
 part 'general_matching.dart';
 
-abstract class QuestionType {}
+abstract class QuestionType {
+  Widget getView();
+}
 
 class GeneralQuestionLetters extends Enum<String> {
   const GeneralQuestionLetters(String val) : super(val);

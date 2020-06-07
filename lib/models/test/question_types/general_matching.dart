@@ -4,6 +4,8 @@ class GeneralMatchingQuestionType extends QuestionType {
   List<GeneralMatchingQuestionQuestion> questions;
   List<GeneralMatchingQuestionVariant> variants;
 
+  @override
+  Widget getView() => GeneralMatchingQuestionView(this);
 //  bool validate(GeneralABCDQuestionVariant variant) => variant.right == true;
 }
 
