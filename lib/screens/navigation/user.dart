@@ -13,6 +13,7 @@ class UserNavigationPage extends StatelessWidget {
     final userBloc = context.bloc<UserBloc>();
     //UserLogOutEvent()
     return ListView(
+      shrinkWrap: true,
       children: [
         const SizedBox(
           height: 18,

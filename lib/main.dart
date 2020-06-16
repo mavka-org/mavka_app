@@ -44,6 +44,12 @@ Future<void> main() async {
             )),
     ],
     child: MaterialApp(
+      builder: (context, child) {
+        return ScrollConfiguration(
+          behavior: _ListViewBehaviour(),
+          child: child,
+        );
+      },
       theme: ThemeData(
           primaryColor: Colors.lightBlue[600],
           accentColor: Colors.lightBlue[600],
@@ -90,4 +96,12 @@ class _Wrapper extends StatelessWidget {
           }
         },
       );
+}
+
+class _ListViewBehaviour extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
+  }
 }

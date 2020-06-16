@@ -19,6 +19,8 @@ class SettingsScreen extends StatelessWidget {
             return ListView(
               physics: const ScrollPhysics(),
               children: [
+                // todo as components
+
                 Text(
                   'Загальні',
                   style: GoogleFonts.montserratAlternates(
@@ -34,11 +36,12 @@ class SettingsScreen extends StatelessWidget {
                         style: GoogleFonts.montserrat(fontSize: 16),
                       ),
                       Switch(
-                        value:
-                            box.get('dark_theme', defaultValue: 'no') == 'yes',
-                        onChanged: (val) =>
-                            box.put('dark_theme', val ? 'yes' : 'no'),
-                      )
+                          value: box.get('dark_theme', defaultValue: 'no') ==
+                              'yes',
+                          onChanged: null
+//                             (val) =>
+//                                box.put('dark_theme', val ? 'yes' : 'no'),
+                          )
                     ],
                   ),
                 ),

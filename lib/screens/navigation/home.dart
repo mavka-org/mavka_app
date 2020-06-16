@@ -13,8 +13,8 @@ class HomeNavigationPage extends StatelessWidget {
     final bloc = context.bloc<UserBloc>();
 
     return ListView(
-      // for annoying shadows when scrolling on android
-      physics: const ScrollPhysics(),
+      shrinkWrap: true,
+//      physics: const ScrollPhysics(),
       padding: const EdgeInsets.symmetric(vertical: 24),
       children: [
         Padding(
@@ -61,6 +61,7 @@ class HomeNavigationPage extends StatelessWidget {
         Container(
           height: 380,
           child: ListView(
+//            physics: const ScrollPhysics(),
             padding: const EdgeInsets.only(left: 26),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,

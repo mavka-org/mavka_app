@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mavka/model_views/question_types/general_abcd.dart';
 import 'package:mavka/model_views/question_types/general_matching.dart';
+import 'package:mavka/model_views/question_types/general_open.dart';
 import 'package:mavka/utilities/enum.dart';
 
 part 'general_abcd.dart';
 part 'general_matching.dart';
+part 'general_open.dart';
 
 abstract class QuestionType {
   Widget getView();

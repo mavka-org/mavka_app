@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mavka/components/fields.dart';
@@ -10,11 +11,13 @@ class CoursesNavigationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       physics: const ScrollPhysics(),
+      shrinkWrap: true,
       padding: const EdgeInsets.symmetric(vertical: 24),
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 26),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 'Каталог курсів',
@@ -29,30 +32,40 @@ class CoursesNavigationPage extends StatelessWidget {
                 color: randomColor4hand,
               ),
               const Spacer(),
-              DropdownButton<String>(
-                items: ['ЗНО'].map((String value) {
-                  return DropdownMenuItem(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                value: 'ЗНО',
-                style: GoogleFonts.montserratAlternates(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black),
-                underline: Container(),
-                onChanged: (_) {},
+              Container(
+                height: 30,
+                child: DropdownButton<String>(
+                  items: ['ЗНО', '11', '10', '9', '8', '7', '6', '5']
+                      .map((String value) {
+                    return DropdownMenuItem(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  value: 'ЗНО',
+                  style: GoogleFonts.montserratAlternates(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black),
+                  underline: Container(),
+                  onChanged: (_) {},
+                ),
               )
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-          child: CoursesSearch(),
+        const SizedBox(
+          height: 24,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14),
+          padding: const EdgeInsets.symmetric(horizontal: 26),
+          child: CoursesSearch(),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14), // 14
           child: GridView.count(
             childAspectRatio: 1 / 1.16,
             shrinkWrap: true,

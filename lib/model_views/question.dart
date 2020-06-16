@@ -10,7 +10,8 @@ class QuestionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      shrinkWrap: true,
       children: [
         TeXView(
           renderingEngine: Hive.box<String>('prefs')
@@ -18,9 +19,12 @@ class QuestionView extends StatelessWidget {
                   'Katex'
               ? const TeXViewRenderingEngine.katex()
               : const TeXViewRenderingEngine.mathjax(),
+          loadingWidgetBuilder: (_) => const LinearProgressIndicator(),
           child: TeXViewDocument(
             question.text,
-            style: TeXViewStyle(backgroundColor: Colors.grey[200]),
+            style: TeXViewStyle(
+                backgroundColor: Colors.grey[200],
+                fontStyle: TeXViewFontStyle(fontSize: 18)),
           ),
         ),
         const SizedBox(

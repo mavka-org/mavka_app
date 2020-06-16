@@ -28,16 +28,18 @@ class TestPage extends StatelessWidget {
                     TestPageIndicatorComponent(bloc.currentTest.questions),
                 child: Column(
                   children: [
-                    if (bloc.currentTest.page == -1) intro(bloc.currentTest),
+                    if (bloc.currentTest.page == -1)
+                      Expanded(child: intro(bloc.currentTest)),
                     if (bloc.currentTest.page > -1 &&
                         bloc.currentTest.page <
                             bloc.currentTest.questions.length)
-                      QuestionView(
-                          bloc.currentTest.questions[bloc.currentTest.page]),
-                    const Spacer(),
+                      Expanded(
+                        child: QuestionView(
+                            bloc.currentTest.questions[bloc.currentTest.page]),
+                      ),
                     bottom(bloc, context),
                     const SizedBox(
-                      height: 28,
+                      height: 6,
                     ),
                   ],
                 ));

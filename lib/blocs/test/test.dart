@@ -77,6 +77,9 @@ class TestBloc extends Bloc<TestEvent, TestState> {
                     ..text = 'v4'
                     ..letter = GeneralQuestionLetters.d
                 ]),
+            Question()
+              ..text = 'math open question'
+              ..question = (GeneralOpenQuestionType()..answer = '90')
           ];
 
         yield TestRunningState();
