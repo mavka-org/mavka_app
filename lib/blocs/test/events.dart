@@ -7,3 +7,5 @@ class TestStartEvent extends TestEvent {
 class TestNextPageEvent extends TestEvent {}
 
 class TestPrevPageEvent extends TestEvent {}
+
+class TestChangeQuestionStateEvent extends TestEvent {}

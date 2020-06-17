@@ -8,12 +8,22 @@ class GeneralOpenQuestionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController controller = TextEditingController();
+
+    controller.text = model.typed ?? '';
+
+    controller.selection = TextSelection.fromPosition(
+        TextPosition(offset: controller.text.length));
+
+    controller.addListener(() => model.input = controller.text);
     return Center(
       child: TextField(
         keyboardType: model.type == GeneralOpenQuestionInputType.number
             ? TextInputType.number
             : TextInputType.text,
-        decoration: const InputDecoration(counterText: ''),
+        controller: controller,
+        decoration:
+            const InputDecoration(counterText: '', hintText: 'Відповідь'),
       ),
     );
   }

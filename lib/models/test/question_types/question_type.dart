@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mavka/blocs/test/events.dart';
+import 'package:mavka/blocs/test/test.dart';
 import 'package:mavka/model_views/question_types/general_abcd.dart';
 import 'package:mavka/model_views/question_types/general_matching.dart';
 import 'package:mavka/model_views/question_types/general_open.dart';
@@ -10,6 +12,11 @@ part 'general_open.dart';
 
 abstract class QuestionType {
   Widget getView();
+
+  /// returns null if there is no answer
+  bool get validate;
+
+  TestBloc testBloc;
 }
 
 class GeneralQuestionLetters extends Enum<String> {

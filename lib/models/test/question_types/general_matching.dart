@@ -6,7 +6,24 @@ class GeneralMatchingQuestionType extends QuestionType {
 
   @override
   Widget getView() => GeneralMatchingQuestionView(this);
-//  bool validate(GeneralABCDQuestionVariant variant) => variant.right == true;
+
+  void input(GeneralMatchingQuestionQuestion q, GeneralQuestionLetters s) {
+    q.selected = s;
+    testBloc.add(TestChangeQuestionStateEvent());
+  }
+
+  @override
+  bool get validate {
+    for (final q in questions) {
+      if (q.selected == null) return null;
+    }
+
+    for (final q in questions) {
+      if (q.selected != q.answer) return false;
+    }
+
+    return true;
+  }
 }
 
 // todo proper validation

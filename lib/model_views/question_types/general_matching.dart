@@ -77,10 +77,12 @@ class _GeneralMatchingQuestionViewState
                       color: Colors.white,
                       child: InkWell(
                         onTap: () {
-                          setState(() => widget.model.questions
-                              .firstWhere(
-                                  (element) => element.number == e.number)
-                              .answer = l.letter);
+                          setState(() {
+                            widget.model.input(
+                                widget.model.questions.firstWhere(
+                                    (element) => element.number == e.number),
+                                l.letter);
+                          });
                         },
                         child: Container(
                           width: 30,
@@ -88,12 +90,12 @@ class _GeneralMatchingQuestionViewState
                           child: widget.model.questions
                                       .firstWhere((element) =>
                                           element.number == e.number)
-                                      .answer ==
+                                      .selected ==
                                   l.letter
-                              ? const Center(
+                              ? Center(
                                   child: Icon(
                                     Icons.close,
-                                    color: Colors.blue,
+                                    color: Colors.indigo[500],
                                   ),
                                 )
                               : Container(),

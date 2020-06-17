@@ -19,10 +19,12 @@ class TestBloc extends Bloc<TestEvent, TestState> {
         currentTest = Test()
           ..name = 'Test title'
           ..description = 'test description'
+          ..isExam = true
           ..questions = [
             Question()
               ..text = 'question #1 text'
               ..question = (GeneralABCDQuestionType()
+                ..testBloc = this
                 ..variants = [
                   GeneralABCDQuestionVariant()
                     ..letter = GeneralQuestionLetters.a
@@ -45,6 +47,7 @@ class TestBloc extends Bloc<TestEvent, TestState> {
               ..text =
                   r'question #2 text here: $$\frac{1}{2}! \neq \frac{1}{2}$$'
               ..question = (GeneralMatchingQuestionType()
+                ..testBloc = this
                 ..questions = [
                   GeneralMatchingQuestionQuestion()
                     ..number = GeneralQuestionNumbers.n1
@@ -79,7 +82,9 @@ class TestBloc extends Bloc<TestEvent, TestState> {
                 ]),
             Question()
               ..text = 'math open question'
-              ..question = (GeneralOpenQuestionType()..answer = '90')
+              ..question = (GeneralOpenQuestionType()
+                ..testBloc = this
+                ..answer = '90')
           ];
 
         yield TestRunningState();
@@ -87,12 +92,25 @@ class TestBloc extends Bloc<TestEvent, TestState> {
 
       case TestNextPageEvent:
         currentTest.nextPage();
+        if (currentTest.questions.length > currentTest.page) {
+          currentTest.checkCanMoveForward();
+        }
         yield TestRunningState();
         break;
 
       case TestPrevPageEvent:
         currentTest.prevPage();
+        if (currentTest.page != -1) currentTest.checkCanMoveForward();
         yield TestRunningState();
+        break;
+
+      case TestChangeQuestionStateEvent:
+        final old = currentTest.canMoveForward;
+        currentTest.checkCanMoveForward();
+        if (currentTest.canMoveForward != old) {
+          yield TestRunningState();
+        }
+
         break;
 
       default:

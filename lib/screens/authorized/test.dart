@@ -11,6 +11,7 @@ import 'package:mavka/model_views/question.dart';
 import 'package:mavka/models/test/test.dart';
 
 class TestPage extends StatelessWidget {
+  // todo inspect border radius for layouts & navbar
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -71,8 +72,10 @@ class TestPage extends StatelessWidget {
           ),
           Expanded(
               child: FlatButtonComponent(
-            onPressed: () => bloc.add(TestNextPageEvent()),
-            text: 'Продовжити',
+            onPressed: !bloc.currentTest.canMoveForward
+                ? null
+                : () => bloc.add(TestNextPageEvent()),
+            text: bloc.currentTest.isExam ? 'Продовжити' : 'Перевірити',
           )),
         ],
       );
