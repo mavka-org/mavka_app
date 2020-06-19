@@ -14,7 +14,7 @@ class HomeNavigationPage extends StatelessWidget {
 
     return ListView(
       shrinkWrap: true,
-//      physics: const ScrollPhysics(),
+      physics: const ScrollPhysics(),
       padding: const EdgeInsets.symmetric(vertical: 24),
       children: [
         Padding(

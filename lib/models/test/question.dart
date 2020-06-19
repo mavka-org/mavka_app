@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:mavka/models/test/question_types/question_type.dart';
 
 class Question {
@@ -5,13 +6,21 @@ class Question {
   QuestionType question;
   QuestionState state = QuestionState.none;
 
-  /// if we are done with this question
-  /// return `true` if we can be done with this question ()
-  void updState() {
-    if (state == QuestionState.active && question.validate != null) {
-      state = question.validate ? QuestionState.right : QuestionState.wrong;
+  /// updates the state of the question
+  void updState({@required bool showAnswer}) {
+    if (showAnswer) {
+//      print('state was set ' +
+//          question.validate.toString() +
+//          ' ' +
+//          state.toString());
+
+      if (question.validate != null) {
+        state = question.validate ? QuestionState.right : QuestionState.wrong;
+      }
+    } else if (question.validate != null) {
+      state = QuestionState.filled;
     }
   }
 }
 
-enum QuestionState { none, right, wrong, active }
+enum QuestionState { none, right, wrong, active, filled }

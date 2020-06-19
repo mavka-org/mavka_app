@@ -9,7 +9,6 @@ class TestPageIndicatorComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('rebuilding');
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40),
         child: LayoutBuilder(
@@ -37,6 +36,9 @@ class TestPageIndicatorComponent extends StatelessWidget {
   Widget chip(int page, QuestionState state) => Padding(
         padding: const EdgeInsets.all(3),
         child: Container(
+          margin: state == QuestionState.active
+              ? const EdgeInsets.only(bottom: 4)
+              : const EdgeInsets.only(),
           width: 20,
           height: 16,
           decoration: BoxDecoration(
@@ -65,6 +67,9 @@ Color _chipState2color(QuestionState state) {
       break;
     case QuestionState.wrong:
       return Colors.red[100];
+      break;
+    case QuestionState.filled:
+      return Colors.yellow[100];
       break;
   }
   throw UnimplementedError();

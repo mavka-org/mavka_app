@@ -16,15 +16,12 @@ class Test {
   int get page => _page;
 
   void _checkPages() {
-    // updating `canMoveForward`
-//    canMoveForward = questions[_page].question.validate() != null;
-
     var i = 0;
     for (final q in questions) {
       if (q.state == QuestionState.active) {
         q.state = QuestionState.none;
         // todo mark pages that are done
-        q.updState();
+        q.updState(showAnswer: !isExam);
       }
       if (i == _page) {
         q.state = QuestionState.active;
