@@ -7,6 +7,8 @@ class PageLayout extends StatelessWidget {
   final Color color;
   final bool isTitleBlack;
   final Widget customHeader;
+  final Widget customHeaderEnd;
+  final Widget belowHeader;
   final String hero;
 
   const PageLayout(
@@ -15,6 +17,8 @@ class PageLayout extends StatelessWidget {
       @required this.hero,
       this.title,
       this.customHeader,
+      this.customHeaderEnd,
+      this.belowHeader,
       this.isTitleBlack = false})
       : assert(title != null || customHeader != null);
 
@@ -26,8 +30,8 @@ class PageLayout extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              color: color,
               height: 64,
+              color: color,
               padding: const EdgeInsets.all(6),
               child: Stack(
                 children: [
@@ -53,9 +57,19 @@ class PageLayout extends StatelessWidget {
                                   isTitleBlack ? Colors.black : Colors.white),
                         ),
                   ),
+                  if (customHeaderEnd != null)
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: customHeaderEnd,
+                    )
                 ],
               ),
             ),
+            if (belowHeader != null)
+              Container(
+                color: color,
+                child: belowHeader,
+              ),
             Expanded(
                 child: Hero(
               tag: hero,

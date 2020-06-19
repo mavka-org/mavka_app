@@ -4,33 +4,68 @@ import 'package:mavka/models/test/question.dart';
 
 class TestPageIndicatorComponent extends StatelessWidget {
   final List<Question> questions;
+  final Function() onTap;
 
-  const TestPageIndicatorComponent(this.questions);
+  const TestPageIndicatorComponent(this.questions, this.onTap);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40),
-        child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-          final cardsAmount = constraints.maxWidth ~/ 26;
-          final cards = <Widget>[];
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(18),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+          child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+            int cardsAmount = constraints.maxWidth ~/ 26;
+            final cards = <Widget>[];
 
-          if (cardsAmount >= questions.length) {
-            var i = 1;
-            for (final e in questions) {
-              cards.add(chip(i, e.state));
-              i++;
+            if (cardsAmount >= questions.length) {
+              var i = 1;
+              for (final e in questions) {
+                cards.add(chip(i, e.state));
+                i++;
+              }
+            } else {
+              if (cardsAmount % 2 == 0) {
+                cardsAmount--;
+              }
+              final centerNum = cardsAmount ~/ 2 + 1;
+
+              int offset = 0;
+              if (getActiveIndex() + 1 > centerNum &&
+                  questions.length - getActiveIndex() > centerNum) {
+                print('1');
+                offset = (getActiveIndex() + 1) - centerNum;
+              } else if (questions.length - getActiveIndex() <= centerNum) {
+                print('2');
+
+                offset = questions.length - cardsAmount;
+              }
+
+              for (int i = offset; i < cardsAmount + offset; i++) {
+                cards.add(chip(i + 1, questions[i].state));
+              }
             }
-          } else {
-            // todo support more questions
-            throw UnimplementedError('list is too big for this screen');
-          }
-          return Row(
-            mainAxisSize: MainAxisSize.min,
-            children: cards,
-          );
-        }));
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: cards,
+            );
+          }),
+        ),
+      ),
+    );
+  }
+
+  int getActiveIndex() {
+    int i = 0;
+    for (final el in questions) {
+      if (el.state == QuestionState.active) return i;
+      i++;
+    }
+    return 0;
   }
 
   Widget chip(int page, QuestionState state) => Padding(

@@ -66,25 +66,24 @@ class _CheckButtonComponent extends StatelessWidget {
           ],
         ));
     // todo use the same color for the test
-    // todo fix ui sizes (active border doesn't match with container sizes)
     return Padding(
       padding: const EdgeInsets.only(bottom: 14),
-      child: Container(
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(10))),
-        child: ButtonTheme(
-            height: 44,
-            child: OutlineButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              borderSide: BorderSide(
-                  width: 1.4,
-                  color: checked ? Colors.indigo[500] : Colors.white),
-              onPressed: onPressed,
-              highlightedBorderColor: Colors.indigo[500].withOpacity(0.8),
-              child: body,
-            )),
+      child: Material(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(8),
+          onTap: onPressed,
+          child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              height: 44,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                      color: checked ? Colors.indigo[500] : Colors.transparent,
+                      width: 1.4)),
+              child: body),
+        ),
       ),
     );
   }
