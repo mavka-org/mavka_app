@@ -20,6 +20,16 @@ class Test {
 
   int get page => _page;
 
+  set page(int p) {
+    _page = p;
+    _checkPages();
+
+    if (p == 0 && !_timerRunning && _duration != null) {
+      _timerRunning = true;
+      _timerRunner();
+    }
+  }
+
   // ignore: avoid_setters_without_getters
   set duration(Duration d) {
     _duration = d;
@@ -52,20 +62,6 @@ class Test {
       }
       i++;
     }
-  }
-
-  void prevPage() {
-    _page--;
-    _checkPages();
-  }
-
-  void nextPage() {
-    if (page == -1 && !_timerRunning && _duration != null) {
-      _timerRunning = true;
-      _timerRunner();
-    }
-    _page++;
-    _checkPages();
   }
 
   void checkCanMoveForward() {

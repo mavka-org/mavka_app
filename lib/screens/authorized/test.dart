@@ -10,7 +10,6 @@ import 'package:mavka/components/painters.dart';
 import 'package:mavka/layouts/authorized/page.dart';
 import 'package:mavka/model_views/question.dart';
 import 'package:mavka/model_views/question_card.dart';
-import 'package:mavka/models/test/question.dart';
 import 'package:mavka/models/test/test.dart';
 import 'package:mavka/utilities/wrapper.dart';
 import 'package:mavka/utilities/zeroed.dart';
@@ -23,7 +22,7 @@ class TestPage extends StatefulWidget {
 
 class _TestPageState extends State<TestPage> {
   bool isPagesViewMode = false;
-
+// todo show wrong answers if it isn't an exam
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -53,16 +52,25 @@ class _TestPageState extends State<TestPage> {
                           child: QuestionCardView(
                               e,
                               getZeroed(index + 1, state.questions.length),
-                              (state.isExam && e.state != QuestionState.filled)
+                              (!state.isExam)
                                   ? null
-                                  : () {}),
+                                  : () {
+                                      context
+                                          .bloc<TestBloc>()
+                                          .add(TestJumpPageEvent(index));
+                                      setState(() =>
+                                          isPagesViewMode = !isPagesViewMode);
+                                    }),
                         );
                       },
                     ),
                   ),
                 ),
-                customHeader: TestPageIndicatorComponent(state.questions,
-                    () => setState(() => isPagesViewMode = !isPagesViewMode)),
+                customHeader: TestPageIndicatorComponent(
+                    state.questions,
+                    () => state.page == -1
+                        ? null
+                        : setState(() => isPagesViewMode = !isPagesViewMode)),
                 customHeaderEnd: state.isDuration
                     ? Padding(
                         padding: const EdgeInsets.only(right: 16),
@@ -137,29 +145,35 @@ class _TestPageState extends State<TestPage> {
         onPressed: () => bloc.add(TestNextPageEvent()),
         text: 'Почати',
       );
-    } else if (state.page == state.questions.length) {
-      return FlatButtonComponent(
-        onPressed: () => Navigator.of(context).pop(),
-        text: 'Закінчити',
-      );
     } else {
       return Row(
         children: [
           Expanded(
               child: OutlineButtonComponent(
-            onPressed: () => bloc.add(TestPrevPageEvent()),
+            onPressed:
+                state.page == 0 ? null : () => bloc.add(TestPrevPageEvent()),
             text: 'Назад',
           )),
           const SizedBox(
             width: 18,
           ),
-          Expanded(
-              child: FlatButtonComponent(
-            onPressed: !state.canMoveForward
-                ? null
-                : () => bloc.add(TestNextPageEvent()),
-            text: state.isExam ? 'Продовжити' : 'Перевірити',
-          )),
+          if (state.page == state.questions.length)
+            Expanded(
+                child: FlatButtonComponent(
+              // todo fire bloc when we are done
+              onPressed: () => Navigator.of(context).pop(),
+              text: 'Закінчити',
+            )),
+          if (state.page != state.questions.length)
+            Expanded(
+                child: FlatButtonComponent(
+              onPressed: !state.canMoveForward && !state.isExam
+                  ? null
+                  : () => bloc.add(TestNextPageEvent()),
+              text: (state.isExam && !state.canMoveForward)
+                  ? 'Пропустити'
+                  : (state.isExam ? 'Продовжити' : 'Перевірити'),
+            )),
         ],
       );
     }

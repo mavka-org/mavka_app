@@ -94,7 +94,7 @@ class TestBloc extends Bloc<TestEvent, Wrapper<Test>> {
         break;
 
       case TestNextPageEvent:
-        _test.nextPage();
+        _test.page = _test.page + 1;
         if (_test.questions.length > _test.page) {
           _test.checkCanMoveForward();
         }
@@ -102,8 +102,19 @@ class TestBloc extends Bloc<TestEvent, Wrapper<Test>> {
         break;
 
       case TestPrevPageEvent:
-        _test.prevPage();
+        _test.page = _test.page - 1;
+
         if (_test.page != -1) _test.checkCanMoveForward();
+        yield wrapper;
+        break;
+
+      case TestJumpPageEvent:
+        _test.page = (event as TestJumpPageEvent).page;
+
+        if (_test.page != -1 || _test.questions.length > _test.page) {
+          _test.checkCanMoveForward();
+        }
+
         yield wrapper;
         break;
 
@@ -113,7 +124,6 @@ class TestBloc extends Bloc<TestEvent, Wrapper<Test>> {
         if (_test.canMoveForward != old) {
           yield wrapper;
         }
-
         break;
 
       default:

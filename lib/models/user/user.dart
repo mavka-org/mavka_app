@@ -5,7 +5,7 @@ import 'storage.dart';
 
 class User {
   final FirebaseUser user;
-  final UserStorage storage;
+  UserStorage storage;
 
   bool get isStorageEmpty => storage == null;
 

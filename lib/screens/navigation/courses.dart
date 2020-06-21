@@ -9,6 +9,15 @@ import 'package:mavka/utilities/random_color.dart';
 class CoursesNavigationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    const _crossAxisSpacing = 8;
+    final _screenWidth = MediaQuery.of(context).size.width;
+    const _crossAxisCount = 2;
+    final _width =
+        (_screenWidth - ((_crossAxisCount - 1) * _crossAxisSpacing)) /
+            _crossAxisCount;
+    const cellHeight = 240;
+    final _aspectRatio = _width / cellHeight;
+
     return ListView(
       physics: const ScrollPhysics(),
       shrinkWrap: true,
@@ -67,7 +76,7 @@ class CoursesNavigationPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14), // 14
           child: GridView.count(
-            childAspectRatio: 1 / 1.16,
+            childAspectRatio: _aspectRatio,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             crossAxisCount: 2,

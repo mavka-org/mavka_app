@@ -73,18 +73,15 @@ class PageLayout extends StatelessWidget {
             Expanded(
                 child: Hero(
               tag: hero,
-              child: Container(
-                color: color,
-                child: ClipRRect(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(28)),
-                  child: Material(
-                    color: Colors.grey[200],
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 22, vertical: 18),
-                        child: Container(width: double.infinity, child: child)),
-                  ),
+              child: ClipRRect(
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(28)),
+                child: Material(
+                  color: Colors.grey[200],
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 22, vertical: 18),
+                      child: Container(width: double.infinity, child: child)),
                 ),
               ),
             ))
