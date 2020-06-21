@@ -33,10 +33,11 @@ class QuestionCardView extends StatelessWidget {
               const SizedBox(width: 8),
               // todo as a function
               Text(
-                (e.state == QuestionState.none ||
-                        e.state == QuestionState.active)
-                    ? 'Не виконано'
-                    : 'Виконано',
+                e.state == QuestionState.active
+                    ? 'Активне'
+                    : (e.state == QuestionState.none
+                        ? 'Не виконано'
+                        : 'Виконано'),
                 style: GoogleFonts.montserrat(),
               ),
             ],
