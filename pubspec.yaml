@@ -52,7 +52,7 @@ dev_dependencies:
 
   # storage
   build_runner: ^1.10.0
-  hive_generator: ^0.7.0+2
+  hive_generator: any
 
 
   # utils

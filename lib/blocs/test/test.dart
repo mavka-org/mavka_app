@@ -80,6 +80,60 @@ class TestBloc extends Bloc<TestEvent, Wrapper<Test>> {
       ..question = (GeneralOpenQuestionType()
         ..testBloc = this
         ..answer = '90');
+    final q4 = Question()
+      ..text = 'bio triples question'
+      ..question = (BioTriplesQuestionType()
+        ..testBloc = this
+        ..questions = [
+          BioTriplesQuestionVariant()
+            ..text = 'question 1'
+            ..question = (GeneralABCDQuestionType()
+              ..testBloc = this
+              ..variants = [
+                GeneralABCDQuestionVariant()
+                  ..number = GeneralQuestionNumbers.n1
+                  ..text = 'option 1'
+                  ..right = true,
+                GeneralABCDQuestionVariant()
+                  ..number = GeneralQuestionNumbers.n2
+                  ..text = 'option 2',
+                GeneralABCDQuestionVariant()
+                  ..number = GeneralQuestionNumbers.n3
+                  ..text = 'option 3'
+              ]),
+          BioTriplesQuestionVariant()
+            ..text = 'question 2'
+            ..question = (GeneralABCDQuestionType()
+              ..testBloc = this
+              ..variants = [
+                GeneralABCDQuestionVariant()
+                  ..number = GeneralQuestionNumbers.n1
+                  ..text = 'option 1'
+                  ..right = true,
+                GeneralABCDQuestionVariant()
+                  ..number = GeneralQuestionNumbers.n2
+                  ..text = 'option 2',
+                GeneralABCDQuestionVariant()
+                  ..number = GeneralQuestionNumbers.n3
+                  ..text = 'option 3'
+              ]),
+          BioTriplesQuestionVariant()
+            ..text = 'question 3'
+            ..question = (GeneralABCDQuestionType()
+              ..testBloc = this
+              ..variants = [
+                GeneralABCDQuestionVariant()
+                  ..number = GeneralQuestionNumbers.n1
+                  ..text = 'option 1'
+                  ..right = true,
+                GeneralABCDQuestionVariant()
+                  ..number = GeneralQuestionNumbers.n2
+                  ..text = 'option 2',
+                GeneralABCDQuestionVariant()
+                  ..number = GeneralQuestionNumbers.n3
+                  ..text = 'option 3'
+              ])
+        ]);
 
     switch (event.runtimeType) {
       case TestStartEvent:
@@ -88,7 +142,7 @@ class TestBloc extends Bloc<TestEvent, Wrapper<Test>> {
           ..name = 'Test title'
           ..description = 'test description'
           ..isExam = true
-          ..questions = [q1, q2, q3];
+          ..questions = [q1, q2, q3, q4];
 
         yield wrapper;
         break;

@@ -22,7 +22,9 @@ class GeneralABCDQuestionType extends QuestionType {
 }
 
 class GeneralABCDQuestionVariant {
+  // specify letter OR number not both
   GeneralQuestionLetters letter;
+  GeneralQuestionNumbers number;
   String text;
   bool right = false;
 }

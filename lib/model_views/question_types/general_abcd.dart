@@ -20,14 +20,16 @@ class _GeneralABCDQuestionViewState extends State<GeneralABCDQuestionView> {
           .map((e) => _CheckButtonComponent(
                 checked: widget.model.input == e,
                 text: e.text,
-                letter: e.letter,
+                letter: e.letter != null
+                    ? e.letter.toString()
+                    : e.number.toString(),
                 onPressed: () => setState(() => widget.model.input = e),
               ))
           .toList());
 }
 
 class _CheckButtonComponent extends StatelessWidget {
-  final GeneralQuestionLetters letter;
+  final String letter;
   final String text;
   final bool checked;
   final Function() onPressed;
@@ -45,7 +47,7 @@ class _CheckButtonComponent extends StatelessWidget {
         child: Row(
           children: [
             Text(
-              '${letter.toString().toUpperCase()}:',
+              '$letter:',
               style: GoogleFonts.montserrat(
                   fontWeight: FontWeight.w600,
                   fontSize: 22,
