@@ -7,8 +7,12 @@ class BioTriplesQuestionType extends QuestionType {
   bool get validate {
     for (final el in questions) {
       if (el.question.validate == null) return null;
+    }
+
+    for (final el in questions) {
       if (!el.question.validate) return false;
     }
+
     return true;
   }
 

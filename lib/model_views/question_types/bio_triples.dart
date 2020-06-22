@@ -10,6 +10,7 @@ class BioTriplesQuestionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    model.questions.firstWhere((element) => false, orElse: () => null);
     return Column(
         children: model.questions
             .map((e) => Column(
